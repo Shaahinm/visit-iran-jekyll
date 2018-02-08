@@ -1,0 +1,46 @@
+.hero {
+  height: 50%;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  position: relative;
+  height: 300px;
+  .hero-text {
+    text-align: center;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    color: $white;
+    font-size: 18px;
+    border: 1px solid;
+    padding: 30px;
+    border-radius: 5px;
+    a {
+      text-decoration: none;
+      color: $white;
+    }
+  }
+
+  &.destinations {
+    background-image: url(http://visitiran.ir:443/static/tourismiran/images/azimi/1.jpg);
+  }
+}
+@include for-size(tablet-portrait-up) {
+  .hero {
+    .hero-text {
+      left: 20%;
+      font-size: 24px;
+    }   
+  }
+}
+
+@include for-size(desktop-up) {
+  .hero {
+    height: 500px;
+    .hero-text {      
+      left: 20%;      
+      font-size: 32px;      
+    }
+  }
+}

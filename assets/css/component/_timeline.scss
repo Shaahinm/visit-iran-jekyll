@@ -1,0 +1,386 @@
+.timeline {
+  position: relative;
+  padding-top: 40px;
+  padding-bottom: 40px;
+
+  &:after {
+    // content: url(http://kasbban.ir/visit/dist/images/iran.png);
+    content: url(../images/iran.png);
+    position: absolute;    
+    left: calc(50% - 27px);      
+    z-index: 11;    
+    @media (max-width: 1199px) {
+      content: none;
+    }
+  }
+
+  &::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 28px;
+    height: 100%;
+    width: 4px;
+    background: $main;
+    z-index: 2;
+    @media (max-width: 499px) and (min-width: 250px) {
+      left: 75px;
+    }
+    @media (max-width: 599px) and (min-width: 500px) {
+      left: 110px;
+    }
+
+    @include for-size(tablet-portrait-up) {
+      left: 50%;
+      margin-left: -2px;
+    }   
+
+    // @media only screen and (min-width: 768px) {
+    //   left: 50%;
+    //   margin-left: -2px;
+    // }
+  }
+
+  &__block {
+    position: relative;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    // margin-bottom: 40px;
+
+    @include for-size(tablet-portrait-up) {
+      flex-wrap: nowrap;
+      align-items: flex-start;
+      justify-content: space-between;
+    }
+
+    .timeline__info {
+      position: absolute;
+      @include for-size(tablet-portrait-up) {
+        position: relative;
+        top: 133px;
+      }
+      @include for-size(desktop-up) {
+        top: 133px;
+      }
+      @include for-size(big-desktop-up) {
+        top: 133px;
+      }
+    }
+
+    &:last-child {
+      margin-bottom: 0;
+    }
+
+    &:nth-child(odd) {
+      .timeline__content {
+        @include for-size(tablet-portrait-up) {
+          order: -1;
+          text-align: end;
+        }
+      }
+    }
+
+    &:nth-child(even) {
+      .timeline__info {
+        @include for-size(tablet-portrait-up) {
+          order: -1;
+          justify-content: flex-end;
+        }
+      }
+    }
+  }
+  &__image {
+    position: absolute;
+    top: 0;
+    left: 0;
+
+    height: 15px;
+    width: 15px;
+    background-color: #d6d6d6;
+    border-radius: 50%;
+    border: 1px solid #e8e8e8;
+
+    @include for-size(tablet-portrait-up) {
+      left: 50%;
+      margin-left: -8px;
+    }
+  }
+  &__content,
+  &__info {
+    // width: calc(100% - 80px);
+    // margin-left: 80px;
+
+    @media (max-width: 499px) {
+      width: calc(100% - 90px);
+      margin-left: 80px;
+    }
+
+    @media (max-width: 599px) and (min-width: 500px) {
+      width: calc(100% - 100px);
+      margin-left: 80px;
+    }
+
+    // @media (max-width: 599px) {
+    //   width: calc(100% - 100px);
+    //   margin-left: 80px;
+    // }
+
+    @include for-size(tablet-portrait-up) {
+      width: 46%;
+      width: calc(50% - 70px);
+      margin-left: 0;
+    }
+  }
+  &__content {
+    margin-bottom: 10px;
+    padding: 0 20px;
+    background-color: $white;
+    // border: 1px solid #e8e8e8;
+
+    @include for-size(tablet-portrait-up) {
+      margin-bottom: 0;
+    }
+
+    p {
+      margin-top: 10px;
+      margin-bottom: 10px;
+      &:before {
+        content: "";
+        position: absolute;
+        // top: 180px;
+        // right: -12px;
+        display: block;
+        z-index: 2;
+        width: 15px;
+        height: 15px;
+        border: 3px solid $white;
+        border-radius: 50%;
+        background: $main;
+        left: 0;
+        margin-left: 19px;
+
+        @include for-size(big-desktop-up) {
+          left: 50%;
+          margin-left: -12px;
+          top: 200px;
+        }
+        @include for-size(desktop-up) {
+          left: 50%;
+          margin-left: -12px;
+          top: 170px;
+        }        
+        @include for-size(tablet-portrait-up) {
+          left: 50%;
+          margin-left: -11px;
+          top: 150px;
+        }
+        @media (max-width: 599px) {
+          left: 82px;
+          top: 140px;
+        }
+        @media (max-width: 499px) {
+          left: 47px;
+          top: 115px;
+        }
+        @media (max-width: 375px) and (min-width: 250px) {
+          left: 47px;
+          top: 115px;
+        }
+      }
+      &:last-child {
+        margin-bottom: 0;
+      }
+    }
+
+    .destination-image {
+      // max-width: 300px;
+
+      @media (max-width: 375px) {
+        // max-width: 250px;
+        max-height: 150px;
+        object-fit: cover;
+      }
+
+      @media (max-width: 499px) {
+        // max-width: 250px;
+        max-height: 220px;
+        object-fit: cover;
+      }
+      @media (max-width: 599px) {
+        max-width: 350px;
+        max-height: 220px;
+        object-fit: cover;
+      }
+
+      @include for-size(tablet-portrait-up) {
+        max-width: 550px;
+        max-height: 300px;
+        object-fit: cover;
+      }
+      @include for-size(desktop-up) {
+        max-width: 450px;
+        max-height: 250px;
+        object-fit: cover;
+      }
+      @include for-size(big-desktop-up) {
+        max-width: 550px;
+        max-height: 300px;
+        object-fit: cover;
+      }
+    }
+  }
+  &__info {
+    @include for-size(tablet-portrait-up) {
+      display: flex;
+      align-items: center;
+      min-height: 60px;
+    }
+  }
+  &__headline {
+    margin-top: 0;
+    margin-bottom: 10px;
+    text-transform: uppercase;
+    font-weight: 700;
+  }
+
+  &__date {
+    font-size: 16px;
+    opacity: 0.8;
+    position: absolute;
+    // display: inline-block;
+    font-size: 13px;
+    top: 105px;
+    left: -40px;
+    max-width: 20px;
+
+    @include for-size(tablet-portrait-up) {
+      position: static;
+      font-size: 16px;
+      max-width: none;
+      margin: 0 -40px;
+    }
+    @media (max-width: 599px) {
+      top: 145px;
+      left: -30px;
+      // max-width: 25px;
+    }
+    @media (max-width: 499px) {
+      top: 120px;
+      max-width: 25px;
+      left: -60px;
+    }
+    @media (max-width: 375px) {
+      top: 120px;
+      left: -50px;
+      max-width: 20px;
+    }
+  }
+}
+
+.timeline-main {
+  margin-top: 40px;
+  &:before {
+    // content: url(http://kasbban.ir/visit/dist/images/visit.png);
+    content: url(../images/visit.png);
+    position: absolute;
+    left: calc(50% - 235px);
+    top: 701px;
+    z-index: 11;    
+    @media (max-width: 1199px) {
+      content: none;
+    }
+  }  
+}
+
+.timeline-sidebar {
+  ul {
+    width: 100%;
+    li {
+      display: inline-block;
+      &:last-child {
+        border: 0;
+      }
+
+      p {
+        display: block;
+        padding: 20px;
+        line-height: 1.4;
+
+        &:nth-child(1) {
+          position: relative;
+          padding-right: 25px;
+          font-size: 14px;
+          line-height: 0.5;
+          color: $main;
+          flex: 1;
+          font-size: 16px;
+          // border-right: 4px solid $main;
+          &:after {
+            content: "";
+            position: absolute;
+            top: 20px;
+            right: 0px;
+            display: block;
+            width: 10px;
+            height: 10px;
+            // border: 3px solid $white;
+            border-radius: 50%;
+            background: $main;
+          }
+        }
+      }
+    }
+  }
+}
+
+@include for-size(desktop-up) {
+  .timeline-sidebar {    
+    ul {
+      list-style: none;
+      width: 100%;
+      a {
+        text-decoration: none;
+        color: $black;
+        &:hover {
+          color: $main;
+        }
+      }
+      li {
+        display: flex;
+        &:last-child {
+          border: 0;
+        }
+
+        p {
+          display: block;
+          padding: 20px;
+          line-height: 1.4;
+
+          &:nth-child(1) {
+            position: relative;
+            padding-right: 25px;
+            font-size: 14px;
+            line-height: 0.5;
+            color: $main;
+            flex: 1;
+            font-size: 16px;
+            border-right: 2px solid $main;
+            &:after {
+              content: "";
+              position: absolute;
+              top: 20px;
+              right: -9px;
+              display: block;
+              width: 10px;
+              height: 10px;
+              border: 3px solid $white;
+              border-radius: 50%;
+              background: $main;
+            }
+          }
+        }
+      }
+    }
+  }
+}

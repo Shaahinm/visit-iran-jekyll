@@ -1,0 +1,136 @@
+@include for-size(tablet-portrait-up) {
+}
+
+footer {
+  display: flex;
+  flex-direction: column;
+  background: $footer;
+  color: white;
+  // padding: 50px 150px;
+  a {
+    text-decoration: none;
+    color: $accent-fc;
+    &:hover {
+      color: $main;
+    }
+  }
+  .top {
+    display: flex;
+    flex-direction: column;    
+    padding: 0 20px;
+    padding-top: 50px;
+    @include for-size(desktop-up) {
+      padding: 0 150px;
+      padding-top: 50px;
+    }    
+    .socials {      
+      a {
+        padding: 0 5px;
+      }
+    }
+
+    .subscription {
+      display: flex;
+      flex-direction: column;
+      @include for-size(desktop-up) {
+        flex-direction: row;
+        height: 70px;
+      }   
+      align-items: center;
+      justify-content: center;
+      padding: 20px 0;
+      // height: 70px;
+      // line-height: 70px;
+      .label {
+        flex: 1;
+        background-color: #777474;
+        text-align: center;
+        font-size: 13.33px;
+        height: 70px;
+        line-height: 70px;
+        width: 100%;
+      }
+      .input {
+        background: #959393;
+        flex: 4;
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        height: 70px;
+        padding: 0;
+        width: 100%;
+        border: none;
+        align-items: center;
+        justify-content: center;
+        input {
+          height: 40px;
+          background: #4e4e51;
+          width: 60%;
+          @include for-size(desktop-up) {
+            width: 80%;
+          }
+          border: none;
+          color: $accent-fc;
+          padding: 0 50px;
+          direction: ltr;
+        }
+      }
+      .button {
+        flex: 1;
+        background-color: #777474;
+        width: 100%;
+        input {
+          height: 70px;
+          width: 100%;
+          background: inherit;
+          border: none;
+          color: $accent-fc;
+        }
+      }
+    }
+  }
+
+  .menu {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    padding: 0 150px;
+    ul {
+      list-style: none;
+      text-align: center;
+      min-width: 300px;
+      li {
+        display: list-item;
+        @include for-size(desktop-up) {
+          display: inline;
+          padding: 0 35px;
+          border-left: 1px solid;
+        }
+        padding: 10px 35px;        
+        color: #959393;
+         border: 0;        
+        &:last-child {
+          border: none;
+        }
+        a {
+          color: #959393;
+          &:hover {
+            color: $main;
+          }
+        }
+      }
+    }
+  }
+
+  .copyright {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    padding: 0 20px;   
+    height: 60px;
+    background: $main;
+    margin-top: 50px;
+  }
+}

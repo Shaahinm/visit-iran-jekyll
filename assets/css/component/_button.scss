@@ -1,0 +1,15 @@
+.btn {
+    display: block;
+    color: $red;
+    border-color: transparent;
+  
+    &:disabled, 
+    &.disabled {  
+      pointer-events: none;
+    }
+  }
+  
+  //Alternate Button
+  .btn.alt {
+    color: $blue;
+  }

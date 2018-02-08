@@ -1,0 +1,52 @@
+---
+---
+
+@charset 'utf-8';
+
+@import "abstract/__abstract-dir.scss";
+@import "base/__base-dir.scss";
+@import "component/__component-dir.scss";
+@import "layout/__layout-dir.scss";
+
+
+a {
+    color: $black;
+    &:hover {
+      color: $main;
+    }
+  }
+  
+  .content {
+    &.destinations {
+      padding: 0 0;
+      .main {
+        display: block;
+        margin-top: 40px;
+        margin-bottom: 40px;
+        .timeline-sidebar {
+          padding-right: 20px;
+          margin-bottom: 20px;
+        }
+      }
+      @include for-size(tablet-landscape-up) {
+        margin-top: 130px;
+      }
+      @include for-size(desktop-up) {
+        padding: 0 124px;
+        margin-top: 130px;
+        .main {
+          display: flex;
+          flex-direction: row;
+          .timeline-sidebar {
+            display: block;
+            flex: 0 0 230px;
+            padding-right: 0;
+            margin-bottom: 0;
+          }
+          .timeline-main {
+            flex: 3;
+          }
+        }
+      }
+    }
+  }
