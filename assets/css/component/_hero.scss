@@ -31,16 +31,79 @@
     .hero-text {
       left: 20%;
       font-size: 24px;
-    }   
+    }
   }
 }
 
 @include for-size(desktop-up) {
   .hero {
     height: 500px;
-    .hero-text {      
-      left: 20%;      
-      font-size: 32px;      
+    .hero-text {
+      left: 20%;
+      font-size: 32px;
+    }
+  }
+}
+
+.hero-img {
+  display: flex;
+  justify-content: center;
+  position: relative;
+  img {
+    width: 100%;
+    height: 300px;
+    object-fit: cover;
+    @include for-size(tablet-portrait-up) {
+      height: 400px;
+    }
+    @include for-size(desktop-up) {
+      height: 500px;
+    }    
+  }
+  .hero-text {
+    text-align: center;
+    position: absolute;
+    top: 50%;
+    left: 50%;    
+    transform: translate(-50%, -50%);
+    color: $white;      
+    padding: 30px;    
+    background-color: rgba(0, 0, 0, .6);
+    width: 80%;
+    @media (min-width: 900px) {
+      left: auto;
+      right: 5%;
+      transform: none;
+      width: auto;
+    }  
+    .top {
+      font-size: 16px;      
+      color: $white;
+      border-bottom: 1px solid $white;
+      padding-bottom: 10px;
+      @media (min-width: 400px) {
+        font-size: 20px;
+      }
+      @media (min-width: 500px) {
+        font-size: 24px;
+      }
+      @media (min-width: 899px) {
+        font-size: 32px;        
+      }  
+    }
+    .bottom {
+      font-size: 12px;      
+      color: $white;
+      padding-top: 10px;
+      @media (min-width: 400px) {
+        font-size: 12px;
+      }
+      @media (min-width: 500px) {
+        font-size: 14px;
+      }  
+      @media (min-width: 899px) {
+        font-size: 18px;
+      }      
     }
   }
 }

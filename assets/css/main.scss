@@ -17,6 +17,9 @@ a {
   }
   
   .content {
+    @include for-size(tablet-landscape-up) {
+      margin-top: 130px;
+    }    
     &.destinations {
       padding: 0 0;
       .main {

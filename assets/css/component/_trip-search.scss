@@ -1,0 +1,126 @@
+$select-color: #5d616d;
+$searchdiv-color: #00081b;
+.selectbox {
+  width: 250px;
+  overflow: hidden;
+  background: $select-color;
+  border-color: $select-color;
+  // position: relative;
+  padding: 8px 10px 8px 5px;
+  margin: 0 30px;
+  //   display: flex;
+  //   flex-direction: column;
+
+  select {
+    color: $white;
+    background: $select-color;
+    background: url(../images/select-arrow.png) no-repeat right;
+    -webkit-appearance: none;
+    background-position-x: 0px;
+    width: 210px;
+    border: 0;
+    position: relative;
+    // z-index: 99;
+    outline: none;
+    option {
+      background: $select-color;
+      color: $white;
+      width: 100%;
+    }
+  }
+}
+.tripsearch {
+  padding: 20px 130px;
+  height: auto;
+  background: $searchdiv-color;  
+  .title {
+    color: $white;
+    position: relative;
+    top: 8px;
+    width: fit-content;
+    background: $searchdiv-color;    
+  }
+  .dropdowns {
+    border-top: 1px solid rgba(255,255,255, .6);
+    display: flex;
+    flex-direction: column;
+    padding-top: 30px;
+    form {
+      display: flex;
+      flex-direction: row;
+      justify-content: center;
+      margin-bottom: 20px;
+      .selectbox {
+        flex: 0 0 220px;
+      }
+      .searchbutton {
+        margin: 0 30px;
+      }
+    }
+  }  
+  @media (max-width: 500px) {
+    padding: 20px;    
+    .dropdowns {
+      form {
+        flex-direction: column;
+        align-items: center;
+        .selectbox {
+          flex: 0;
+          margin-top: 20px;
+          width: 220px;
+        }
+        .searchbutton {
+          display: flex;
+          margin-top: 20px;
+          justify-content: center;
+        }
+        .btn.index {
+          width: 235px;
+        }
+      }
+    }
+  }
+  @media (max-width: 1200px) and (min-width: 500px) {
+    padding: 20px;   
+    .dropdowns {
+      form {
+        flex-direction: row;
+        flex-wrap: wrap;
+        align-items: center;
+        .selectbox {
+          flex: 0 0 220px;
+          margin-top: 20px;
+          width: 220px;
+        }
+        .searchbutton {
+          display: flex;
+          margin-top: 20px;
+          justify-content: center;
+        }
+        .btn.index {
+          width: 235px;
+        }
+      }
+    }
+  } 
+}
+
+
+
+
+.container2 {
+  margin: 0 auto;
+  padding: 40px;
+  width: 80%;
+  color: #333;
+  background: #419be0;
+}
+
+.single-item {
+  text-align: center;
+  color: #419be0;
+  background: white;
+  h3 {
+    font-size: 25px;
+  }
+}

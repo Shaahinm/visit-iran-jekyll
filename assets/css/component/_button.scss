@@ -1,15 +1,22 @@
 .btn {
-    display: block;
-    color: $red;
-    border-color: transparent;
-  
-    &:disabled, 
-    &.disabled {  
-      pointer-events: none;
-    }
+  display: block;
+  color: $red;
+  border-color: transparent;
+
+  &:disabled,
+  &.disabled {
+    pointer-events: none;
   }
-  
-  //Alternate Button
-  .btn.alt {
-    color: $blue;
+
+  &.index {
+    width: 230px;
+    color: $white;
+    background: $main;
+    height: 38px;
   }
+}
+
+//Alternate Button
+.btn.alt {
+  color: $blue;
+}

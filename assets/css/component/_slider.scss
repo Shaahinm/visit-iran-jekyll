@@ -1,0 +1,114 @@
+.slick-slider {
+  width: 100%;
+  max-width: 900px;
+}
+
+.slider {
+  .shadow {
+    -moz-box-shadow: outset 0 0 10px rgba(0, 0, 0, 0.4);
+    -webkit-box-shadow: outset 0 0 10px rgba(0, 0, 0, 0.4);
+    box-shadow: outset 0 0 10px rgba(0, 0, 0, 0.4);
+  }
+  &.province {
+    margin: 30px 80px;
+    display: flex;
+    height: 500px;
+    max-height: 500px;
+    align-items: center;
+    flex-direction: row-reverse;
+    .right {
+      display: flex;
+      align-items: center;
+      direction: ltr;
+      overflow: hidden;
+      max-width: 50%;
+      width: 50%;
+      max-height: 500px;
+      .image {
+        h3{
+          position: absolute;
+          left: 50%;
+          top: 50%;
+        }
+        img {
+          object-fit: cover;
+          height: 250px;
+        }
+      }
+    }
+    .left {
+      height: 500px;
+      background-color: #fff;
+      padding-right: 20px;
+      width: 50%;
+      .image {
+        text-align: right;  
+        .name {
+          position: absolute;
+          top: 50%;
+          right: 10%;
+          text-align: center;
+          font-size: 24px;
+          width: 300px;          
+          background: rgba(0, 0, 0, 0.4);
+          padding: 50px;
+          a {
+            color: $white;
+          }
+
+        }      
+        img {
+          object-fit: cover;
+          height: 500px;
+        }
+      }
+    }
+  }
+}
+
+@media (max-width: 1024px) {
+  .destinations {
+    min-height: 650px;
+  }
+  .slider {   
+    &.province {
+      margin: 30px 20px;
+      display: flex;
+      flex-direction: column;
+      height: auto;
+      min-height: 500px;
+      align-items: center;      
+      .right {
+        display: flex;
+        overflow: hidden;        
+        width: 100%;
+        max-width: none;
+        flex: 1;
+        min-height: 300px;
+        height: auto;
+        .image {
+          padding: 0 5px;
+          img {
+            object-fit: cover;
+            height: 250px;
+            width: 100%;
+          }
+        }
+      }
+      .left {
+        // height: 500px;        
+        width: 100%;
+        height: auto;        
+        margin-left: auto;
+        .image {
+          text-align: right;
+          img {
+            object-fit: cover;
+            min-height: 250px;
+            height: 300px;
+          }
+        }
+      }
+    }
+  }
+}
