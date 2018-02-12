@@ -1,0 +1,371 @@
+.entertainment-province {
+  .title {
+    width: auto;
+    height: 48px;
+    margin: 0 auto;
+    text-align: center;
+    color: $accent-fc;
+    background: $main;
+    line-height: 48px;
+    font-size: 24px;
+  }
+  .categories {
+    margin: 0 130px 30px 130px;
+    @media (max-width: 768px) {
+        margin: 0;
+    }
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: row;
+    justify-content: center;
+    .category {
+      border-top: 3px solid white;
+      &:hover {
+        border-top: 3px solid $accent;
+      }
+      .image {
+        margin-top: 50px;
+        img {
+          width: 100px;
+          height: 100px;
+          object-fit: cover;
+          padding: 0 10px;
+          border-left: 0.5px solid rgba(0, 0, 0, 0.4);
+          border-right: 0.5px solid rgba(0, 0, 0, 0.4);
+        }
+      }
+    }
+  }
+}
+
+.crafts {
+  &.province {
+    margin: 80px 0 0 0;
+    height: 600px;
+    background: #e7e7e7;
+    .slider.craft {
+      border: 0;
+      margin: 0 130px;
+      @media (max-width: 768px) {
+        margin: 0 30px;
+      }
+      padding-top: 80px;
+      .center {
+        .image {
+          background: $white;
+          clip-path: none;
+          border: none;
+          .text {
+            margin: 0;
+            color: black;
+            background: $white;
+          }
+          .link {
+            background: $white;
+            padding: 20px;
+          }
+        }
+      }
+    }
+  }
+}
+
+.events-province {
+  margin-left: 0;
+  margin-right: 0;
+  background: #e7e7e7;
+  .title {
+    width: auto;
+    height: 48px;
+    margin: 0 auto;
+    text-align: center;
+    color: $accent-fc;
+    background: $main;
+    line-height: 48px;
+    font-size: 24px;
+  }
+  .slider.event {
+    // border: 0;
+    // margin-left: 130px;
+    // margin-right: 130px;
+    // padding-top: 85px;
+  }
+  .filters {
+    padding: 50px 130px;
+    display: flex;
+    flex-wrap: wrap;
+    button {
+      border: 1px solid rgba(0, 0, 0, 0.4);
+      display: inline-block;
+      min-width: 100px;
+      padding: 4px 8px;
+      vertical-align: middle;
+      overflow: hidden;
+      text-decoration: none;
+      color: inherit;
+      background-color: inherit;
+      text-align: center;
+      cursor: pointer;
+      white-space: nowrap;
+      &.active {
+        color: $accent-fc;
+        background: $accent;
+      }
+    }
+  }
+  @media (max-width: 768px) {
+    .filters {
+      display: none;
+    }
+  }
+  .province-event-slider {
+    display: flex;
+    flex-direction: row-reverse;
+    margin: 0 130px;
+    @media (max-width: 768px) {
+      margin: 0 30px;
+    }
+    .right {
+      flex: 0 0 300px;
+      direction: ltr;
+      overflow: hidden;
+      max-height: 500px;
+      .image {
+        img {
+          object-fit: cover;
+          height: 250px;
+        }
+      }
+    }
+    @media (max-width: 768px) {
+      .right {
+        display: none;
+      }
+    }
+    .left {
+      height: 300px;
+      flex: 1;
+      padding-top: 50px;
+      .event {
+        margin: 0 20px;
+        padding: 20px 0;
+        border-bottom: 1px solid rgba(0, 0, 0, 0.4);
+        &:nth-child(odd) {
+          border-bottom: 1px solid $main;
+        }
+      }
+    }
+  }
+}
+
+.content {
+  .routes.province {
+    @media (max-width: 1025px) {
+      min-height: auto;
+    }
+    .title {
+      width: auto;
+      height: 48px;
+      margin: 0 auto;
+      text-align: center;
+      color: $accent-fc;
+      background: $accent;
+      line-height: 48px;
+      font-size: 24px;
+    }
+    .slider.route {
+      border: none;
+    }
+    @media (max-width: 1160px) {
+      position: relative;
+      top: -100px;
+      padding: 30px;
+      margin: 0;
+    }
+  }
+}
+.villages.province {
+  .title {
+    width: auto;
+    height: 48px;
+    margin: 0 auto;
+    text-align: center;
+    color: $accent-fc;
+    background: $accent;
+    line-height: 48px;
+    font-size: 24px;
+  }
+  .slider.route {
+    border: none;
+  }
+  .slider.village {
+    .center {
+      .image {
+        clip-path: none;
+      }
+      .slick-slide {
+        .image {
+          border: none;
+        }
+        .text {
+          margin: 0;
+          color: black;
+          background: #e7e7e7;
+        }
+      }
+    }
+  }
+}
+
+.history {
+  //   display: flex;
+  //   flex-direction: column;
+  .top {
+    padding: 30px 130px;
+    display: flex;
+    flex-direction: row;
+    @media (max-width: 600px) {
+      padding: 30px;
+    }
+    .right {
+      max-width: 900px;
+      @media (max-width: 1660px) {
+        max-width: 800px;
+      }
+      @media (max-width: 1560px) {
+        max-width: 700px;
+      }
+      @media (max-width: 1460px) {
+        max-width: 600px;
+      }
+      @media (max-width: 1360px) {
+        max-width: 500px;
+      }
+      @media (max-width: 1150px) {
+        max-width: 100%;
+      }
+      //   @media (max-width: 600px) {
+      //     padding: 30px;
+      //   }
+      .title {
+        margin-bottom: 40px;
+        color: $main;
+        h1 {
+          font-size: 32px;
+        }
+      }
+      .body {
+        text-align: justify;
+        line-height: 32px;
+        padding-left: 40px;
+        max-height: 250px;
+        overflow: hidden;
+        @media (max-width: 1150px) {
+          padding-left: 0;
+          width: 100%;
+        }
+      }
+      .link {
+        padding: 20px 0;
+        a {
+          color: $main;
+        }
+      }
+    }
+  }
+  .map {
+    width: 500px;
+    // flex: 0 0 500px;
+    position: absolute;
+    top: 650px;
+    left: 130px;
+    margin-top: 50px;
+    @media (max-width: 1360px) {
+      left: 50px;
+    }
+    @media (max-width: 1150px) {
+      position: relative;
+      margin: 0 auto;
+      top: -100px;
+      left: 0;
+    }
+    @media (max-width: 560px) {
+      flex: 0 0 300px;
+      width: 300px;
+      //   position: absolute;
+      //   margin: 0 auto;
+      //   top: 90%;
+      //   left: 50%;
+      //   transform: translate(-50%, -50%);
+    }
+    .parent {
+      border: 1px solid black;
+      width: 500px;
+      height: 500px;
+      position: relative;
+      background: $white;
+      @media (max-width: 560px) {
+        height: 300px;
+        width: 300px;
+      }
+      .child {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        width: 95%;
+        height: 95%;
+        background: $white;
+        // margin: auto;
+      }
+    }
+  }
+  .bottom {
+    height: 300px;
+    width: 100%;
+
+    background: #e7e7e7;
+
+    @media (max-width: 1500px) {
+      height: 250px;
+    }
+    @media (max-width: 1320px) {
+      top: -180px;
+    }
+    z-index: -1;
+    .temp {
+      .title {
+        padding-bottom: 20px;
+      }
+      padding: 30px 130px;
+      @media (max-width: 600px) {
+        padding: 30px;
+      }
+      table {
+        max-width: 600px;
+        width: 50%;
+        @media (max-width: 1150px) {
+          max-width: none;
+          width: 100%;
+        }
+      }
+      #table-temp {
+        // border: 1px solid black;
+        padding: 8px;
+        th {
+          font-size: 20px;
+          padding: 10px;
+          border: 1px solid rgba(0, 0, 0, 0.4);
+        }
+        td {
+          width: 24%;
+          padding: 10px;
+          text-align: center;
+          background: $white;
+          color: $main;
+          border: 1px solid rgba(0, 0, 0, 0.4);
+        }
+      }
+    }
+  }
+}

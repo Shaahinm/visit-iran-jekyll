@@ -30,7 +30,7 @@
   .hero {
     .hero-text {
       left: 20%;
-      font-size: 24px;
+      font-size: 24px;      
     }
   }
 }
@@ -74,7 +74,11 @@
       left: auto;
       right: 5%;
       transform: none;
-      width: auto;
+      width: auto;      
+      &.left {
+          right: auto;
+          left: 5%;
+      }
     }  
     .top {
       font-size: 16px;      

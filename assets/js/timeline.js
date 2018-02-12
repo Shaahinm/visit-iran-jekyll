@@ -50,7 +50,7 @@ $(function() {
               .css("top", "81px")
               .css("width", "100%")
               .css("background", "white")
-              .css("z-index", "10");
+              .css("z-index", "2");
           } else {
             sidebar
               .css("position", "static")
