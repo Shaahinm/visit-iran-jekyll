@@ -1,0 +1,41 @@
+// .arrow {
+//   &.down {
+//     bottom: -58px;
+//   }
+//   &.up {
+//     top: -58px;
+//   }
+//   @media (max-width: 1024px) {
+//     display: none;
+//   }  
+//   position: absolute;
+//   z-index: 2;
+//   font-size: 100px;
+//   color: $white;
+//   background: rgba(0, 0, 0, 0.4);
+//   width: 99%;
+//   text-align: center;
+//   vertical-align: middle;
+//   //   top: 100%;
+//   //   right: 22%;
+//   .down {
+//     // top: 100%;
+//     // right: 22%;
+//     cursor: pointer;
+//     margin-left: -25px;
+//     > div {
+//       -webkit-transform: rotate(90deg);
+//       -ms-transform: rotate(90deg);
+//       transform: rotate(90deg);
+//     }
+//   }
+//   .up {
+//     cursor: pointer;
+//     margin-left: -24px;
+//     > div {
+//       -webkit-transform: rotate(90deg);
+//       -ms-transform: rotate(90deg);
+//       transform: rotate(90deg);
+//     }
+//   }
+// }

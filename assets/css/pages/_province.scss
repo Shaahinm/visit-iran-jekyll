@@ -25,9 +25,9 @@
       }
       .image {
         margin-top: 50px;
-        img {
+        img {        
           width: 100px;
-          height: 100px;
+          height: 100px;  
           object-fit: cover;
           padding: 0 10px;
           border-left: 0.5px solid rgba(0, 0, 0, 0.4);
@@ -55,6 +55,15 @@
           background: $white;
           clip-path: none;
           border: none;
+          .title {
+            margin: 0;
+            color: black;
+            background: $white;
+            font-weight: 700;
+            text-align: right;
+            padding: 20px;
+            width: auto;
+          }
           .text {
             margin: 0;
             color: black;
@@ -130,6 +139,7 @@
       direction: ltr;
       overflow: hidden;
       max-height: 500px;
+      padding-top: 50px;
       .image {
         img {
           object-fit: cover;
@@ -260,6 +270,7 @@
         padding-left: 40px;
         max-height: 250px;
         overflow: hidden;
+        min-height: 250px;
         @media (max-width: 1150px) {
           padding-left: 0;
           width: 100%;

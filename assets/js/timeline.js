@@ -10,8 +10,8 @@ $(function() {
       var sidebar = $(".timeline-sidebar");
 
       var heroPositionEnd =
-        $(".hero.destinations").offset().top +
-        $(".hero.destinations").height() - 150;
+        $(".hero-img").offset().top +
+        $(".hero-img").height() - 150;
 
       $(window).scroll(function() {
         if (window.innerHeight + window.scrollY > document.body.clientHeight) {
