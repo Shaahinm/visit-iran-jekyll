@@ -463,8 +463,8 @@ header {
               }
             }
             &.map {
-              min-width: 700px;
-              width: 700px;
+              min-width: 1000px;
+              width: 1000px;
               .map-menu-wrapper {
                 background-color: $main;
                 display: flex;
@@ -472,7 +472,7 @@ header {
                 padding: 30px 20px;
                 flex-direction: row;
                 .right {
-                  width: 300px;
+                  flex: 0 0 550px;
                   table {
                     margin-top: 10px;
                     tr {
@@ -494,7 +494,7 @@ header {
                   }
                   a {
                     border-bottom: 1px solid $white;
-                    padding: 3px 0;
+                    padding: 10px 0;
                     color: $white;
                     &:hover {
                       color: $main;

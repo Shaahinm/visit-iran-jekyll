@@ -1,95 +1,54 @@
 $(document).ready(function() {
-  ///////////////////////// start of Provinces slider ////////////////////////////////  
-
-  $("#terminus-scroll-up").click(function(e) {
-    $("#terminus-scrollable").animate(
-      {
-        scrollTop: $("#terminus-scrollable").scrollTop() - 275
-      },
-      1000
-    );
-  });
-
-  $("#terminus-scroll-down").click(function(e) {
-    $("#terminus-scrollable").animate(
-      {
-        scrollTop: $("#terminus-scrollable").scrollTop() + 275
-      },
-      1000
-    );
-  });
-
-  // $("#terminus-down").click(function() {
-  //   $(".slider-nav").slick("slickNext");
-  // });
-  // $("#terminus-up").click(function() {
-  //   $(".slider-nav").slick("slickPrev");
-  // });
-
-  // $(".goto").click(function(e) {
-  //   e.preventDefault();
-  //   // var slideno = $(this).data("slide");
-  //   var slideno = $(this).data("slide");
-  //   $(".slider-for").slick("slickGoTo", slideno - 1);
-  // });
-  ///////////////////////// end of Provinces slider //////////////////////////////////
-  //////////////////////// start of routes slider ////////////////////////////////////
-  $(".slider-for-routes").slick({
+  ///////////////////////// start of home page hero slider ////////////////////////////////
+  $("#hero-slider").slick({
     slidesToShow: 1,
     slidesToScroll: 1,
     arrows: false,
-    fade: true,
-    asNavFor: ".slider-nav-routes",
-    swipe: false
+    // nextArrow: '<div class="my-prev"><div>&#x3009;</div></div>',
+    // prevArrow: '<div class="my-next"><div>&#x3008;</div></div>',
+    autoplay: true,
+    autoplaySpeed: 5000
   });
-  $(".slider-nav-routes").slick({
-    slidesToShow: 2,
-    autoPlay: true,
-    slidesToScroll: 1,
-    asNavFor: ".slider-for-routes",
-    dots: false,
-    focusOnSelect: true,
-    vertical: true,
-    verticalSwiping: true,
-    arrows: false,
-    centerMode: false,
-    responsive: [
+  ///////////////////////// end of home page hero slider //////////////////////////////////
+  ///////////////////////// start of points of interest slider ////////////////////////////////
+  $("#poi-scroll-up").click(function(e) {
+    $("#poi-scrollable").animate(
       {
-        breakpoint: 1025,
-        settings: {
-          rows: 1,
-          slidesPerRow: 1,
-          slidesToShow: 3,
-          autoPlay: true,
-          slidesToScroll: 1,
-          asNavFor: ".slider-for-routes",
-          dots: false,
-          focusOnSelect: true,
-          vertical: false,
-          verticalSwiping: false,
-          arrows: false,
-          centerMode: true
-        }
+        scrollTop: $("#poi-scrollable").scrollTop() - 275
       },
-      {
-        breakpoint: 700,
-        settings: {
-          rows: 1,
-          slidesPerRow: 1,
-          slidesToShow: 1,
-          autoPlay: true,
-          slidesToScroll: 1,
-          asNavFor: ".slider-for-routes",
-          dots: false,
-          focusOnSelect: true,
-          vertical: false,
-          verticalSwiping: false,
-          arrows: false,
-          centerMode: true
-        }
-      }
-    ]
+      1000
+    );
   });
+
+  $("#poi-scroll-down").click(function(e) {
+    $("#poi-scrollable").animate(
+      {
+        scrollTop: $("#poi-scrollable").scrollTop() + 275
+      },
+      1000
+    );
+  });
+  ///////////////////////// end of points of interest slider //////////////////////////////////
+  ///////////////////////// start of routes of interest slider ////////////////////////////////
+  $("#roi-scroll-up").click(function(e) {
+    $("#roi-scrollable").animate(
+      {
+        scrollTop: $("#roi-scrollable").scrollTop() - 207
+      },
+      1000
+    );
+  });
+
+  $("#roi-scroll-down").click(function(e) {
+    $("#roi-scrollable").animate(
+      {
+        scrollTop: $("#roi-scrollable").scrollTop() + 207
+      },
+      1000
+    );
+  });
+  ///////////////////////// end of routes of interest slider //////////////////////////////////
+
   $(".routes-province-scroll-down").click(function() {
     $(".slider-nav-routes").slick("slickNext");
   });
@@ -169,7 +128,7 @@ $(document).ready(function() {
           slidesToScroll: 2,
           arrows: false
         }
-      },      
+      },
       {
         breakpoint: 700,
         settings: {
@@ -181,106 +140,44 @@ $(document).ready(function() {
     ]
   });
   ///////////////////////// end of village slider //////////////////////////////////
-  //////////////////////// start of residental slider ////////////////////////////////////
-  $(".slider-for-residentals").slick({
-    slidesToShow: 1,
-    slidesToScroll: 1,
-    arrows: false,
-    fade: true,
-    asNavFor: ".slider-nav-residentals",
-    swipe: false
-  });
-  $(".slider-nav-residentals").slick({
-    slidesToShow: 2,
-    autoPlay: true,
-    slidesToScroll: 1,
-    asNavFor: ".slider-for-residentals",
-    dots: false,
-    focusOnSelect: true,
-    vertical: true,
-    verticalSwiping: true,
-    arrows: false,
-    centerMode: false,
-    responsive: [
+  //////////////////////// start of residentials slider ////////////////////////////////////
+
+  $("#residentials-scroll-up").click(function(e) {
+    $("#residentials-scrollable").animate(
       {
-        breakpoint: 1025,
-        settings: {
-          rows: 1,
-          slidesPerRow: 1,
-          slidesToShow: 3,
-          autoPlay: true,
-          slidesToScroll: 1,
-          asNavFor: ".slider-for-residentals",
-          dots: false,
-          focusOnSelect: true,
-          vertical: false,
-          verticalSwiping: false,
-          arrows: false,
-          centerMode: true
-        }
+        scrollTop: $("#residentials-scrollable").scrollTop() - 207
       },
-      {
-        breakpoint: 700,
-        settings: {
-          rows: 1,
-          slidesPerRow: 1,
-          slidesToShow: 1,
-          autoPlay: true,
-          slidesToScroll: 1,
-          asNavFor: ".slider-for-residentals",
-          dots: false,
-          focusOnSelect: true,
-          vertical: false,
-          verticalSwiping: false,
-          arrows: false,
-          centerMode: true
-        }
-      }
-    ]
+      1000
+    );
   });
-  ///////////////////////// end of residental slider //////////////////////////////////
+
+  $("#residentials-scroll-down").click(function(e) {
+    $("#residentials-scrollable").animate(
+      {
+        scrollTop: $("#residentials-scrollable").scrollTop() + 207
+      },
+      1000
+    );
+  });
+
+  ///////////////////////// end of residentials slider //////////////////////////////////
   //////////////////////// start of event slider ////////////////////////////////////
-  $(".slider-nav-event").slick({
-    slidesToShow: 3,
-    autoPlay: true,
-    slidesToScroll: 1,
-    speed: 1000,
-    dots: false,
-    focusOnSelect: true,
-    arrows: false,
-    centerMode: false,
-    vertical: true,
-    verticalSwiping: true,
-    responsive: [
+  $("#events-scroll-up").click(function(e) {
+    $("#events-scrollable").animate(
       {
-        breakpoint: 1025,
-        settings: {
-          rows: 1,
-          slidesPerRow: 1,
-          slidesToShow: 2,
-          autoPlay: true,
-          slidesToScroll: 1,
-          dots: false,
-          focusOnSelect: true,
-          arrows: false,
-          centerMode: false
-        }
+        scrollTop: $("#events-scrollable").scrollTop() - 207
       },
+      1000
+    );
+  });
+
+  $("#events-scroll-down").click(function(e) {
+    $("#events-scrollable").animate(
       {
-        breakpoint: 700,
-        settings: {
-          rows: 1,
-          slidesPerRow: 1,
-          slidesToShow: 1,
-          autoPlay: true,
-          slidesToScroll: 1,
-          dots: false,
-          focusOnSelect: true,
-          arrows: false,
-          centerMode: false
-        }
-      }
-    ]
+        scrollTop: $("#events-scrollable").scrollTop() + 207
+      },
+      1000
+    );
   });
   ///////////////////////// end of event slider //////////////////////////////////
   //////////////////////// start of craft slider ////////////////////////////////////
@@ -310,7 +207,7 @@ $(document).ready(function() {
           slidesToScroll: 2,
           arrows: false
         }
-      },     
+      },
       {
         breakpoint: 700,
         settings: {
@@ -349,22 +246,6 @@ $(document).ready(function() {
     // var slideno = $(this).data("slide");
     var slideno = $(this).data("slide");
     $(".slider-for-events-province").slick("slickGoTo", slideno - 1);
-  });
-
-  // $(".filters button").bind("click", function(e) {
-  //   var filter = $(this).val();
-  //   var key = "." + filter;
-
-  //   $(".slider-nav-events-province, .slider-for-events-province").slick(
-  //     "slickUnfilter"
-  //   );
-  //   $(".slider-nav-events-province, .slider-for-events-province")
-  //     .slick("slickFilter", ":has(" + key + ")")
-  //     .slick("refresh");
-  //   $(".slider-nav-events-province, .slider-for-events-province").slick(
-  //     "slickGoTo",
-  //     0
-  //   );
-  // });
+  });  
   ///////////////////////// end of province event slider //////////////////////////////////
 });

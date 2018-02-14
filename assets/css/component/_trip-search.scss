@@ -4,12 +4,9 @@ $searchdiv-color: $accent;
   width: 250px;
   overflow: hidden;
   background: $select-color;
-  border-color: $select-color;
-  // position: relative;
+  border-color: $select-color;  
   padding: 8px 10px 8px 5px;
-  margin: 0 30px;
-  //   display: flex;
-  //   flex-direction: column;
+  margin: 0 30px;  
 
   select {
     color: $white;
@@ -34,10 +31,7 @@ $searchdiv-color: $accent;
   height: auto;
   background: $searchdiv-color;  
   .title {
-    color: $white;
-    position: relative;
-    top: 8px;
-    width: fit-content;
+    color: $white;    
     background: $searchdiv-color;    
   }
   .dropdowns {
@@ -103,24 +97,4 @@ $searchdiv-color: $accent;
       }
     }
   } 
-}
-
-
-
-
-.container2 {
-  margin: 0 auto;
-  padding: 40px;
-  width: 80%;
-  color: #333;
-  background: #419be0;
-}
-
-.single-item {
-  text-align: center;
-  color: #419be0;
-  background: white;
-  h3 {
-    font-size: 25px;
-  }
 }

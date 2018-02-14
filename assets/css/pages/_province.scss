@@ -12,7 +12,7 @@
   .categories {
     margin: 0 130px 30px 130px;
     @media (max-width: 768px) {
-        margin: 0;
+      margin: 0;
     }
     display: flex;
     flex-wrap: wrap;
@@ -25,9 +25,9 @@
       }
       .image {
         margin-top: 50px;
-        img {        
+        img {
           width: 100px;
-          height: 100px;  
+          height: 100px;
           object-fit: cover;
           padding: 0 10px;
           border-left: 0.5px solid rgba(0, 0, 0, 0.4);
@@ -79,91 +79,11 @@
   }
 }
 
-.events-province {
-  margin-left: 0;
-  margin-right: 0;
-  background: #e7e7e7;
-  .title {
-    width: auto;
-    height: 48px;
-    margin: 0 auto;
-    text-align: center;
-    color: $accent-fc;
-    background: $main;
-    line-height: 48px;
-    font-size: 24px;
-  }
-  .slider.event {
-    // border: 0;
-    // margin-left: 130px;
-    // margin-right: 130px;
-    // padding-top: 85px;
-  }
-  .filters {
-    padding: 50px 130px;
-    display: flex;
-    flex-wrap: wrap;
-    button {
-      border: 1px solid rgba(0, 0, 0, 0.4);
-      display: inline-block;
-      min-width: 100px;
-      padding: 4px 8px;
-      vertical-align: middle;
-      overflow: hidden;
-      text-decoration: none;
-      color: inherit;
-      background-color: inherit;
-      text-align: center;
-      cursor: pointer;
-      white-space: nowrap;
-      &.active {
-        color: $accent-fc;
-        background: $accent;
-      }
-    }
-  }
-  @media (max-width: 768px) {
-    .filters {
-      display: none;
-    }
-  }
-  .province-event-slider {
-    display: flex;
-    flex-direction: row-reverse;
-    margin: 0 130px;
-    @media (max-width: 768px) {
-      margin: 0 30px;
-    }
-    .right {
-      flex: 0 0 300px;
-      direction: ltr;
-      overflow: hidden;
-      max-height: 500px;
-      padding-top: 50px;
-      .image {
-        img {
-          object-fit: cover;
-          height: 250px;
-        }
-      }
-    }
-    @media (max-width: 768px) {
-      .right {
-        display: none;
-      }
-    }
-    .left {
-      height: 300px;
-      flex: 1;
-      padding-top: 50px;
-      .event {
-        margin: 0 20px;
-        padding: 20px 0;
-        border-bottom: 1px solid rgba(0, 0, 0, 0.4);
-        &:nth-child(odd) {
-          border-bottom: 1px solid $main;
-        }
-      }
+.roi {
+  &.province {
+    margin: 50px 130px;
+    @media (max-width: 1025px) {
+      margin: 50px 30px;
     }
   }
 }
