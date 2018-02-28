@@ -84,12 +84,12 @@
     width: 80%;
     @media (min-width: 900px) {
       left: auto;
-      right: 5%;
+      right: 130px;
       transform: none;
       width: auto;      
       &.left {
           right: auto;
-          left: 5%;
+          left: 130px;
       }
     }  
     .top {

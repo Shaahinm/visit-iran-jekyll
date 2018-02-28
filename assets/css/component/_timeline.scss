@@ -345,6 +345,9 @@
         &:hover {
           color: $main;
         }
+        &.active {
+          color: $main;
+        }
       }
       li {
         display: flex;

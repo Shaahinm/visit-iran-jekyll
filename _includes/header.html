@@ -1,6 +1,8 @@
 <header>
     <div class="logo-wrapper">
-        <img src="{{site.baseurl}}/assets/images/logo.png" alt="">
+        <a href="">
+            <img src="{{site.baseurl}}/assets/images/logo-f.jpg" alt="">
+        </a>
     </div>
     <div class="primary-menu-wrapper">
         <div class="top">
@@ -8,8 +10,8 @@
             <div class="top-mobile-underline"></div>
             <div class="container">
                 <div class="right">
-                    <a href="#">درباره ایران</a>
-                    <a href="#">تماس با ما</a>
+                    <a href="javascript:void(0)">پـرتـال جـامع گردشـگری ایـران</a>
+                    <a href="#">دربـاره ی ایـران</a>
                 </div>
                 <div class="middle">
                     <a href="#">
@@ -24,32 +26,35 @@
                 </div>
                 <div class="left">
                     <ul>
-                        <li>
-                            <a href="#">
-                                <i class="fa fa-cloud"></i>
-                            </a>
-                        </li>
-                        <li>
-                            <a href="#">
+                        <li class="search">
+                            <!-- <a href="#">
                                 <i class="fa fa-search"></i>
-                            </a>
+                            </a> -->
+                            <form id="frmSearch" action="www.google.com">
+                                <input type="text" name="search" id="search" class="search-input">
+                                <input type="submit" class="btn-submit-search" value="">
+                            </form>
+                            <!-- <div class="search-input">
+                                <span class="input-icon"><span class="fa fa-user"></span>
+                                <input type="text" class="input-with-icon" id="form-name">
+                            </div>  -->
+                        </li>
+                        <li>                            
+                            <a href="#">ورود</a>
                         </li>
                         <li>
-                            <a href="#">
-                                <i class="fa fa-heart"></i>
-                            </a>
-                        </li>
-                        <li>
-                            <a href="#">ثبت نام</a>
+                                <a href="#">ثبت نام</a>
                         </li>
                         <li>
                             <div class="dropdown">
-                                <button class="dropdown-btn" type="button">زبان
-                                    <i class="fa fa-chevron-down"></i>
+                                <button class="dropdown-btn flag" type="button">                                    
+                                    <img src="http://visitiran.ir/static/tourismiran/images/flags/fa.svg">
                                 </button>
                                 <div class="dropdown-content">
-                                    <a href="#">انگلیسی</a>
-                                    <a href="#">فارسی</a>
+                                    <a href="#">
+                                        فارسی
+                                        <img style="position: relative; top: 5px; margin-right: 15px;width:20px; height:auto" src="http://visitiran.ir/static/tourismiran/images/flags/fa.svg">
+                                    </a>
                                 </div>
                             </div>
                         </li>
@@ -65,10 +70,9 @@
         </label>
         <nav class="buttom">
             <ul>
-                <li>
+                <li class="ostanha">
                     <div class="dropdown">
-                        <button class="dropdown-btn" type="button">مقاصد گردشگری
-                            <i class="fa fa-chevron-down"></i>
+                        <button class="dropdown-btn" type="button">مقـاصـــد گــردشــگــری                            
                         </button>
                         <div class="dropdown-content map">
                             <div class="map-menu-wrapper">
@@ -79,13 +83,13 @@
                                                 <td data-state="west-azar">
                                                     <a href="">آذربایجان غربی</a>
                                                 </td>
-                                                <td data-state="cha-and-ba">                                                
+                                                <td data-state="cha-and-ba">
                                                     <a href="" style="font-size:15px">چهارمحال و بختیاری</a>
                                                 </td>
                                                 <td data-state="fars">
                                                     <a href="">فارس</a>
                                                 </td>
-                                                <td data-state="gilan">                                                
+                                                <td data-state="gilan">
                                                     <a href="">گیلان</a>
                                                 </td>
                                             </tr>
@@ -93,13 +97,13 @@
                                                 <td data-state="east-azar">
                                                     <a href="">آذربایجان شرقی</a>
                                                 </td>
-                                                <td data-state="south-khorasan">                                                
+                                                <td data-state="south-khorasan">
                                                     <a href="">خراسان جنوبی</a>
-                                                </td>                                                
+                                                </td>
                                                 <td data-state="qazvin">
                                                     <a href="">قزوین</a>
                                                 </td>
-                                                <td data-state="lorestan">                                                
+                                                <td data-state="lorestan">
                                                     <a href="">لرستان</a>
                                                 </td>
                                             </tr>
@@ -107,13 +111,13 @@
                                                 <td data-state="ardabil">
                                                     <a href="">اردبیل</a>
                                                 </td>
-                                                <td data-state="razavi-khorasan">                                                
+                                                <td data-state="razavi-khorasan">
                                                     <a href="">خراسان رضوی</a>
-                                                </td>                                                
+                                                </td>
                                                 <td data-state="qom">
                                                     <a href="">قم</a>
                                                 </td>
-                                                <td data-state="mazandaran">                                                
+                                                <td data-state="mazandaran">
                                                     <a href="">مازندران</a>
                                                 </td>
                                             </tr>
@@ -121,13 +125,13 @@
                                                 <td data-state="isfahan">
                                                     <a href="">اصفهان</a>
                                                 </td>
-                                                <td data-state="north-khorasan">      
+                                                <td data-state="north-khorasan">
                                                     <a href="">خراسان شمالی</a>
-                                                </td>                                                
+                                                </td>
                                                 <td data-state="kordestan">
                                                     <a href="">کردستان</a>
                                                 </td>
-                                                <td data-state="markazi">      
+                                                <td data-state="markazi">
                                                     <a href="">مرکزی</a>
                                                 </td>
                                             </tr>
@@ -135,13 +139,13 @@
                                                 <td data-state="alborz">
                                                     <a href="">البرز</a>
                                                 </td>
-                                                <td data-state="khoozestan">      
+                                                <td data-state="khoozestan">
                                                     <a href="">خوزستان</a>
-                                                </td>                                                
+                                                </td>
                                                 <td data-state="kerman">
                                                     <a href="">کرمان</a>
                                                 </td>
-                                                <td data-state="hormozgan">      
+                                                <td data-state="hormozgan">
                                                     <a href="">هرمزگان</a>
                                                 </td>
                                             </tr>
@@ -149,9 +153,9 @@
                                                 <td data-state="ilam">
                                                     <a href="">ایلام</a>
                                                 </td>
-                                                <td data-state="zanjan">      
+                                                <td data-state="zanjan">
                                                     <a href="">زنجان</a>
-                                                </td>                                                
+                                                </td>
                                                 <td data-state="kermanshah">
                                                     <a href="">کرمانشاه</a>
                                                 </td>
@@ -163,13 +167,13 @@
                                                 <td data-state="booshehr">
                                                     <a href="">بوشهر</a>
                                                 </td>
-                                                <td data-state="semnan">      
+                                                <td data-state="semnan">
                                                     <a href="">سمنان</a>
-                                                </td>                                                
+                                                </td>
                                                 <td data-state="ko-and-bo">
                                                     <a href="" style="font-size:15px">کهکیلویه و بویراحمد</a>
                                                 </td>
-                                                <td data-state="yazd">      
+                                                <td data-state="yazd">
                                                     <a href="">یزد</a>
                                                 </td>
                                             </tr>
@@ -179,14 +183,14 @@
                                                 </td>
                                                 <td data-state="sis-and-bal">
                                                     <a href="" style="font-size:15px">سیستان و بلوچستان</a>
-                                                </td>                                                
-                                                <td data-state="golestan">                                                
+                                                </td>
+                                                <td data-state="golestan">
                                                     <a href="">گلستان</a>
                                                 </td>
                                                 <td>
                                                     <a href="">&nbsp;</a>
                                                 </td>
-                                            </tr>                                             
+                                            </tr>
                                         </tbody>
                                     </table>
                                 </div>
@@ -202,31 +206,26 @@
                 <li>
                     <div class="dropdown">
                         <a href="http://google.com">
-                            <button class="dropdown-btn" type="button">مسیرهای گردشگری</button>
+                            <button class="dropdown-btn" type="button">روستـاهـای مقصـد گردشگـری</button>
                         </a>
                     </div>
                 </li>
                 <li>
                     <div class="dropdown">
                         <a href="javascript:void(0)">
-                            <button class="dropdown-btn" type="button">مراکز اقامتی
-                                <i class="fa fa-chevron-down"></i>
+                            <button class="dropdown-btn" type="button">اقامتگــاه هــای بومــگــردی                                
                             </button>
-                        </a>
-                        <div class="dropdown-content">
-                            <a href="#">اقامتهای بوم گردی</a>
-                            <a href="#">هتل ها</a>
-                        </div>
+                        </a>                        
                     </div>
                 </li>
                 <li>
                     <div class="dropdown">
-                        <button class="dropdown-btn" type="button">رویدادهای گردشگری</button>
+                        <button class="dropdown-btn" type="button">خـانه هـای تـاریـخــی</button>
                     </div>
                 </li>
                 <li>
                     <div class="dropdown">
-                        <button class="dropdown-btn" type="button">صنایع دستی</button>
+                        <button class="dropdown-btn" type="button">رویدادهــای گردشگــری</button>
                     </div>
                 </li>
             </ul>

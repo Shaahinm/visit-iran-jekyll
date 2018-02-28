@@ -1,0 +1,118 @@
+$auth_input_bg: #959393;
+$auth_input_bg_focused: lightgray;
+
+.center-wrapper {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 566px;
+  .form {
+    width: 350px;
+    padding: 50px 0;
+    .logo {
+      display: flex;
+      width: 100%;
+      justify-content: center;
+      img {
+        width: 130px;
+        height: 130px;
+      }
+    }
+    .row {
+      padding: 10px;
+      label {
+        font-size: 12px;
+        padding: 0 5px;
+      }
+
+      .input {
+        margin: 5px 0;
+        background: $auth_input_bg;
+        padding: 5px 10px;
+        border: 2px solid $auth_input_bg_focused;
+        border-radius: 4px;
+        width: 100%;
+        box-sizing: border-box;
+        &:focus {
+          background: lightgray;
+          border: 2px solid #00a594;
+          outline: 0 none;
+        }
+      }
+      .error {
+        font-size: 12px;
+        color: red;   
+        list-style: disc;
+        line-height: 24px;
+      }
+      .btn.full-width {
+        width: 100%;
+        background: $main;
+        color: white;
+        padding: 0;
+        height: 32px;
+        border-radius: 4px;
+      }
+      .checkbox {
+        border: 1px solid $main;
+      }
+      &.link {
+        font-size: 12px;
+        a {
+          color: $main;
+        }
+      }
+    }
+
+    &.bordered {
+      width: 400px;
+      border: 1px solid #959393;
+      display: flex;
+      padding: 0 30px;
+      flex-wrap: wrap;
+      margin: 50px 20px;
+    }
+
+    .right {
+      flex: 1;
+      img {
+        width: 130px;
+        height: 130px;
+      }
+    }
+    .left {
+      display: flex;
+      flex: 1;
+      justify-content: center;
+      flex-direction: column;
+      text-align: center;
+      .link {
+        .login {
+          text-align: center;
+          padding-top: 10px;
+        }
+      }
+    }
+  }
+}
+
+@media (max-width: 400px) {
+  .center-wrapper {
+    padding: 0;
+    .form {
+      width: 300px;
+      padding: 50px 0;
+      &.bordered {
+        width: 400px;
+      }
+      // #rc-imageselect,
+      // .g-recaptcha {
+      //   transform: scale(0.77);
+      //   -webkit-transform: scale(0.77);
+      //   transform-origin: 0 0;
+      //   -webkit-transform-origin: 50% 50%;
+      // }
+    }
+  }
+}
+

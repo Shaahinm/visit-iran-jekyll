@@ -246,6 +246,33 @@ $(document).ready(function() {
     // var slideno = $(this).data("slide");
     var slideno = $(this).data("slide");
     $(".slider-for-events-province").slick("slickGoTo", slideno - 1);
-  });  
+  });
   ///////////////////////// end of province event slider //////////////////////////////////
+  $(".link.expand").click(function(e) {
+    e.preventDefault();
+    if ($(this).hasClass("expanded")) {
+      $(this).removeClass("expanded");
+      $("#content-to-expand").removeClass("expand");
+      $(this)
+        .children("a")
+        .text("بیشتر بخوانید");
+    } else {
+      $(this).addClass("expanded");
+      $("#content-to-expand").addClass("expand");
+      $(this)
+        .children("a")
+        .text("نمایش کمتر");
+    }
+  });
+
+  $("#search").on("blur", function() {
+    // if($(this).val())
+    //   $("#frmSearch").submit();
+  });
+
+  $("#search").keypress(function(e) {
+    if (e.which == 13) {
+      $("#frmSearch").submit();
+    }
+  });
 });

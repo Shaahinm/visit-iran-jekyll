@@ -62,6 +62,11 @@ $(function() {
       });
     }
   );
-
   //end of sticky sidebar timeline
+
+  // active class 
+  $(".timeline-sidebar a").click(function(e){
+    $(".timeline-sidebar a").removeClass("active");
+    $(this).addClass("active");
+  });
 });

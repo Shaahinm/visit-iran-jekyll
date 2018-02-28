@@ -40,14 +40,29 @@
 
 .crafts {
   &.province {
+    .title {
+      width: auto;
+      height: 48px;
+      margin: 0 auto;
+      text-align: center;
+      color: white;
+      background: $accent;
+      line-height: 48px;
+      font-size: 24px;
+    }
     margin: 80px 0 0 0;
-    height: 600px;
+    padding: 30px 130px 0 130px;
+    @media (max-width: 1000px) {
+      padding: 30px 0;
+    }
+
+    // height: 600px;
     background: #e7e7e7;
     .slider.craft {
       border: 0;
-      margin: 0 130px;
+      padding: 80px 0;
       @media (max-width: 768px) {
-        margin: 0 30px;
+        margin: 0 30px;        
       }
       padding-top: 80px;
       .center {
@@ -68,6 +83,7 @@
             margin: 0;
             color: black;
             background: $white;
+            line-height: 24px;
           }
           .link {
             background: $white;
@@ -188,12 +204,17 @@
         text-align: justify;
         line-height: 32px;
         padding-left: 40px;
-        max-height: 250px;
+        // max-height: 100px;
+        height: 100px;
         overflow: hidden;
-        min-height: 250px;
+        // min-height: 100px;
+        transition: height 0.5s;
         @media (max-width: 1150px) {
           padding-left: 0;
           width: 100%;
+        }
+        &.expand {
+          height: auto;
         }
       }
       .link {
@@ -296,6 +317,167 @@
           color: $main;
           border: 1px solid rgba(0, 0, 0, 0.4);
         }
+      }
+    }
+  }
+}
+
+.social {
+  form {
+    display: inline;
+  }
+  margin: 50px 130px;
+  @media (max-width: 768px) {
+    margin: 50px 30px;
+  }
+  .title {
+    width: auto;
+    height: 48px;
+    margin: 0 auto;
+    text-align: center;
+    color: $white;
+    background: $main;
+    line-height: 48px;
+    font-size: 24px;
+  }
+  .content {
+    display: flex;
+    flex-direction: row-reverse;
+    margin-top: 0;
+    padding-top: 30px;
+    flex-wrap: wrap;
+    .left {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      width: 50%;
+      margin-right: 10px;
+      .suggestions {
+        padding-top: 30px; 
+        textarea {
+          width: 100%;
+          padding: 2px 20px; 
+          box-sizing: border-box;
+          outline: 0 none;
+        }
+        button {
+          height: 40px;
+          background: $main;
+          width: 50%;
+          border: none;
+          color: $white;
+          padding: 0 30px;
+        }
+      }
+
+      .rate {
+        display: flex;
+        flex-direction: row-reverse;
+        justify-content: flex-start;
+        font-size: 30px;
+        margin-top: 10px;
+        flex-wrap: wrap;
+        .text {
+          font-size: 16px;
+          line-height: 30px;
+          flex: 0 0 160px;
+        }
+        .rating {
+          unicode-bidi: bidi-override;
+          direction: rtl;
+          text-align: center;
+          flex: 0 0 200px;
+        }
+        .rating {
+          unicode-bidi: bidi-override;
+          direction: rtl;
+          text-align: center;
+        }
+        .rating > span {
+          display: inline-block;
+          position: relative;
+          width: 1.1em;
+        }
+        .rating > span:hover,
+        .rating > span:hover ~ span {
+          color: transparent;
+        }
+        .rating > span:hover:before,
+        .rating > span:hover ~ span:before {
+           content: "\2605";
+           position: absolute;
+           left: 0; 
+           color: gold;
+        }
+      }
+    }
+    .right {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      width: 50%;
+      margin-left: 10px; 
+      .top {
+        padding: 30px 0;        
+        input {
+          margin-bottom: 10px;
+          height: 40px;
+          width: calc(100% - 60px);
+          background: #4e4e51;
+          border: none;
+          color: $white;
+          direction: ltr;
+          padding: 0 30px;
+        }
+
+        button {
+          height: 40px;
+          background: $main;
+          width: 100%;
+          border: none;
+          color: $white;
+          padding: 0 30px;
+        }
+      }
+      .bottom {
+        display: flex;
+        flex-direction: row;
+        button {
+          height: 40px;
+          background: $main;
+          width: 100%;
+          border: none;
+          color: $white;
+          padding: 0 30px;
+        }
+        .image-upload {
+          flex: 0 0 60%;
+          margin-left: 10px;
+          position: relative;
+          button {
+            background: #4e4e51;            
+          }
+          .icon{
+            position:absolute;
+            left:18px;
+            top:5px;
+            font-size:30px;
+          }
+        }
+      }
+    }
+  }
+
+  @media (max-width: 1100px) {
+    .content {
+      flex-direction: column-reverse;
+      .left {
+        width: 100%;        
+        margin-right: 0;
+      }
+      .right {
+        width: 100%;
+        margin-left: 0;
       }
     }
   }
