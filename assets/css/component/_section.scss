@@ -1,0 +1,262 @@
+$mobile-title-font-size: 20px;
+$tablet-title-font-size: 24px;
+$desktop-title-font-size: 28px;
+.slick-slide {
+  outline: none;
+}
+.carousel {  
+  &.dark {
+    background: $dark-bg;
+    padding: 30px 0 30px 0;
+    .title {
+      background: $dark-bg;
+    }
+  }
+  &.light {
+    background: $white;
+    .title {
+      background: $white;
+    }
+  }
+  .button {
+    width: 100%;
+    margin: 30px 0;
+    @media (min-width: 601px) {
+      display: flex;
+      justify-content: flex-end;
+    }
+    .button-link {
+      width: auto;
+      @media (min-width: 601px) {
+        width: 250px;
+      }
+      &.full-width {
+        display: block;
+      }
+    }
+  }
+  img {
+    width: 100%;
+    object-fit: cover;
+  }
+  > div {
+    margin: 40px 20px;
+    @media (min-width: 1024px) {
+      margin: 40px 124px;
+    }
+    @media (min-width: 769px) {
+      border-top: 1px solid $main;
+      // margin: 40px 20px;
+    }
+    .title {
+      width: 100%;
+      text-align: center;
+      font-size: $mobile-title-font-size;
+      margin: 20px 0;
+      font-weight: 500;
+      @media (min-width: 769px) {
+        position: relative;
+        top: -33px;
+        width: fit-content;
+        background: $white;
+        z-index: 2;
+      }
+      &.accent {
+        background: $accent;
+        color: $white;
+        width: auto;
+        height: 48px;
+        margin: 0 auto;
+        text-align: center;
+        line-height: 48px;        
+        position: relative;
+        top: -16px;
+      }
+    }
+    &.vertical {
+      .title {
+        position: relative;
+        top: 20px;
+        @media (min-width: 769px) {
+          top: -12px;
+          width: fit-content;
+          margin: 0;
+          background: $white;
+          z-index: 2;
+        }
+      }
+      .arrow {
+        height: 40px;
+        position: relative;
+        z-index: 1;
+        cursor: pointer;
+        &.up {
+          background: rgba(255, 255, 255, 0.5) url("../images/arrow-up.png")
+            no-repeat;
+          background-position: center;
+          background-size: 100px 30px;
+          top: 40px;
+        }
+        &.down {
+          background: rgba(255, 255, 255, 0.5) url("../images/arrow-down.png")
+            no-repeat;
+          background-position: center;
+          background-size: 100px 30px;
+          top: -40px;
+        }
+        @media (min-width: 900px) {
+          width: 50%;
+        }
+      }
+      .parent {
+        display: flex;
+        height: 550px;
+        @media (min-width: 900px) {
+          flex-direction: row-reverse;
+        }
+        // @media (min-width: 769px) {
+        //   border-top: 1px solid $main;
+        // }
+        .thumbnail {
+          height: 550px;
+          overflow: hidden;
+        }
+
+        .preview {
+          display: none;
+          @media (min-width: 900px) {
+            display: flex;
+            width: 50%;
+            .image {
+              height: auto;
+            }
+          }
+        }
+      }
+      .button {
+        position: relative;
+        top: -20px;
+      }
+      &.old-houses {
+        @media (min-width: 900px) {
+          .arrow {
+            width: 400px;
+          }
+          .image {
+            padding: 1px;
+          }
+          .parent {
+            .thumbnail {
+              flex: 0 0 400px;
+              height: 550px;
+              display: flex;
+              flex-direction: column;
+              overflow: hidden;
+            }
+
+            .preview {
+              flex: 1;
+            }
+          }
+        }
+      }
+    }
+
+    .image {
+      cursor: pointer;
+      width: 100%;
+      height: 275px;
+      background: inherit;
+      box-sizing: border-box;
+      position: relative;
+      padding: 1px 0;
+      .name {
+        position: absolute;
+        text-align: center;
+        min-width: 150px;
+        max-width: 250px;
+        color: white;
+        background: rgba(0, 0, 0, 0.5);
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        padding: 20px;
+      }
+    }
+
+    &.horizontal {
+      .image.polygon {
+        @media (min-width: 700px) {
+          border-left: 5px solid white;
+          border-right: 5px solid white;
+          clip-path: polygon(50% 0, 100% 25%, 100% 75%, 50% 100%, 0 75%, 0 25%);
+        }
+        .slider {
+          @media (min-width: 769px) {
+            border-top: 1px solid $main;
+          }          
+        }
+      }
+      .padded {
+        .center {
+          .slick-slide {
+            padding: 0 2px;
+          }
+          .image {
+            padding: 0;
+          }
+
+          .text {
+            margin: 0;
+          }
+        }
+      }
+
+      &.boomgardi {
+        .image {
+          @media (min-width: 769px) {
+            height: 500px;
+          }
+        }
+      }
+      .text {
+        direction: rtl;
+        padding: 20px;
+        background: $accent;
+        margin: 10px -10px 0 -10px;
+        color: $white;
+        margin-bottom: 10px;
+        p {
+          text-align: justify;
+          line-height: 20px;
+          font-size: 14px;
+          height: 80px;
+          overflow: hidden;
+        }
+        h5 {
+          font-size: 20px;
+          margin-bottom: 10px;
+        }
+      }
+    }
+  }
+}
+
+@media (min-width: 600px) {
+  .carousel {
+    & .vertical.poi {
+      .parent {
+        .thumbnail {
+          flex: 1;
+          display: flex;
+          flex-direction: row;
+          flex-wrap: wrap;
+          .image {
+            width: 50%;
+            padding: 1px;
+          }
+        }
+      }
+    }
+  }
+}

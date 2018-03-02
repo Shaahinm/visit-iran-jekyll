@@ -30,19 +30,19 @@ $(document).ready(function() {
   });
   ///////////////////////// end of points of interest slider //////////////////////////////////
   ///////////////////////// start of routes of interest slider ////////////////////////////////
-  $("#roi-scroll-up").click(function(e) {
-    $("#roi-scrollable").animate(
+  $("#old-houses-scroll-up").click(function(e) {
+    $("#old-houses-scrollable").animate(
       {
-        scrollTop: $("#roi-scrollable").scrollTop() - 207
+        scrollTop: $("#old-houses-scrollable").scrollTop() - 275
       },
       1000
     );
   });
 
-  $("#roi-scroll-down").click(function(e) {
-    $("#roi-scrollable").animate(
+  $("#old-houses-scroll-down").click(function(e) {
+    $("#old-houses-scrollable").animate(
       {
-        scrollTop: $("#roi-scrollable").scrollTop() + 207
+        scrollTop: $("#old-houses-scrollable").scrollTop() + 275
       },
       1000
     );
@@ -68,7 +68,7 @@ $(document).ready(function() {
     prevArrow: '<div class="my-next">&#x3008;</div>',
     responsive: [
       {
-        breakpoint: 1025,
+        breakpoint: 1024,
         settings: {
           rows: 1,
           slidesPerRow: 1,
@@ -81,22 +81,6 @@ $(document).ready(function() {
           verticalSwiping: false,
           arrows: false,
           centerMode: true
-        }
-      },
-      {
-        breakpoint: 700,
-        settings: {
-          rows: 1,
-          slidesPerRow: 1,
-          slidesToShow: 1,
-          autoPlay: true,
-          slidesToScroll: 1,
-          dots: false,
-          focusOnSelect: true,
-          vertical: false,
-          verticalSwiping: false,
-          arrows: false,
-          centerMode: false
         }
       }
     ]
@@ -122,7 +106,7 @@ $(document).ready(function() {
         }
       },
       {
-        breakpoint: 1025,
+        breakpoint: 1024,
         settings: {
           slidesToShow: 2,
           slidesToScroll: 2,
@@ -265,14 +249,14 @@ $(document).ready(function() {
     }
   });
 
-  $("#search").on("blur", function() {
-    // if($(this).val())
-    //   $("#frmSearch").submit();
-  });
+  // $("#search").on("blur", function() {
+  //   // if($(this).val())
+  //   //   $("#frmSearch").submit();
+  // });
 
-  $("#search").keypress(function(e) {
-    if (e.which == 13) {
-      $("#frmSearch").submit();
-    }
-  });
+  // $("#search").keypress(function(e) {
+  //   if (e.which == 13) {
+  //     $("#frmSearch").submit();
+  //   }
+  // });
 });

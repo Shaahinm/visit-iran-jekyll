@@ -19,6 +19,7 @@ input, textarea, select, button {
 
 .my-prev.slick-arrow {
   position: absolute;
+  cursor: pointer;
   right: 0;
   top: 45%;
   margin-right: -100px;
@@ -28,6 +29,7 @@ input, textarea, select, button {
 
 .my-next.slick-arrow {
   position: absolute;
+  cursor: pointer;
   top: 45%;
   left: 0;
   font-size: 100px;

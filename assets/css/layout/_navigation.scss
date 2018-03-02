@@ -1,21 +1,21 @@
-@media (max-width: 320px) {
-  header .primary-menu-wrapper .top .left ul li:nth-child(2) {
-    display: none;
-  }
-}
+// @media (max-width: 320px) {
+//   header .primary-menu-wrapper .top .left ul li:nth-child(2) {
+//     display: none;
+//   }
+// }
 
 header {
   // font-family: "Yekan";
   display: flex;
   flex-direction: row;
-  height: 80px;
+  height: 70px;
   #burger {
     display: none;
   }
   input + label {
     position: fixed;
     top: 35px;
-    left: 35px;
+    left: 20px;
     height: 20px;
     width: 15px;
     z-index: 5;
@@ -29,6 +29,7 @@ header {
       display: block;
       background: $black;
       transition: 0.5s;
+      background: $main;
     }
     span:first-child {
       top: 3px;
@@ -63,7 +64,7 @@ header {
     top: 0;
     left: 0;
     width: 100%;
-    height: 81px;
+    height: 70px;
     z-index: 3;
     transition: 0.5s;
     transition-delay: 0.5s;
@@ -101,9 +102,9 @@ header {
   }
 
   .logo-wrapper {
-    z-index: 4;
+    z-index: 5;
     position: fixed;
-    right: 15px;
+    right: 20px;
     border: 1px solid rgba(0, 0, 0, 0.1);
     height: 79px;
     background: $white;
@@ -125,19 +126,19 @@ header {
         height: 20px;
         position: fixed;
         top: 0;
-        right: 96px;
-        z-index: 10px;
+        right: 0px;
+        z-index: 1;
         background: $accent;
       }
-      .top-mobile-underline {
-        width: 83%;
-        height: 1px;
-        position: fixed;
-        top: 65px;
-        right: 96px;
-        z-index: 2;
-        background: rgba(0, 0, 0, 0.1);
-      }
+      // .top-mobile-underline {
+      //   width: 83%;
+      //   height: 1px;
+      //   position: fixed;
+      //   top: 65px;
+      //   right: 96px;
+      //   z-index: 2;
+      //   background: rgba(0, 0, 0, 0.1);
+      // }
       .middle {
         display: none;
       }
@@ -148,7 +149,7 @@ header {
         font-size: 13px;
         position: relative;
         top: -50px;
-        left: 40px;
+        left: 20px;
         ul {
           li {
             display: inline-block;
@@ -156,7 +157,7 @@ header {
             padding: 0 10px;
             border-left: 1px solid $menu-black;
             &:nth-child(2) {
-              border-right: 1px solid $menu-black;
+              // border-right: 1px solid $menu-black;
             }
             &:last-child {
               border: 0;
@@ -170,10 +171,10 @@ header {
             }
             // &:nth-child(1),
             &:nth-child(3) {
-              display: none;
+              // display: none;
             }
             &.search {
-              border: none;
+              // border: none;
               padding: 0 10px 0 0;
             }
 
@@ -280,7 +281,7 @@ header {
       .dropdown {
         &:hover .dropdown-content {
           display: block;
-          right: -100px;
+          right: -79px;
           box-shadow: none;
           min-width: 300px;
           text-align: center;
@@ -305,13 +306,13 @@ header {
   }
 }
 
-@media (max-width: 769px) {
-  #frmSearch {   
-    .search-input {      
-      background: lightgray !important;                     
-    }    
-  }
-}
+// @media (max-width: 769px) {
+//   #frmSearch {   
+//     .search-input {      
+//       background: lightgray !important;                     
+//     }    
+//   }
+// }
 
 @include for-size(tablet-portrait-up) {
   header {
@@ -339,26 +340,26 @@ header {
               &:nth-child(2) {
                 border-right: 0;
               }
-              &.search {
-                border-left: none;
-              }
+              // &.search {
+              //   border-left: none;
+              // }
               &:nth-child(1),
               &:nth-child(3) {
                 display: inline-block;
               }
-              #frmSearch {        
+              // #frmSearch {        
                 
-                .search-input {
-                  width: 180px;   
-                  background: white;               
-                  position: relative;
-                  top: 8px;
-                }
-                .btn-submit-search {
-                  z-index: 3;
-                  top: 3px;
-                }
-              }
+              //   .search-input {
+              //     width: 180px;   
+              //     background: white;               
+              //     position: relative;
+              //     top: 8px;
+              //   }
+              //   .btn-submit-search {
+              //     z-index: 3;
+              //     top: 3px;
+              //   }
+              // }
               
             }
           }
@@ -721,6 +722,6 @@ header {
   }
 }
 
-#frmSearch {
-  display: inline;
-}
+// #frmSearch {
+//   display: inline;
+// }

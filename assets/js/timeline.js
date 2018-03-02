@@ -11,7 +11,7 @@ $(function() {
 
       var heroPositionEnd =
         $(".hero-img").offset().top +
-        $(".hero-img").height() - 150;
+        $(".hero-img").height() - 110;
 
       $(window).scroll(function() {
         if (window.innerHeight + window.scrollY > document.body.clientHeight) {
@@ -47,7 +47,7 @@ $(function() {
           if ($(window).scrollTop() > heroPositionEnd) {
             sidebar
               .css("position", "fixed")
-              .css("top", "81px")
+              .css("top", "70px")
               .css("width", "100%")
               .css("background", "white")
               .css("z-index", "2");
@@ -68,5 +68,5 @@ $(function() {
   $(".timeline-sidebar a").click(function(e){
     $(".timeline-sidebar a").removeClass("active");
     $(this).addClass("active");
-  });
+  });  
 });

@@ -4,9 +4,9 @@ $searchdiv-color: $accent;
   width: 250px;
   overflow: hidden;
   background: $select-color;
-  border-color: $select-color;  
+  border-color: $select-color;
   padding: 8px 10px 8px 5px;
-  margin: 0 30px;  
+  margin: 0 30px;
 
   select {
     color: $white;
@@ -29,16 +29,25 @@ $searchdiv-color: $accent;
 .tripsearch {
   padding: 20px 130px;
   height: auto;
-  background: $searchdiv-color;  
+  background: $searchdiv-color;
   .title {
-    color: $white;    
-    background: $searchdiv-color;    
+    color: $white;
+    background: $searchdiv-color;
+    font-size: 20px;
+    text-align: center;
+    @media (min-width: 769px) {
+      position: relative;
+      top: 8px;
+      width: fit-content;
+    }
   }
   .dropdowns {
-    border-top: 1px solid rgba(255,255,255, .6);
+    @media (min-width: 769px) {
+      border-top: 1px solid rgba(255, 255, 255, 0.6);
+      padding-top: 30px;
+    }
     display: flex;
     flex-direction: column;
-    padding-top: 30px;
     form {
       display: flex;
       flex-direction: row;
@@ -51,9 +60,9 @@ $searchdiv-color: $accent;
         margin: 0 30px;
       }
     }
-  }  
+  }
   @media (max-width: 500px) {
-    padding: 20px;    
+    padding: 20px;
     .dropdowns {
       form {
         flex-direction: column;
@@ -75,7 +84,7 @@ $searchdiv-color: $accent;
     }
   }
   @media (max-width: 1200px) and (min-width: 500px) {
-    padding: 20px;   
+    padding: 20px;
     .dropdowns {
       form {
         flex-direction: row;
@@ -96,5 +105,5 @@ $searchdiv-color: $accent;
         }
       }
     }
-  } 
+  }
 }

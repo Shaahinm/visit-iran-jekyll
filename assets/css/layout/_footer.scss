@@ -16,15 +16,21 @@ footer {
   }
   .top {
     display: flex;
-    flex-direction: row;    
+    flex-direction: column-reverse;        
+    @media (min-width: 900px) {
+      flex-direction: row;   
+      
+    }
     padding: 0 20px;
     padding-top: 50px;
-    @include for-size(desktop-up) {
-      padding: 0 150px;
+    @media (min-width: 900px){
+      padding: 0 124px;
       padding-top: 50px;
     }    
     .logo {
       flex: 0 0 100px;
+      text-align: center;
+      margin: 20px 0;
     }
     .socials {   
       text-align: left;
@@ -138,5 +144,6 @@ footer {
     height: 60px;
     background: $main;
     margin-top: 50px;
+    font-size: 12px;
   }
 }
