@@ -78,22 +78,23 @@
 
       .left {
         flex: 0 0 200px;
-        .title {
-          font-size: 60px;
+        .title {          
           //   height: 200px;
           -webkit-transform: rotate(-90deg);
           -ms-transform: rotate(-90deg);
           transform: rotate(-90deg);
           float: left;
           position: relative;
-          top: 230px;
+          top: 200px;
+          font-size: 27px;
           color: $main;
+          white-space: nowrap;
         }
 
         @media (max-width: 1300px) {
           flex: 0 0 150px;
           .title {
-            font-size: 40px;
+            font-size: 25px;
           }
         }
       }

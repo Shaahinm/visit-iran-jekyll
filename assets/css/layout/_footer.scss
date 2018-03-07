@@ -31,6 +31,9 @@ footer {
       flex: 0 0 100px;
       text-align: center;
       margin: 20px 0;
+      img {
+        background: $white;
+      }
     }
     .socials {   
       text-align: left;

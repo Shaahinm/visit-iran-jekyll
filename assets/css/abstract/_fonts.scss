@@ -32,4 +32,10 @@
     font-weight: normal;
     src: url('../fonts/IRANSans.ttf') format('truetype');
   }
+
+  @font-face {
+    font-family: yn;
+    src: url("../fonts/yekannumbers-regular.eot");
+    src: url("../fonts/yekannumbers-regular.eot?#iefix") format("embedded-opentype"), url("../fonts/yekannumbers-regular.woff") format("woff"), url("../fonts/yekannumbers-regular.ttf") format("truetype"), url("../fonts/yekannumbers-regular.svg#yn") format("svg");
+  }
   

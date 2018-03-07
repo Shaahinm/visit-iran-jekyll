@@ -32,10 +32,10 @@ header {
       background: $main;
     }
     span:first-child {
-      top: 3px;
+      top: 5px;
     }
     span:last-child {
-      top: 16px;
+      top: 15px;
     }
   }
 
@@ -462,9 +462,9 @@ header {
               }
             }
             .dropdown {
-              i {
-                bottom: -5px;
-              }
+              // i {
+              //   bottom: -5px;
+              // }
               .dropdown-btn {
                 background: $accent;
                 color: $accent-fc;
@@ -606,10 +606,10 @@ header {
                     height: 350px;
                     background: url(../images/all-states.png) 0 0;
                     &.west-azar {
-                      background: url(../images/all-states.png) 1050px 0;
-                    }
-                    &.east-azar {
                       background: url(../images/all-states.png) 1400px 0;
+                    }
+                    &.east-azar {                      
+                      background: url(../images/all-states.png) 1050px 0;
                     }
                     &.ardabil {
                       background: url(../images/all-states.png) 700px 0;
