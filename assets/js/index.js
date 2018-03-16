@@ -1,13 +1,21 @@
 $(document).ready(function() {
-  ///////////////////////// start of home page hero slider ////////////////////////////////
+  ///////////////////////// start of home page hero slider ////////////////////////////////  
   $("#hero-slider").slick({
     slidesToShow: 1,
     slidesToScroll: 1,
-    arrows: false,
-    // nextArrow: '<div class="my-prev"><div>&#x3009;</div></div>',
-    // prevArrow: '<div class="my-next"><div>&#x3008;</div></div>',
+    arrows: true,    
+    prevArrow:"<div class='inside'><img class='a-left control-c prev slick-prev' src='../assets/images/arrow-left.png'></div>",
+    nextArrow:"<div class='inside'><img class='a-right control-c next slick-next' src='../assets/images/arrow-right.png'></div>",
     autoplay: true,
-    autoplaySpeed: 5000
+    autoplaySpeed: 5000,
+    responsive: [
+      {
+        breakpoint: 650,
+        settings: {
+          arrows: false
+        }
+      }
+    ]
   });
   ///////////////////////// end of home page hero slider //////////////////////////////////
   ///////////////////////// start of points of interest slider ////////////////////////////////

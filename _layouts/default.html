@@ -4,7 +4,13 @@
 <head>
   <meta charset="utf-8">
   <title>{% if page.title %}{{page.title}}{% endif %}</title>
+
+  <link rel="shortcut icon" href="{{side.baseurl}}/assets/images/favicon.jpg" type="image/x-icon">
+  <link rel="apple-touch-icon" href="{{side.baseurl}}/assets/images/touch-icon.jpg">
+  <link rel="apple-touch-icon" sizes="72x72" href="{{side.baseurl}}/assets/images/touch-icon.jpg">
+  <link rel="apple-touch-icon" sizes="114x114" href="{{side.baseurl}}/assets/images/touch-icon.jpg">  
   <link rel="stylesheet" href="{{site.baseurl}}/assets/css/main.css">
+  
   {% if page.custom_css %}
     {% for stylesheet in page.custom_css %}
     <link rel="stylesheet" href="{{site.baseurl}}/assets/css/{{ stylesheet }}.css" media="screen" type="text/css">

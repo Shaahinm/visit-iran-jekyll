@@ -105,6 +105,10 @@ header {
     z-index: 5;
     position: fixed;
     right: 20px;
+    box-shadow: 5px 0px 8px 1px $accent;
+    @media screen and (max-width: 360px){
+      right: 0;
+    }
     border: 1px solid rgba(0, 0, 0, 0.1);
     height: 79px;
     background: $white;
@@ -148,14 +152,20 @@ header {
       .left {
         font-size: 13px;
         position: relative;
-        top: -50px;
+        top: -57px;
         left: 20px;
+        @media screen and (max-width: 360px){
+          left: 50px;
+        }
         ul {
           li {
             display: inline-block;
             line-height: 13px;
             padding: 0 10px;
-            border-left: 1px solid $menu-black;
+            @media screen and (max-width: 360px){
+              padding: 0;
+            }
+            // border-left: 1px solid $menu-black;
             &:nth-child(2) {
               // border-right: 1px solid $menu-black;
             }
@@ -239,7 +249,7 @@ header {
         cursor: pointer;
         &.flag {
           position: relative;
-          top: 2px;
+          top: 4px;
           height: 20px;
           img {
             width: 20px;
@@ -278,6 +288,7 @@ header {
     }
 
     .buttom {
+      box-shadow: 0 0px 8px 1px $accent;
       .dropdown {
         &:hover .dropdown-content {
           display: block;
@@ -395,10 +406,10 @@ header {
     .logo-wrapper {
       position: static;
       border-bottom: 1px solid rgba(0, 0, 0, 0.1);
-      height: 129px;
+      height: 128px;
       img {
         width: 124px;
-        height: 129px;
+        height: 128px;
         object-fit: cover;
       }
     }
@@ -505,7 +516,9 @@ header {
         flex-direction: row;
         background-color: $white;
         position: static;
-        outline: 1px solid rgba(0, 0, 0, 0.1);
+        border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+        box-shadow: 0 0px 8px 1px $accent;
+        // outline: 1px solid rgba(0, 0, 0, 0.1);
         align-items: center;
         ul {
           position: static;
