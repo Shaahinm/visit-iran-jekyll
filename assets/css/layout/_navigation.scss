@@ -105,7 +105,7 @@ header {
     z-index: 5;
     position: fixed;
     right: 20px;
-    box-shadow: 5px 0px 8px 1px $accent;
+    // box-shadow: 5px 0px 8px 1px $accent;
     @media screen and (max-width: 360px){
       right: 0;
     }
@@ -264,7 +264,7 @@ header {
         background-color: $white;
         min-width: 200px;
         max-width: 300px;
-        box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+        // box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
         text-align: right;
         z-index: 10;
         a {
@@ -288,7 +288,8 @@ header {
     }
 
     .buttom {
-      box-shadow: 0 0px 8px 1px $accent;
+      // box-shadow: 0 0px 8px 1px $accent;
+      border-bottom: 1px solid rgba(0, 0, 0, 0.1);
       .dropdown {
         &:hover .dropdown-content {
           display: block;
@@ -495,7 +496,7 @@ header {
                 background-color: $accent;
                 text-align: left;
                 left: 0;
-                box-shadow: 0px 8px 16px 8px rgba(0, 0, 0, 0.2);
+                // box-shadow: 0px 8px 16px 8px rgba(0, 0, 0, 0.2);
                 z-index: 10;
                 a {
                   color: $accent-fc;
@@ -515,10 +516,9 @@ header {
         display: flex;
         flex-direction: row;
         background-color: $white;
-        position: static;
+        position: static;        
+        // box-shadow: 0 0px 8px 1px $accent;
         border-bottom: 1px solid rgba(0, 0, 0, 0.1);
-        box-shadow: 0 0px 8px 1px $accent;
-        // outline: 1px solid rgba(0, 0, 0, 0.1);
         align-items: center;
         ul {
           position: static;
@@ -558,7 +558,7 @@ header {
             background-color: $white;
             min-width: 200px !important;
             max-width: 300px;
-            box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+            // box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
             z-index: 1;
             right: auto !important;
             a {

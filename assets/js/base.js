@@ -7,7 +7,7 @@ $(function() {
 
   $("#search, #search button.close").on("click keyup", function(event) {
     if (
-      event.target == this ||
+      // event.target == this ||
       event.target.className == "close" ||
       event.keyCode == 27
     ) {

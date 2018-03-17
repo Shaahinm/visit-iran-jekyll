@@ -4,8 +4,10 @@ $(document).ready(function() {
     slidesToShow: 1,
     slidesToScroll: 1,
     arrows: true,    
-    prevArrow:"<div class='inside'><img class='a-left control-c prev slick-prev' src='../assets/images/arrow-left.png'></div>",
-    nextArrow:"<div class='inside'><img class='a-right control-c next slick-next' src='../assets/images/arrow-right.png'></div>",
+    // prevArrow:"<div class='inside'><img class='a-left control-c prev slick-prev' src='../assets/images/arrow-left.png'></div>",
+    // nextArrow:"<div class='inside'><img class='a-right control-c next slick-next' src='../assets/images/arrow-right.png'></div>",    
+    prevArrow:"<div class='inside'><div class='a-left control-c prev slick-prev'>&nbsp;</div></div>",
+    nextArrow:"<div class='inside'><div class='a-right control-c next slick-next'>&nbsp;</div></div>",    
     autoplay: true,
     autoplaySpeed: 5000,
     responsive: [
