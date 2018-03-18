@@ -3,18 +3,19 @@ $(document).ready(function() {
   $("#hero-slider").slick({
     slidesToShow: 1,
     slidesToScroll: 1,
-    arrows: true,    
-    // prevArrow:"<div class='inside'><img class='a-left control-c prev slick-prev' src='../assets/images/arrow-left.png'></div>",
-    // nextArrow:"<div class='inside'><img class='a-right control-c next slick-next' src='../assets/images/arrow-right.png'></div>",    
-    prevArrow:"<div class='inside'><div class='a-left control-c prev slick-prev'>&nbsp;</div></div>",
-    nextArrow:"<div class='inside'><div class='a-right control-c next slick-next'>&nbsp;</div></div>",    
+    arrows: true,        
+    // prevArrow:"<div class='inside'><div class='a-left control-c prev slick-prev'>&nbsp;</div></div>",
+    // nextArrow:"<div class='inside'><div class='a-right control-c next slick-next'>&nbsp;</div></div>",    
+    nextArrow: '<div class="my-prev inside">&#x3009;</div>',
+    prevArrow: '<div class="my-next inside">&#x3008;</div>',
     autoplay: true,
     autoplaySpeed: 5000,
     responsive: [
       {
-        breakpoint: 650,
+        breakpoint: 769,
         settings: {
-          arrows: false
+          arrows: false,
+          dots: true
         }
       }
     ]
@@ -85,7 +86,7 @@ $(document).ready(function() {
           slidesToShow: 1,
           autoPlay: true,
           slidesToScroll: 1,
-          dots: false,
+          dots: true,
           focusOnSelect: true,
           vertical: false,
           verticalSwiping: false,
@@ -120,7 +121,9 @@ $(document).ready(function() {
         settings: {
           slidesToShow: 2,
           slidesToScroll: 2,
-          arrows: false
+          arrows: false, 
+          dotsClass: 'slick-dots outside-dots dark',
+          dots: true
         }
       },
       {
@@ -128,7 +131,9 @@ $(document).ready(function() {
         settings: {
           slidesToShow: 1,
           slidesToScroll: 1,
-          arrows: false
+          arrows: false,
+          dotsClass: 'slick-dots outside-dots dark',
+          dots: true
         }
       }
     ]
