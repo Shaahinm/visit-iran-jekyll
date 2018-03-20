@@ -185,10 +185,13 @@ $desktop-title-font-size: 28px;
     }
 
     &.horizontal {
-      .image.polygon {
+      .image.polygon {        
         @media (min-width: 700px) {
           border-left: 5px solid white;
           border-right: 5px solid white;
+          
+        }
+        @media (min-width: 1024px) { 
           clip-path: polygon(50% 0, 100% 25%, 100% 75%, 50% 100%, 0 75%, 0 25%);
         }
         .slider {

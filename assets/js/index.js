@@ -4,10 +4,10 @@ $(document).ready(function() {
     slidesToShow: 1,
     slidesToScroll: 1,
     arrows: true,        
-    // prevArrow:"<div class='inside'><div class='a-left control-c prev slick-prev'>&nbsp;</div></div>",
-    // nextArrow:"<div class='inside'><div class='a-right control-c next slick-next'>&nbsp;</div></div>",    
-    nextArrow: '<div class="my-prev inside">&#x3009;</div>',
-    prevArrow: '<div class="my-next inside">&#x3008;</div>',
+    prevArrow:"<div class='inside'><div class='a-left control-c prev slick-prev'>&nbsp;</div></div>",
+    nextArrow:"<div class='inside'><div class='a-right control-c next slick-next'>&nbsp;</div></div>",    
+    // nextArrow: '<div class="my-prev inside">&#x3009;</div>',
+    // prevArrow: '<div class="my-next inside">&#x3008;</div>',
     autoplay: true,
     autoplaySpeed: 5000,
     responsive: [
@@ -38,7 +38,7 @@ $(document).ready(function() {
       },
       1000
     );
-  });
+  }); 
   ///////////////////////// end of points of interest slider //////////////////////////////////
   ///////////////////////// start of routes of interest slider ////////////////////////////////
   $("#old-houses-scroll-up").click(function(e) {
@@ -75,8 +75,8 @@ $(document).ready(function() {
     centerMode: false,
     //  nextArrow: '<div class="my-prev"><i class="fa fa-chevron-right"></i></div>',
     //  prevArrow: '<div class="my-next"><i class="fa fa-chevron-left"></i></div>',
-    nextArrow: '<div class="my-prev">&#x3009;</div>',
-    prevArrow: '<div class="my-next">&#x3008;</div>',
+    prevArrow:"<div class='outside'><div class='a-left control-c prev slick-prev'>&nbsp;</div></div>",
+    nextArrow:"<div class='outside'><div class='a-right control-c next slick-next'>&nbsp;</div></div>",    
     responsive: [
       {
         breakpoint: 1024,
@@ -85,12 +85,14 @@ $(document).ready(function() {
           slidesPerRow: 1,
           slidesToShow: 1,
           autoPlay: true,
-          slidesToScroll: 1,
-          dots: true,
+          slidesToScroll: 1,          
           focusOnSelect: true,
           vertical: false,
           verticalSwiping: false,
-          arrows: false,
+          arrows: true,
+          prevArrow:"<div class='inside'><div class='a-left control-c prev slick-prev'>&nbsp;</div></div>",
+          nextArrow:"<div class='inside'><div class='a-right control-c next slick-next'>&nbsp;</div></div>",   
+          dots: false,
           centerMode: true
         }
       }
@@ -105,8 +107,8 @@ $(document).ready(function() {
     dots: false,
     focusOnSelect: true,
     arrows: true,
-    nextArrow: '<div class="my-prev">&#x3009;</div>',
-    prevArrow: '<div class="my-next">&#x3008;</div>',
+    prevArrow:"<div class='outside'><div class='a-left control-c prev slick-prev'>&nbsp;</div></div>",
+    nextArrow:"<div class='outside'><div class='a-right control-c next slick-next'>&nbsp;</div></div>",    
     centerMode: false,
     responsive: [
       {
@@ -121,9 +123,11 @@ $(document).ready(function() {
         settings: {
           slidesToShow: 2,
           slidesToScroll: 2,
-          arrows: false, 
+          arrows: true, 
           dotsClass: 'slick-dots outside-dots dark',
-          dots: true
+          dots: false,
+          prevArrow:"<div class='inside top'><div class='a-left control-c prev slick-prev'>&nbsp;</div></div>",
+          nextArrow:"<div class='inside top'><div class='a-right control-c next slick-next'>&nbsp;</div></div>", 
         }
       },
       {
@@ -131,9 +135,11 @@ $(document).ready(function() {
         settings: {
           slidesToShow: 1,
           slidesToScroll: 1,
-          arrows: false,
+          arrows: true,
+          prevArrow:"<div class='inside top'><div class='a-left control-c prev slick-prev'>&nbsp;</div></div>",
+          nextArrow:"<div class='inside top'><div class='a-right control-c next slick-next'>&nbsp;</div></div>", 
           dotsClass: 'slick-dots outside-dots dark',
-          dots: true
+          dots: false
         }
       }
     ]

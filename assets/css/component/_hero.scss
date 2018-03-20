@@ -139,28 +139,38 @@
   }
 }
 
-// .slick-arrow.inside {
-//   z-index: 1;  
-//   .slick-next {
-//     background: url("../images/arrow-right.png") center;
-//     right: 0px;
-//     height: 130px;
-//     width: 100px;
-//     &:before {
-//       content: ""
-//     }
-//   }
-//   .slick-prev {
-//     background: url("../images/arrow-left.png") center;
-//     left: 0;
-//     width: 100px;
-//     height: 130px;
-//     z-index: 1;
-//     &:before {
-//       content: ""
-//     }
-//   }
-// }
+.slick-arrow.inside {
+  z-index: 1;  
+  .slick-next {
+    background: url("../images/arrow-right-white.png") center;
+    right: 0px;
+    height: 130px;
+    width: 100px;
+    background-size: cover;
+    &:before {
+      content: ""
+    }
+  }
+  .slick-prev {
+    background: url("../images/arrow-left-white.png") center;
+    left: 0;
+    width: 100px;
+    height: 130px;
+    z-index: 1;
+    background-size: cover;
+    &:before {
+      content: ""
+    }
+  }
+  &.top {
+    .slick-next {
+      top: 40%;
+    }
+    .slick-prev {
+      top: 40%;
+    }
+  }
+}
 
 .my-next.slick-arrow {
   position: absolute;
@@ -174,5 +184,30 @@
   &.inside {
     margin-left: 0;
     color: $white;
+  }
+}
+
+.slick-arrow.outside {
+  z-index: 1;  
+  .slick-next {
+    background: url("../images/arrow-right-green.png") center;
+    right: -80px;
+    height: 130px;
+    width: 100px;
+    background-size: cover;
+    &:before {
+      content: ""
+    }
+  }
+  .slick-prev {
+    background: url("../images/arrow-left-green.png") center;
+    left: -80px;
+    width: 100px;
+    height: 130px;
+    z-index: 1;
+    background-size: cover;
+    &:before {
+      content: ""
+    }
   }
 }
