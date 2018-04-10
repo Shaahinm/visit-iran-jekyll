@@ -6,8 +6,11 @@ $auth_input_bg_focused: lightgray;
   align-items: center;
   justify-content: center;
   min-height: 566px;
+  .hidden  {
+    display: none;
+  }
   .form {
-    width: 350px;
+    width: 302px;
     padding: 50px 0;
     .logo {
       display: flex;
@@ -19,7 +22,9 @@ $auth_input_bg_focused: lightgray;
       }
     }
     .row {
-      padding: 10px;
+      padding: 10px 0;
+      box-sizing: border-box;
+
       label {
         font-size: 12px;
         padding: 0 5px;
@@ -50,8 +55,11 @@ $auth_input_bg_focused: lightgray;
         background: $main;
         color: white;
         padding: 0;
-        height: 32px;
+        height: 34px;
         border-radius: 4px;
+        &:disabled {
+          background: $accent;
+        }
       }
       .checkbox {
         border: 1px solid $main;

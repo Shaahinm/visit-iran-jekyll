@@ -1,0 +1,53 @@
+---
+layout: default
+title: ورود
+custom_js:
+- base
+- login
+---
+<div class="content" id="email_content">
+    <div class="center-wrapper">
+        <div class="blockui">
+            <div id="loader"></div>
+        </div>
+        <form class="form" id="frmEmail">                
+            <div class="logo">
+                <img src="{{site.baseurl}}/assets/images/logo-fa.jpg" alt="">
+            </div>
+            <div class="row">
+                <label for="email">آدرس ایمیل</label>
+                <input class="input" type="email" id="email" name="email">
+            </div>            
+            <div class="row">
+                <script data-cfasync="false" src="http://visitiran.ir/cdn-cgi/scripts/d07b1474/cloudflare-static/email-decode.min.js"></script>
+                <script src='https://www.google.com/recaptcha/api.js?hl=fa'></script>
+                <div class="g-recaptcha" data-sitekey="6LfNl0gUAAAAAJwcQy2oSUZyUtwODMY90sYtn0Gv" data-callback="correctCaptcha"></div>
+            </div>
+            <div class="row">
+                <button id="btnSubmit" type="submit" class="btn full-width">ورود</button>
+            </div>            
+            <div class="row">
+                <ul class="error hidden">                    
+                </ul>
+            </div>
+        </form>        
+    </div>  
+</div>
+<div class="content" id="verify_code_content" style="display: none;">
+    <div class="center-wrapper">
+        <form method="post" class="form" id="frmCode">            
+            <div class="logo">
+                <img src="{{site.baseurl}}/assets/images/logo-fa.jpg" alt="">
+            </div>                        
+            <div class="row">
+                <input class="input" type="hidden" id="entered_email" name="email">
+                <input class="input" type="number" id="code" name="code" placeholder="کد ارسال شده به ایمیل را وارد کنید">
+            </div>
+                            
+            <div class="row">
+                <button type="submit" id="btnVerify" class="btn full-width">بررسی و ورود</button>
+                <input type="hidden" name="next" value="" />
+            </div>                    					
+        </form> 
+    </div>
+</div>
