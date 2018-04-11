@@ -5,11 +5,11 @@ custom_js:
 - base
 - login
 ---
+<div class="blockui">
+    <div id="loader"></div>
+</div>
 <div class="content" id="email_content">
-    <div class="center-wrapper">
-        <div class="blockui">
-            <div id="loader"></div>
-        </div>
+    <div class="center-wrapper">        
         <form class="form" id="frmEmail">                
             <div class="logo">
                 <img src="{{site.baseurl}}/assets/images/logo-fa.jpg" alt="">
@@ -38,16 +38,27 @@ custom_js:
         <form method="post" class="form" id="frmCode">            
             <div class="logo">
                 <img src="{{site.baseurl}}/assets/images/logo-fa.jpg" alt="">
-            </div>                        
+            </div>  
+            <div class="row center bold">
+                <label id="lblEmail" for=""></label>
+            </div>                      
             <div class="row">
                 <input class="input" type="hidden" id="entered_email" name="email">
                 <input class="input" type="number" id="code" name="code" placeholder="کد ارسال شده به ایمیل را وارد کنید">
             </div>
                             
             <div class="row">
-                <button type="submit" id="btnVerify" class="btn full-width">بررسی و ورود</button>
+                <button type="submit" id="btnVerify" class="btn full-width">بررسی و ورود</button>                
                 <input type="hidden" name="next" value="" />
-            </div>                    					
+            </div>   
+            <div class="row">
+                <button type="button" id="btnPrevForm" class="btn full-width white">تصحیح ایمیل</button>                
+            </div>   
+            
+            <div class="row">
+                <ul class="error code hidden">                    
+                </ul>
+            </div>                 					
         </form> 
     </div>
 </div>

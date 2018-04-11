@@ -1,0 +1,66 @@
+.center-wrapper.create-form {
+  flex-direction: column;
+  .submitrow {
+    width: 100%;
+    // margin: 10px 10px 30px 10px;
+    box-sizing: border-box;
+    padding: 0 10px 30px 10px;
+    display: flex;
+    justify-content: center;
+    .btn {
+      width: 100%;
+      background: $main;
+      color: white;
+      padding: 0;
+      height: 34px;
+      border-radius: 4px;
+      max-width: 500px;
+    }
+  }
+}
+.frmCreatePlace {
+  padding: 30px 10px 10px 10px !important;
+  width: 100% !important; 
+  .dz-message {
+    border: 2px dashed $main;
+    border-radius: 5px;
+    padding: 40px 0;
+  }
+  .hr {
+    width: 100%;
+    height: 1px;
+    background: $main;
+  }
+  #mapcontainer {
+    width: 300px;
+    height: 500px;
+    @media (max-width: 400px) {
+      width: 380px;
+      height: 500px;
+    }
+    @media (max-width: 500px) {
+      width: 480px;
+      height: 500px;
+    }
+  }
+  .title {
+    width: 100%;
+    h1 {
+      font-size: 24px;
+      font-weight: 700;
+      margin-bottom: 20px;
+    }
+  }
+  #map {
+    padding-top: 10px;
+    display: flex;
+    justify-content: center;
+  }
+
+  @media (min-width: 520px) {
+    width: 500px !important;
+    #mapcontainer {
+      width: 500px;
+    }
+  }
+}

@@ -1,0 +1,74 @@
+---
+layout: default
+title: مکان گردشگری
+custom_css:
+- basic.min
+- dropzone.min
+custom_js:
+- base
+- dropzone.min
+- exif
+- createPlaces
+---
+<div class="blockui">
+    <div id="loader"></div>
+</div>
+
+<div class="content">
+    <div class="center-wrapper create-form">
+        <form class="dropzone frmCreatePlace form" method="POST" action="abbbas" enctype="multipart/form-data">
+            <div class="row title">
+                <h1>
+                    بارگزاری عکس های شما
+                </h1>
+                <div class="hr"></div>
+            </div>
+            <div class="row name">
+                <label for="name">نام محل عکس</label>
+                <input class="input" type="text" name="name" id="name">
+            </div>
+            <div class="row address">
+                <label for="address">آدرس عکس</label>
+                <input class="input" type="text" name="address" id="address">
+            </div>
+            <div class="row intro">
+                <label for="intro">توضیحات</label>
+                <input class="input" type="text" name="intro" id="intro">
+            </div>
+            <div class="row map">
+                <label for="intro">لطفآ محل عکس را انتخاب نمایید</label>
+                <div id="map">
+                    <div id="mapcontainer"></div>
+                </div>
+                <input type="hidden" name="lat" id="lat">
+                <input type="hidden" name="lng" id="lng">
+            </div>
+            <div class="row image-uploader">
+                <div class="dz-default dz-message">
+                    <span>برای آپلود عکس، اینجا را کلیک نمایید</span>
+                </div>
+            </div>
+        </form>
+
+        <div class="submitrow">
+            <button id="btnSubmit" type="button" class="btn full-width">ذخیره</button>       
+        </div>
+        
+        <!-- <img src="{{site.baseurl}}/assets/images/1.jpg" id="img" alt=""> -->
+
+
+    </div>
+</div>
+<script>
+    function myMap() {
+        var mapOptions = {
+            center: new google.maps.LatLng(51.5, -0.12),
+            zoom: 10,
+            mapTypeId: google.maps.MapTypeId.HYBRID
+        };
+        var map = new google.maps.Map(document.getElementById("mapcontainer"), mapOptions);
+    }  
+</script>
+<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBFndaoH80NlVGRjJrwr_Jl-ko2CpWmtSU&amp;callback=myMap" async
+    defer>
+</script>

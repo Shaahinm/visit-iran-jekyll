@@ -10,6 +10,17 @@
   <link rel="apple-touch-icon" sizes="72x72" href="{{side.baseurl}}/assets/images/touch-icon.jpg">
   <link rel="apple-touch-icon" sizes="114x114" href="{{side.baseurl}}/assets/images/touch-icon.jpg">  
   <link rel="stylesheet" href="{{site.baseurl}}/assets/css/main.css">
+  <script>
+    var settings = {
+      lang: 'fa',
+      register_url: 'http://visitiran.ir/fa/api/register/',
+      login_url: 'http://visitiran.ir/fa/api/login/',
+      error_server_connection: 'خطا در ایجاد برقراری ارتباط با سرور',
+      error_no_email: 'ایمیل خود را وارد نمایید',
+      error_no_verification_code: 'لطفآ کد ارسال شده را وارد نمایید',
+      login_return_url: '/fa/'
+    }
+  </script>
   
   {% if page.custom_css %}
     {% for stylesheet in page.custom_css %}

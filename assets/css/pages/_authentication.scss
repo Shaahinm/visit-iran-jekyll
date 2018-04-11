@@ -25,6 +25,14 @@ $auth_input_bg_focused: lightgray;
       padding: 10px 0;
       box-sizing: border-box;
 
+      &.bold {
+        font-weight: 700;
+      }
+
+      &.center {
+        text-align: center;
+      }
+
       label {
         font-size: 12px;
         padding: 0 5px;
@@ -58,7 +66,11 @@ $auth_input_bg_focused: lightgray;
         height: 34px;
         border-radius: 4px;
         &:disabled {
-          background: $accent;
+          background: #e7e7e7;
+        }
+        &.white {
+          background: $white;
+          color: black;
         }
       }
       .checkbox {
