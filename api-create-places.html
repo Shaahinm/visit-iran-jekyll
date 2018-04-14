@@ -4,10 +4,12 @@ title: مکان گردشگری
 custom_css:
 - basic.min
 - dropzone.min
+- notify
 custom_js:
 - base
 - dropzone.min
 - exif
+- notify
 - createPlaces
 ---
 <div class="blockui">
@@ -16,7 +18,7 @@ custom_js:
 
 <div class="content">
     <div class="center-wrapper create-form">
-        <form class="dropzone frmCreatePlace form" method="POST" action="abbbas" enctype="multipart/form-data">
+        <form id="dropzoneForm" class="dropzone frmCreatePlace form" method="POST" action="http://visitiran.ir/fa/api/places/" enctype="multipart/form-data">
             <div class="row title">
                 <h1>
                     بارگزاری عکس های شما
@@ -24,16 +26,16 @@ custom_js:
                 <div class="hr"></div>
             </div>
             <div class="row name">
-                <label for="name">نام محل عکس</label>
-                <input class="input" type="text" name="name" id="name">
+                <label for="name">نام مکان گردشگری</label>
+                <input class="input" type="text" name="name" id="name" maxlength="130" size="130" placeholder="نام جاذبه، اقامتگاه بومگردی، روستا، ...">
             </div>
             <div class="row address">
-                <label for="address">آدرس عکس</label>
-                <input class="input" type="text" name="address" id="address">
+                <label for="address">آدرس محل موردنظر</label>
+                <input class="input" type="text" name="address" maxlength="300" size="300" id="address" placeholder="استان، شهر، خیابان، ...">
             </div>
             <div class="row intro">
                 <label for="intro">توضیحات</label>
-                <input class="input" type="text" name="intro" id="intro">
+                <textarea class="input" rows="5" maxlength="5000" size="5000" placeholder="مکان گردشگری را توصیف کنید و اطلاعات لازم را بنویسید." name="intro" id="intro"></textarea>
             </div>
             <div class="row map">
                 <label for="intro">لطفآ محل عکس را انتخاب نمایید</label>
@@ -43,31 +45,66 @@ custom_js:
                 <input type="hidden" name="lat" id="lat">
                 <input type="hidden" name="lng" id="lng">
             </div>
+            <div class="row www">
+                <label for="address">آدرس اینترنتی</label>
+                <input class="input" type="text" name="www_address" id="www_address" placeholder="www.example.ir">
+            </div>
             <div class="row image-uploader">
                 <div class="dz-default dz-message">
                     <span>برای آپلود عکس، اینجا را کلیک نمایید</span>
                 </div>
             </div>
         </form>
-
         <div class="submitrow">
-            <button id="btnSubmit" type="button" class="btn full-width">ذخیره</button>       
+            <button id="submit-all" class="btn full-width">ذخیره</button>
         </div>
-        
         <!-- <img src="{{site.baseurl}}/assets/images/1.jpg" id="img" alt=""> -->
-
-
+    </div>
+    <div class="center-wrapper success-form hidden">
+        <div class="form bordered">
+            <div class="right">
+                <img src="{{site.baseurl}}/assets/images/logo-fa.jpg" alt="">
+            </div>
+            <div class="left">
+                <div class="row link">
+                    مکان گردشگری شما با موفقیت ثبت گردید.
+                    
+                    <div class="login">
+                        <a href="#">بازگشت به صفحه اصلی</a>
+                    </div>
+                </div>
+            </div>
+        </div> 
     </div>
 </div>
 <script>
+    var map;
+    var markers = null;
     function myMap() {
         var mapOptions = {
-            center: new google.maps.LatLng(51.5, -0.12),
-            zoom: 10,
-            mapTypeId: google.maps.MapTypeId.HYBRID
+            center: new google.maps.LatLng(31.939692, 54.344959),
+            zoom: 6,
         };
-        var map = new google.maps.Map(document.getElementById("mapcontainer"), mapOptions);
-    }  
+        map = new google.maps.Map(document.getElementById("mapcontainer"), mapOptions);
+
+        map.addListener('click', function (e) {
+            placeMarker(e.latLng, map);
+        });
+    }   
+
+    function placeMarker(position) {        
+        if(markers !== null) {
+            markers.setMap(null);
+        }
+        var marker = new google.maps.Marker({
+            position: position,
+            map: map
+        });        
+        markers = marker;
+        map.panTo(position);
+        $("#lat").val(position.lat());
+        $("#lng").val(position.lng());        
+    }
 </script>
 <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBFndaoH80NlVGRjJrwr_Jl-ko2CpWmtSU&amp;callback=myMap" async
     defer>

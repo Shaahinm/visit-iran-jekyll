@@ -5,6 +5,7 @@
   color: $main;
   border-color: transparent;
   text-align: center;
+  cursor: pointer;
 
   &:disabled,
   &.disabled {
@@ -16,6 +17,15 @@
     color: $white;
     background: $main;
     height: 38px;
+  }
+
+  &.btn-small {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+  }
+  &.btn-danger {
+    
   }
 }
 

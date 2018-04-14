@@ -9,20 +9,21 @@ $(document).ready(function() {
         var form = $("#frmEmail");
         // var url = "/fa/api/register/";
         var url = "http://visitiran.ir/fa/api/register/";
-        
+
         $(".blockui").show();
         var jqxhr = $.post(settings.register_url, form.serialize())
           .done(function(data) {
             $("#entered_email").val(data.data.email);
             $("#lblEmail").text(data.data.email);
+            console.log(data.data);
             $("#email_content").hide(0);
             $("#verify_code_content").fadeIn(500);
             $(".blockui").hide();
           })
           .fail(function(data) {
             $(".error").hide(0);
-            $(".error").empty();            
-            $(".error").append("<li>" + settings.error_server_conncetion);            
+            $(".error").empty();
+            $(".error").append("<li>" + data.data.status_text);
             $(".error").show(500);
             $(".blockui").hide();
           })
@@ -35,7 +36,7 @@ $(document).ready(function() {
         // });
       } else {
         $(".error").hide();
-        $(".error").empty();        
+        $(".error").empty();
         $(".error").append("<li>" + settings.error_no_email);
         $(".error").show(500);
       }
@@ -59,6 +60,7 @@ $(document).ready(function() {
         .fail(function(data) {
           $(".error.code").hide(0);
           $(".error.code").empty();
+          console.log('error', data);
           $(".error.code").append("<li>" + data.responseJSON.status_text);
           $(".error.code").show(500);
           $(".blockui").hide();
@@ -68,7 +70,7 @@ $(document).ready(function() {
         });
     } else {
       $(".error.code").hide(0);
-      $(".error.code").empty();      
+      $(".error.code").empty();
       $(".error.code").append("<li>" + settings.error_no_verification_code);
       $(".error.code").show(500);
     }

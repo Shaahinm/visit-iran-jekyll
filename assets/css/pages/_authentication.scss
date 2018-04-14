@@ -1,14 +1,13 @@
 $auth_input_bg: #959393;
 $auth_input_bg_focused: lightgray;
-
+.hidden  {
+  display: none !important;
+}
 .center-wrapper {
   display: flex;
   align-items: center;
   justify-content: center;
-  min-height: 566px;
-  .hidden  {
-    display: none;
-  }
+  min-height: 566px;    
   .form {
     width: 302px;
     padding: 50px 0;
@@ -51,7 +50,12 @@ $auth_input_bg_focused: lightgray;
           border: 2px solid #00a594;
           outline: 0 none;
         }
-      }
+
+        &.error-border  {
+          border: 2px solid red;
+          color: black;
+        }
+      }      
       .error {
         font-size: 12px;
         color: red;   
@@ -64,7 +68,7 @@ $auth_input_bg_focused: lightgray;
         color: white;
         padding: 0;
         height: 34px;
-        border-radius: 4px;
+        border-radius: 4px;        
         &:disabled {
           background: #e7e7e7;
         }
