@@ -14,32 +14,27 @@ $(document).ready(function() {
         var jqxhr = $.post(settings.register_url, form.serialize())
           .done(function(data) {
             $("#entered_email").val(data.data.email);
-            $("#lblEmail").text(data.data.email);
-            console.log(data.data);
+            $("#lblEmail").text(data.data.email);            
             $("#email_content").hide(0);
             $("#verify_code_content").fadeIn(500);
             $(".blockui").hide();
           })
-          .fail(function(data) {
-            $(".error").hide(0);
-            $(".error").empty();
-            $(".error").append("<li>" + data.data.status_text);
-            $(".error").show(500);
+          .fail(function(data) {            
+            $.notify(data.data.status_text, {type: 'danger', delay: 5000});
             $(".blockui").hide();
           })
           .always(function(data) {
             $(".blockui").hide();
-          });
-
-        // jqxhr.always(function() {
-        //   alert("second finished");
-        // });
+          });        
       } else {
-        $(".error").hide();
-        $(".error").empty();
-        $(".error").append("<li>" + settings.error_no_email);
-        $(".error").show(500);
+        // $(".error").hide();
+        // $(".error").empty();
+        // $(".error").append("<li>" + settings.error_no_email);
+        // $(".error").show(500);
+        $.notify(settings.error_no_email, {type: 'info', delay: 5000});
       }
+    } else {
+      $.notify(settings.error_no_email, {type: 'info', delay: 5000});
     }
   });
 
@@ -58,20 +53,22 @@ $(document).ready(function() {
           $(".blockui").hide();
         })
         .fail(function(data) {
-          $(".error.code").hide(0);
-          $(".error.code").empty();
-          console.log('error', data);
-          $(".error.code").append("<li>" + data.responseJSON.status_text);
-          $(".error.code").show(500);
+          // $(".error.code").hide(0);
+          // $(".error.code").empty();
+          // console.log('error', data);
+          // $(".error.code").append("<li>" + data.responseJSON.status_text);
+          // $(".error.code").show(500);
+          $.notify(data.responseJSON.status_text, {type: 'danger', delay: 5000});
           $(".blockui").hide();
         })
         .always(function(data) {
           $(".blockui").hide();
         });
     } else {
-      $(".error.code").hide(0);
-      $(".error.code").empty();
-      $(".error.code").append("<li>" + settings.error_no_verification_code);
+      // $(".error.code").hide(0);
+      // $(".error.code").empty();
+      // $(".error.code").append("<li>" + settings.error_no_verification_code);
+      $.notify(settings.error_no_verification_code, {type: 'danger', delay: 5000});
       $(".error.code").show(500);
     }
   });

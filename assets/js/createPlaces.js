@@ -9,7 +9,7 @@ $(document).ready(function() {
   //         .done(function(data) {
   //           alert('done');
   //         })
-  // });  
+  // });
 });
 
 var isLoading = $(".blockui");
@@ -49,28 +49,30 @@ Dropzone.options.dropzoneForm = {
         $(isLoading).hide();
         // $("#name").addClass('error-border');
         $("#name").focus();
-        $.notify(settingsCreatePlaces.name, {type: 'warning'});
+        $.notify(settingsCreatePlaces.name, { type: "warning", delay: 5000 });
         hasError = true;
-      } else
-       if (address === "") {
+      } else if (address === "") {
         // $("#name").removeClass('error-border');
         // $("#address").addClass('error-border');
         $("#address").focus();
         $(isLoading).hide();
-        $.notify(settingsCreatePlaces.address, {type: 'warning'});
+        $.notify(settingsCreatePlaces.address, {
+          type: "warning",
+          delay: 5000
+        });
         hasError = true;
       } else if (intro === "") {
         $("#intro").focus();
         $(isLoading).hide();
-        $.notify(settingsCreatePlaces.intro, {type: 'warning'});
+        $.notify(settingsCreatePlaces.intro, { type: "warning", delay: 5000 });
         hasError = true;
       } else if (lat === "") {
         $(isLoading).hide();
-        $.notify(settingsCreatePlaces.lat, {type: 'warning'});
+        $.notify(settingsCreatePlaces.lat, { type: "warning", delay: 5000 });
         hasError = true;
       } else if (lng === "") {
         $(isLoading).hide();
-        $.notify(settingsCreatePlaces.lng, {type: 'warning'});
+        $.notify(settingsCreatePlaces.lng, { type: "warning", delay: 5000 });
         hasError = true;
       }
       if (!hasError) {
@@ -78,11 +80,31 @@ Dropzone.options.dropzoneForm = {
           myDropzone.processQueue();
         } else {
           $(isLoading).hide();
-          $.notify(settingsCreatePlaces.image, {type: 'warning'});
+          $.notify(settingsCreatePlaces.image, { type: "warning" });
         }
       }
     });
     this.on("addedfile", function(file) {
+      if (this.files[5]!=null){
+        this.removeFile(this.files[5]);
+        $.notify(settingsCreatePlaces.too_many, { type: "warning", delay: 5000 });
+      }
+      if (!file.type.match("image.*")) {
+        $.notify(settingsCreatePlaces.not_image, {
+          type: "warning",
+          delay: 5000
+        });
+        this.removeFile(file);
+        return false;
+      }
+      if (file.size > 4 * 1024 * 1024) {
+        $.notify(settingsCreatePlaces.too_large, {
+          type: "warning",
+          delay: 5000
+        });
+        this.removeFile(file);
+        return false;
+      }
       var removeButton = Dropzone.createElement(
         "<button class='btn btn-small btn-danger' style='margin-top: 5px; margin-right: 40px;'><i class='fa fa-times'></i></button>"
       );
@@ -96,13 +118,16 @@ Dropzone.options.dropzoneForm = {
     });
     this.on("success", function(file, serverResponse) {
       $(isLoading).hide();
-      $.notify(settingsCreatePlaces.success, {type: 'success'});      
-      $('.create-form').hide();
-      $('.success-form').fadeIn(500);
+      $.notify(settingsCreatePlaces.success, { type: "success", delay: 5000 });
+      $(".create-form").hide();
+      $(".success-form").fadeIn(500);
     });
     this.on("error", function(file, serverResponse) {
-      $(isLoading).hide();      
-      $.notify(serverResponse.status_text, {type: 'error'});      
+      $(isLoading).hide();
+      $(file.previewElement)
+        .find(".dz-error-message")
+        .text(settingsCreatePlaces.error_server_connection);
+      $.notify(serverResponse.status_text, { type: "danger", delay: 5000 });
     });
   }
 };

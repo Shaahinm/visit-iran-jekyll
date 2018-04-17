@@ -20,6 +20,15 @@
       error_no_verification_code: 'لطفآ کد ارسال شده را وارد نمایید',
       login_return_url: '/fa/'
     }
+
+    var settings_comments_province = {      
+      url: 'http://visitiran.ir/fa/api/reviews/?basetourismobject=32',     
+      error_empty_form: 'لطفآ امتیاز و متن را وارد کنید',
+      is_logged_in: false,
+      success: 'کامنت شما با موفقیت ثبت شد',
+      error: 'مشکلی برای ثبت کمانت شما به ایجاد شد'
+
+    }
     
     var settingsCreatePlaces = {
       name: 'نام را پور کنید',
@@ -31,6 +40,9 @@
       url: 'http://visitiran.ir/fa/api/places/',
       return_url: 'image-upload-done.html',
       success: 'موفق',
+      not_image: 'لطفآ عکس اپلود کنید',
+      too_large: 'سایز عکس زیاد',
+      too_many: 'زیاد عکس',
       error_server_connection: 'خطا در ایجاد برقراری ارتباط با سرور',
     }
 

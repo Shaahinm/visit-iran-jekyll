@@ -8,8 +8,9 @@
 	-webkit-transition: all .4s ease-in-out;
 	-moz-transition: all .4s ease-in-out;
 	-o-transition: all .4s ease-in-out;
-	transition: all .4s ease-in-out;
+	transition: all .4s ease-in-out;	
 }
+
 .notify > button.close{
 	position: absolute;
 	top: 8px;
@@ -192,6 +193,7 @@ body.notify-open-drop{
 @media all and (max-width:768px){
 	.notify{
 		width: 100%;
+		box-sizing: border-box;
 		left: 0!important;
 		margin: 0!important;
 		border-radius: 0;
@@ -223,3 +225,9 @@ body.notify-open-drop{
 		opacity: 0;
 	}
 }
+
+/* @media (max-width: 768px) {
+	.notify {
+		width: 90%;
+	}
+} */

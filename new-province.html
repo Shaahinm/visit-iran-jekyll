@@ -4,10 +4,16 @@ title: استان
 custom_css: 
 - slick 
 - slick-theme 
+- notify
+- fontawesome-stars-o
 custom_js: 
 - slick.min 
 - index
 - base
+- jquery.barrating.min
+- notify
+- js.cookie-2.2.0.min
+- province
 ---
 <div class="content">
     <!-- <div class="hero-img">
@@ -394,7 +400,7 @@ custom_js:
                 </div>
             </section>
         </div>
-    </section>  
+    </section>
     <div class="entertainment-province">
         <div class="title">
             مراکز تفریحی
@@ -427,9 +433,12 @@ custom_js:
             </div>
         </div>
     </div>
-    <section class="social">
-        <div class="title">نظرات و پیشنهادات</div>
-        <div class="content">
+    <section class="social" id="social">
+        <div class="title" id="commentToggle">
+            نظرات و پیشنهادات &nbsp;(&nbsp;
+            <span id="commentCount">0</span>&nbsp;)
+        </div>
+        <!-- <div class="content">
             <div class="left">
                 <div class="suggestions">
                     <form action="">
@@ -456,109 +465,255 @@ custom_js:
                         <input type="text" placeholder="ایمیل خود را وارد نمایید">
                         <button>مشترک شوید</button>
                     </form>
-                </div>
-                <!-- <div class="bottom"> -->
-                    <form action="" class="bottom">
-                        <div class="image-upload">
-                            <button class="btn">
-                                <i class="fa fa-image icon"></i>
-                                آپلود عکس های کاربران
-                            </button>
+                </div>            
+                <form action="" class="bottom">
+                    <div class="image-upload">
+                        <button class="btn">
+                            <i class="fa fa-image icon"></i>
+                            آپلود عکس های کاربران
+                        </button>
+                    </div>
+                    <button class="btn">ارسال</button>
+                </form>                
+            </div>
+        </div> -->
+        <div class="content comment-section hidden">
+            <div class="blockui local">
+                <div id="loader"></div>
+            </div>
+            <div class="comment-container">
+                <!-- <div class="comment">
+                    <div class="avatar">
+                        <img src="{{site.baseurl}}/assets/images/avatar-placholder.png" alt="">
+                        <div class="sub-avatar">
+                            <div class="username">عباس</div>
+                            <div class="star-rating-display">
+                                <span class="fa fa-star checked"></span>
+                                <span class="fa fa-star checked"></span>
+                                <span class="fa fa-star checked"></span>
+                                <span class="fa fa-star"></span>
+                                <span class="fa fa-star"></span>
+                            </div>
                         </div>
-                        <button class="btn">ارسال</button>
-                    </form>
-                <!-- </div> -->
+                    </div>
+                    <div class="text">
+                        لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ و با استفاده از طراحان گرافیک است. چاپگرها و متون بلکه روزنامه و مجله در ستون و سطرآنچنان که لازم است و برای شرایط فعلی تکنولوژی مورد نیاز و کاربردهای متنوع با هدف بهبود ابزارهای کاربردی می باشد. کتابهای زیادی در شصت و سه درصد گذشته، حال و آینده شناخت فراوان جامعه و متخصصان را می طلبد تا با نرم افزارها شناخت بیشتری را برای طراحان رایانه ای علی الخصوص طراحان خلاقی و فرهنگ پیشرو در زبان فارسی ایجاد کرد. در این صورت می توان امید داشت که تمام و دشواری موجود در ارائه راهکارها و شرایط سخت تایپ به پایان رسد وزمان مورد نیاز شامل حروفچینی دستاوردهای اصلی و جوابگوی سوالات پیوسته اهل دنیای موجود طراحی اساسا مورد استفاده قرار گیرد.
+                    </div>
+                </div>
+                <div class="comment">
+                    <div class="avatar">
+                        <img src="{{site.baseurl}}/assets/images/avatar-placholder.png" alt="">
+                        <div class="sub-avatar">
+                            <div class="username">عباس</div>
+                            <div class="star-rating-display">
+                                <span class="fa fa-star checked"></span>
+                                <span class="fa fa-star checked"></span>
+                                <span class="fa fa-star checked"></span>
+                                <span class="fa fa-star"></span>
+                                <span class="fa fa-star"></span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="text">
+                        خالی خوب
+                    </div>
+                </div> -->
+            </div>
+            <div class="next-prev">
+                <a href="#" class="btn next disabled">بیشتر</a>
+                <!-- <a href="#" class="btn prev disabled">قبلی</a> -->
+            </div>
+            <div class="no-comment">
+                <h3>
+                    تا به امروز نظری ثبت نشده است
+                </h3>
             </div>
         </div>
     </section>
+    <section class="social">
+        <div class="content">
+            <div class="blockui local" id="blockuiPostReview">
+                <div id="loader"></div>
+            </div>
+            <div class="review">
+                <form class="reviewForm" id="reviewForm" action="">
+                    <div class="review-text">
+                        <textarea name="review" id="review" placeholder="متن مورد نظر را بنوسید" cols="30" rows="5"></textarea>
+                    </div>
+                    <div class="review-rate">
+                        <div class="text">
+                            امتیاز دهید
+                        </div>
+                        <select id="rater">
+                            <option value="1">1</option>
+                            <option value="2">2</option>
+                            <option value="3">3</option>
+                            <option value="4">4</option>
+                            <option value="5">5</option>
+                        </select>
+                        <input type="hidden" name="rate" id="rate" value="0">
+                    </div>
+                    <div class="review-btn">
+                        <button class="btn" id="btnSubmitReview">
+                            ارسال
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+
+    </section>
     <section class="carousel dark">
-            <div class="horizontal villages">
-                <section class="villages">
-                    <div class="title accent"> انزدیکمکان اقامتی&nbsp;&nbsp;&nbsp;</div>
-                    <div class="slider village padded" dir="ltr">
-                        <div class="center">
-                            <div class="slider-nav-village">
-                                <div>
-                                    <div class="image">
-                                        <img src="http://visitiran.ir/media/provinces/3.jpg" width="100%" height="100%">
-                                    </div>
-                                    <div class="text">
-                                        <h5>روستای کندوان </h5>
-                                        <p>
-                                            این روستا یکی از روستاهای استان آذربایجان شرقی و شهرستان اسکو است که از پیشینه ی تاریخی سه هزار سال برخوردار است. این روستای
-                                            تاریخی و باستانی دارای جاذبه های گردشگری فراوانی است....
-                                        </p>
-                                    </div>
+        <div class="horizontal villages">
+            <section class="villages">
+                <div class="title accent"> انزدیکمکان اقامتی&nbsp;&nbsp;&nbsp;</div>
+                <div class="slider village padded" dir="ltr">
+                    <div class="center">
+                        <div class="slider-nav-village">
+                            <div>
+                                <div class="image">
+                                    <img src="http://visitiran.ir/media/provinces/3.jpg" width="100%" height="100%">
                                 </div>
-                                <div>
-                                    <div class="image">
-                                        <img src="http://visitiran.ir/media/provinces/3.jpg" width="100%" height="100%">
-                                    </div>
-                                    <div class="text">
-                                        <h5>روستای کندوان </h5>
-                                        <p>
-                                            این روستا یکی از روستاهای استان آذربایجان شرقی و شهرستان اسکو است که از پیشینه ی تاریخی سه هزار سال برخوردار است. این روستای
-                                            تاریخی و باستانی دارای جاذبه های گردشگری فراوانی است....
-                                        </p>
-                                    </div>
+                                <div class="text">
+                                    <h5>روستای کندوان </h5>
+                                    <p>
+                                        این روستا یکی از روستاهای استان آذربایجان شرقی و شهرستان اسکو است که از پیشینه ی تاریخی سه هزار سال برخوردار است. این روستای
+                                        تاریخی و باستانی دارای جاذبه های گردشگری فراوانی است....
+                                    </p>
                                 </div>
-                                <div>
-                                    <div class="image">
-                                        <img src="http://visitiran.ir/media/provinces/3.jpg" width="100%" height="100%">
-                                    </div>
-                                    <div class="text">
-                                        <h5>روستای کندوان </h5>
-                                        <p>
-                                            این روستا یکی از روستاهای استان آذربایجان شرقی و شهرستان اسکو است که از پیشینه ی تاریخی سه هزار سال برخوردار است. این روستای
-                                            تاریخی و باستانی دارای جاذبه های گردشگری فراوانی است....
-                                        </p>
-                                    </div>
+                            </div>
+                            <div>
+                                <div class="image">
+                                    <img src="http://visitiran.ir/media/provinces/3.jpg" width="100%" height="100%">
                                 </div>
-                                <div>
-                                    <div class="image">
-                                        <img src="http://visitiran.ir/media/provinces/3.jpg" width="100%" height="100%">
-                                    </div>
-                                    <div class="text">
-                                        <h5>روستای کندوان </h5>
-                                        <p>
-                                            این روستا یکی از روستاهای استان آذربایجان شرقی و شهرستان اسکو است که از پیشینه ی تاریخی سه هزار سال برخوردار است. این روستای
-                                            تاریخی و باستانی دارای جاذبه های گردشگری فراوانی است....
-                                        </p>
-                                    </div>
+                                <div class="text">
+                                    <h5>روستای کندوان </h5>
+                                    <p>
+                                        این روستا یکی از روستاهای استان آذربایجان شرقی و شهرستان اسکو است که از پیشینه ی تاریخی سه هزار سال برخوردار است. این روستای
+                                        تاریخی و باستانی دارای جاذبه های گردشگری فراوانی است....
+                                    </p>
                                 </div>
-                                <div>
-                                    <div class="image">
-                                        <img src="http://visitiran.ir/media/provinces/3.jpg" width="100%" height="100%">
-                                    </div>
-                                    <div class="text">
-                                        <h5>روستای کندوان </h5>
-                                        <p>
-                                            این روستا یکی از روستاهای استان آذربایجان شرقی و شهرستان اسکو است که از پیشینه ی تاریخی سه هزار سال برخوردار است. این روستای
-                                            تاریخی و باستانی دارای جاذبه های گردشگری فراوانی است....
-                                        </p>
-                                    </div>
+                            </div>
+                            <div>
+                                <div class="image">
+                                    <img src="http://visitiran.ir/media/provinces/3.jpg" width="100%" height="100%">
                                 </div>
-                                <div>
-                                    <div class="image">
-                                        <img src="http://visitiran.ir/media/provinces/3.jpg" width="100%" height="100%">
-                                    </div>
-                                    <div class="text">
-                                        <h5>روستای کندوان </h5>
-                                        <p>
-                                            این روستا یکی از روستاهای استان آذربایجان شرقی و شهرستان اسکو است که از پیشینه ی تاریخی سه هزار سال برخوردار است. این روستای
-                                            تاریخی و باستانی دارای جاذبه های گردشگری فراوانی است....
-                                        </p>
-                                    </div>
+                                <div class="text">
+                                    <h5>روستای کندوان </h5>
+                                    <p>
+                                        این روستا یکی از روستاهای استان آذربایجان شرقی و شهرستان اسکو است که از پیشینه ی تاریخی سه هزار سال برخوردار است. این روستای
+                                        تاریخی و باستانی دارای جاذبه های گردشگری فراوانی است....
+                                    </p>
+                                </div>
+                            </div>
+                            <div>
+                                <div class="image">
+                                    <img src="http://visitiran.ir/media/provinces/3.jpg" width="100%" height="100%">
+                                </div>
+                                <div class="text">
+                                    <h5>روستای کندوان </h5>
+                                    <p>
+                                        این روستا یکی از روستاهای استان آذربایجان شرقی و شهرستان اسکو است که از پیشینه ی تاریخی سه هزار سال برخوردار است. این روستای
+                                        تاریخی و باستانی دارای جاذبه های گردشگری فراوانی است....
+                                    </p>
+                                </div>
+                            </div>
+                            <div>
+                                <div class="image">
+                                    <img src="http://visitiran.ir/media/provinces/3.jpg" width="100%" height="100%">
+                                </div>
+                                <div class="text">
+                                    <h5>روستای کندوان </h5>
+                                    <p>
+                                        این روستا یکی از روستاهای استان آذربایجان شرقی و شهرستان اسکو است که از پیشینه ی تاریخی سه هزار سال برخوردار است. این روستای
+                                        تاریخی و باستانی دارای جاذبه های گردشگری فراوانی است....
+                                    </p>
+                                </div>
+                            </div>
+                            <div>
+                                <div class="image">
+                                    <img src="http://visitiran.ir/media/provinces/3.jpg" width="100%" height="100%">
+                                </div>
+                                <div class="text">
+                                    <h5>روستای کندوان </h5>
+                                    <p>
+                                        این روستا یکی از روستاهای استان آذربایجان شرقی و شهرستان اسکو است که از پیشینه ی تاریخی سه هزار سال برخوردار است. این روستای
+                                        تاریخی و باستانی دارای جاذبه های گردشگری فراوانی است....
+                                    </p>
                                 </div>
                             </div>
                         </div>
                     </div>
-                    <div class="button">
-                        <a href="#" class="button-link full-width">
-                            روستــاهــای بیشتــر
-                        </a>
-                    </div>
-                </section>
+                </div>
+                <div class="button">
+                    <a href="#" class="button-link full-width">
+                        روستــاهــای بیشتــر
+                    </a>
+                </div>
+            </section>
+        </div>
+    </section>
+    <div id="loginModal" class="modal">
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <div class="blockui" id="blockLogin">
+                <div id="loader"></div>
             </div>
-        </section>  
+            <div class="content" style="margin-top: 0" id="email_content">
+                <div class="center-wrapper">
+                    <form class="form" id="frmEmail">
+                        <div class="logo">
+                            <img src="{{site.baseurl}}/assets/images/logo-fa.jpg" alt="">
+                        </div>
+                        <div class="row">
+                            <label for="email">آدرس ایمیل</label>
+                            <input class="input" type="email" id="email" name="email">
+                        </div>
+                        <div class="row">
+                            <script data-cfasync="false" src="http://visitiran.ir/cdn-cgi/scripts/d07b1474/cloudflare-static/email-decode.min.js"></script>
+                            <script src='https://www.google.com/recaptcha/api.js?hl=fa'></script>
+                            <div class="g-recaptcha" data-sitekey="6LfNl0gUAAAAAJwcQy2oSUZyUtwODMY90sYtn0Gv" data-callback="correctCaptcha" data-expired-callback="recaptchaExpired"></div>
+                        </div>
+                        <div class="row">
+                            <button id="btnSubmit" type="submit" class="btn full-width">ورود</button>
+                        </div>
+                        <div class="row">
+                            <ul class="error hidden">
+                            </ul>
+                        </div>
+                    </form>
+                </div>
+            </div>
+            <div class="content" style="margin-top: 0; display: none;" id="verify_code_content">
+                <div class="center-wrapper">
+                    <form method="post" class="form" id="frmCode">
+                        <div class="logo">
+                            <img src="{{site.baseurl}}/assets/images/logo-fa.jpg" alt="">
+                        </div>
+                        <div class="row center bold">
+                            <label id="lblEmail" for=""></label>
+                        </div>
+                        <div class="row">
+                            <input class="input" type="hidden" id="entered_email" name="email">
+                            <input class="input" type="number" maxlength="10" size="10" id="code" name="code" placeholder="کد ارسال شده به ایمیل را وارد کنید">
+                        </div>
+
+                        <div class="row">
+                            <button type="submit" id="btnVerify" class="btn full-width">بررسی و ورود</button>
+                            <input type="hidden" name="next" value="" />
+                        </div>
+                        <div class="row">
+                            <button type="button" id="btnPrevForm" class="btn full-width white">تصحیح ایمیل</button>
+                        </div>
+
+                        <div class="row">
+                            <ul class="error code hidden">
+                            </ul>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+
+    </div>
 </div>

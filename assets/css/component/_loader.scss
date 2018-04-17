@@ -6,6 +6,9 @@
     background: rgba(0, 0, 0, 0.2);
     z-index: 1000;
     display: none;
+    &.local {
+      position: absolute;
+    }
 }
 #loader {
     position: absolute;
