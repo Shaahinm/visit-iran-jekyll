@@ -21,9 +21,11 @@ Dropzone.options.dropzoneForm = {
   parallelUploads: 5,
   createImageThumbnails: true,
   paramName: "images",
+  previewsContainer: '.preview-container',
   headers: {
     "Cache-Control": null,
-    "X-Requested-With": null
+    "X-Requested-With": null,
+    "Authorization": `JWT ${getToken()}`
   },
   init: function() {
     var submitButton = document.querySelector("#submit-all");

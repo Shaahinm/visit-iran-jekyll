@@ -656,10 +656,10 @@ custom_js:
     <div id="loginModal" class="modal">
         <div class="modal-content">
             <span class="close">&times;</span>
-            <div class="blockui" id="blockLogin">
+            <div class="blockui local" id="blockLogin">
                 <div id="loader"></div>
             </div>
-            <div class="content" style="margin-top: 0" id="email_content">
+            <div class="content" id="email_content" style="margin-top: 0">
                 <div class="center-wrapper">
                     <form class="form" id="frmEmail">
                         <div class="logo">
@@ -672,7 +672,7 @@ custom_js:
                         <div class="row">
                             <script data-cfasync="false" src="http://visitiran.ir/cdn-cgi/scripts/d07b1474/cloudflare-static/email-decode.min.js"></script>
                             <script src='https://www.google.com/recaptcha/api.js?hl=fa'></script>
-                            <div class="g-recaptcha" data-sitekey="6LfNl0gUAAAAAJwcQy2oSUZyUtwODMY90sYtn0Gv" data-callback="correctCaptcha" data-expired-callback="recaptchaExpired"></div>
+                            <div class="g-recaptcha" data-sitekey="6LfNl0gUAAAAAJwcQy2oSUZyUtwODMY90sYtn0Gv" data-callback="correctCaptcha"></div>
                         </div>
                         <div class="row">
                             <button id="btnSubmit" type="submit" class="btn full-width">ورود</button>
@@ -684,7 +684,7 @@ custom_js:
                     </form>
                 </div>
             </div>
-            <div class="content" style="margin-top: 0; display: none;" id="verify_code_content">
+            <div class="content" id="verify_code_content" style="display: none; margin-top: 0;">
                 <div class="center-wrapper">
                     <form method="post" class="form" id="frmCode">
                         <div class="logo">
@@ -694,8 +694,8 @@ custom_js:
                             <label id="lblEmail" for=""></label>
                         </div>
                         <div class="row">
-                            <input class="input" type="hidden" id="entered_email" name="email">
-                            <input class="input" type="number" maxlength="10" size="10" id="code" name="code" placeholder="کد ارسال شده به ایمیل را وارد کنید">
+                            <input class="input" type="hidden" id="entered_email" name="username">
+                            <input class="input" type="number" maxlength="10" size="10" id="password" name="password" placeholder="کد ارسال شده به ایمیل را وارد کنید">
                         </div>
 
                         <div class="row">

@@ -14,4 +14,11 @@ $(function() {
       $(this).removeClass("open");
     }
   });
+
+
+  $("#logout").on('click', function(e) {
+    e.preventDefault();
+    localStorage.removeItem('token');
+    window.location.href = global_settings.logout_url;
+  });
 });

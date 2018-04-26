@@ -1,22 +1,14 @@
+
 var isLoading = $(".blockui");
+var modal = document.getElementById("loginModal");
+modal.style.display = "none";
 $(document).ready(function() {
   var url = settings_comments_province.url;
-  getComments(url);
+  getComments(url, true);
   $(".btn.next").on("click", function(e) {
     e.preventDefault();
-    getComments($(this).attr("href"));
-    // $('html,body').animate({
-    //   scrollTop: $("#social").offset().top - 200},
-    //   500);
+    getComments($(this).attr("href"), false);    
   });
-
-  // $(".btn.prev").on('click', function(e){
-  //   e.preventDefault();
-  //   getComments($(this).attr("href"));
-  //   $('html,body').animate({
-  //     scrollTop: $("#social").offset().top - 200},
-  //     500);
-  // });
 
   $("#commentToggle").on("click", function(e) {
     e.preventDefault();
@@ -43,26 +35,16 @@ $(document).ready(function() {
         delay: 5000
       });
     } else {
-      if (settings_comments_province.is_logged_in) {
+      if (!isExpired()) {        
         postComment();
       } else {
-        var modal = document.getElementById("loginModal");
-
-        // Get the button that opens the modal
+        var modal = document.getElementById("loginModal");        
         var btn = document.getElementById("myBtn");
-
-        // Get the <span> element that closes the modal
         var span = document.getElementsByClassName("close")[0];
-
-        // When the user clicks on the button, open the modal
         modal.style.display = "block";
-
-        // When the user clicks on <span> (x), close the modal
         span.onclick = function() {
           modal.style.display = "none";
         };
-
-        // When the user clicks anywhere outside of the modal, close it
         window.onclick = function(event) {
           if (event.target == modal) {
             modal.style.display = "none";
@@ -75,7 +57,8 @@ $(document).ready(function() {
   // bar rating
   $("#rater").barrating({
     theme: "fontawesome-stars-o",
-    allowEmpty: true,
+    allowEmpty: false,
+    initialRating: 1,
     onSelect: function(value, text, event) {
       $("#rate").val(value);
     }
@@ -91,9 +74,6 @@ $(document).ready(function() {
       if (isValidEmailAddress(email.val())) {
         $(".error").empty();
         var form = $("#frmEmail");
-        // var url = "/fa/api/register/";
-        var url = "http://visitiran.ir/fa/api/register/";
-
         $("#blockLogin").show();
         var jqxhr = $.post(settings.register_url, form.serialize())
           .done(function(data) {
@@ -110,11 +90,7 @@ $(document).ready(function() {
           .always(function(data) {
             $("#blockLogin").hide();
           });
-      } else {
-        // $(".error").hide();
-        // $(".error").empty();
-        // $(".error").append("<li>" + settings.error_no_email);
-        // $(".error").show(500);
+      } else {        
         $.notify(settings.error_no_email, { type: "info", delay: 5000 });
       }
     } else {
@@ -124,26 +100,21 @@ $(document).ready(function() {
 
   $("#btnVerify").on("click", function(e) {
     e.preventDefault();
-    var code = $("#code");
+    var code = $("#password");
     if (code.val().length > 0) {
       $(".error.code").empty();
-      var form = $("#frmCode");
-      // var url = "/fa/api/login/";
-      var url = "http://visitiran.ir/fa/api/login/";
-      $("#blockLogin").show();
-      var jqxhr = $.post(url, form.serialize())
+      var form = $("#frmCode");      
+      $("#blockLogin").show();      
+      var jqxhr = $.post(settings.login_url_token, form.serialize())
         .done(function(data) {
+          var token = data.token;
+          localStorage.setItem('token', token);
           var modal = document.getElementById("loginModal");
-          modal.style.display = "none";          
+          modal.style.display = "none";
           $("#blockLogin").hide();
           postComment();
         })
-        .fail(function(data) {
-          // $(".error.code").hide(0);
-          // $(".error.code").empty();
-          // console.log('error', data);
-          // $(".error.code").append("<li>" + data.responseJSON.status_text);
-          // $(".error.code").show(500);
+        .fail(function(data) {         
           $.notify(data.responseJSON.status_text, {
             type: "danger",
             delay: 5000
@@ -153,10 +124,7 @@ $(document).ready(function() {
         .always(function(data) {
           $("#blockLogin").hide();
         });
-    } else {
-      // $(".error.code").hide(0);
-      // $(".error.code").empty();
-      // $(".error.code").append("<li>" + settings.error_no_verification_code);
+    } else {      
       $.notify(settings.error_no_verification_code, {
         type: "danger",
         delay: 5000
@@ -169,12 +137,18 @@ $(document).ready(function() {
   });
 });
 
-function getComments(url) {
+function getComments(url, reset) {
   $(isLoading).show();
   var commentContainer = $(".comment-container");
+  if (reset) {
+    $(commentContainer).empty();
+    $(".next-prev").show();
+    $(".comment-container").show();
+    $(".no-comment").hide();
+  }
   var jqxhr = $.get(url, function(data) {
     $("#commentCount").text(data.count);
-    if (data.count > 0) {      
+    if (data.count > 0) {
       for (i = 0; i < data.results.length; i++) {
         createComment(data.results[i]);
       }
@@ -200,7 +174,7 @@ function getComments(url) {
       $(isLoading).fadeOut(500);
     })
     .fail(function() {
-      alert("error");
+      // alert("error");
     })
     .always(function() {
       $(isLoading).fadeOut(500);
@@ -212,26 +186,26 @@ function createComment(data) {
 
   var commentTemplate = `<div class="comment">
                             <div class="avatar">
-                                <img src="./assets/images/avatar-placholder.png" alt="">
+                                <img src="http://visitiran.ir/static/tourismiran/assets/images/avatar-placholder.png" alt="">
                                 <div class="sub-avatar">
                                     <div class="username">
-                                    ${data.reviewer.first_name
-                                      ? data.reviewer.first_name
-                                      : "بدون نام"}
+                                    ${
+                                      data.reviewer.first_name
+                                        ? data.reviewer.first_name
+                                        : "بدون نام"
+                                    }
                                     </div>                                    
                                 </div>
                             </div>                           
                             <div class="text">                                                           
                               <div class="star-rating-display">
                                   ${stars}
-                                  <div class="date">${
-                                    data.time
-                                  }</div>   
+                                  <div class="date">${data.time}</div>   
                               </div>
                                   ${data.review}
                             </div>
                         </div>`;
-  var commentContainer = $(".comment-container");  
+  var commentContainer = $(".comment-container");
   $(commentContainer).append(commentTemplate);
 }
 
@@ -269,41 +243,76 @@ function recaptchaExpired() {
   // grecaptcha.reset();
 }
 function postComment() {
-  var isLoading = $('#blockuiPostReview');
-  $(isLoading).show();
-  var jqxhr = $.post(
-    settings_comments_province.url,
-    $("#reviewForm").serialize()
-  )
-    .done(function(data) {
+  var isLoading = $("#blockuiPostReview");
+  $(isLoading).show();  
+  $.ajax({
+    url: settings_comments_province.url,
+    type  : 'POST',
+    headers: {"Authorization": `JWT ${getToken()}`},
+    data: $("#reviewForm").serialize(),
+    success: function(data) {
       $.notify(settings_comments_province.success, {
         type: "success",
         delay: 5000
       });
-      resetLoginModal();      
-      getComments();
-    })
-    .fail(function(data) {      
-      $.notify(settings_comments_province.error, {
+      resetLoginModal();
+      resetReviewForm();
+      var url = settings_comments_province.url;
+      getComments(url, true);
+    },
+    error: function(data) {
+      console.log(data);
+      $.notify(data.responseJSON.status_text, {
         type: "danger",
         delay: 5000
-      });      
+      });
       $(isLoading).hide();
-    })
-    .always(function(data) {      
+    },
+    always: function() {
       resetLoginModal();
       $(isLoading).hide();
-    });
+    }
+  });
+  // var jqxhr = $.post(
+  //   settings_comments_province.url,
+  //   $("#reviewForm").serialize()
+  // )
+  //   .done(function(data) {
+  //     $.notify(settings_comments_province.success, {
+  //       type: "success",
+  //       delay: 5000
+  //     });
+  //     resetLoginModal();
+  //     resetReviewForm();
+  //     var url = settings_comments_province.url;
+  //     getComments(url, true);
+  //   })
+  //   .fail(function(data) {
+  //     $.notify(settings_comments_province.error, {
+  //       type: "danger",
+  //       delay: 5000
+  //     });
+  //     $(isLoading).hide();
+  //   })
+  //   .always(function(data) {
+  //     resetLoginModal();
+  //     $(isLoading).hide();
+  //   });
 }
 
-function resetLoginModal(){
+function resetLoginModal() {
   $("#blockLogin").show();
-    $(".error.code").hide(0);
-    $(".error.code").empty();
-    $("#code").val("");
-    grecaptcha.reset();
-    $("#btnSubmit").prop("disabled", true);
-    $("#verify_code_content").hide(0);
-    $("#email_content").fadeIn(500);
-    $(".blockui").hide();
+  $(".error.code").hide(0);
+  $(".error.code").empty();
+  $("#code").val("");
+  grecaptcha.reset();
+  $("#btnSubmit").prop("disabled", true);
+  $("#verify_code_content").hide(0);
+  $("#email_content").fadeIn(500);
+  $(".blockui").hide();
+}
+
+function resetReviewForm() {
+  $("#review").val("");
+  $("#rater").barrating("clear");
 }

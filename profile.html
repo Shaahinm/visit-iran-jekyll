@@ -1,0 +1,43 @@
+---
+layout: default
+title: پروفایل
+custom_css:
+- basic.min
+- notify
+custom_js:
+- base
+- notify
+- profile
+---
+
+<div class="content">
+    <div class="center-wrapper">
+        <form class="frmProfile form" method="POST" action="http://visitiran.ir/fa/api/profile/" enctype="multipart/form-data">
+            <div class="row title">
+                <h1>
+                    پروفایل شما
+                </h1>
+                <div class="hr"></div>
+            </div>
+            <div class="row email">
+                <label for="email">ایمیل</label>
+                <input class="input" type="email" readonly name="email" id="email" size="130" placeholder="ایمیل" value="shahinm@gmail.com">
+            </div>
+            <div class="row first-name">
+                <label for="first-name">نام</label>
+                <input class="input" type="text" name="first-name" maxlength="300" size="300" id="first_name" placeholder="نام">
+            </div>
+            <div class="row last-name">
+                <label for="last-name">نام خانوادگی</label>
+                <input class="input" type="text" name="last-name" maxlength="300" size="300" id="last_name" placeholder="نام خانوادگی">
+            </div>
+            <div class="row mobile">
+                <label for="mobile">نام خانوادگی</label>
+                <input class="input" type="text" name="mobile" maxlength="300" size="300" id="mobile" placeholder="شماره موبایل">
+            </div>
+            <div class="row">
+                <button id="submit-all" class="btn">ذخیره</button>    
+            </div>
+        </form>                
+    </div>    
+</div>
