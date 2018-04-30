@@ -25,7 +25,7 @@ Dropzone.options.dropzoneForm = {
   headers: {
     "Cache-Control": null,
     "X-Requested-With": null,
-    "Authorization": `JWT ${getToken()}`
+    // "Authorization": `JWT ${getToken()}`
   },
   init: function() {
     var submitButton = document.querySelector("#submit-all");

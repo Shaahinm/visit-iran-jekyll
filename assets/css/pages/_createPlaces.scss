@@ -19,14 +19,14 @@
     }
   }
 }
+.dz-message {
+  border: 2px dashed $main;
+  border-radius: 5px;
+  padding: 40px 0;
+}
 .frmCreatePlace {
   padding: 30px 10px 10px 10px !important;
-  width: 100% !important; 
-  .dz-message {
-    border: 2px dashed $main;
-    border-radius: 5px;
-    padding: 40px 0;
-  }
+  width: 100% !important;   
   .hr {
     width: 100%;
     height: 1px;

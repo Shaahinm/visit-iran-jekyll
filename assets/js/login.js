@@ -10,14 +10,14 @@ $(document).ready(function() {
         $(".blockui").show();
         var jqxhr = $.post(settings.register_url, form.serialize())
           .done(function(data) {
-            $("#entered_email").val(data.data.email);
-            $("#lblEmail").text(data.data.email);
+            $("#entered_email").val(data.email);
+            $("#lblEmail").text(data.email);
             $("#email_content").hide(0);
             $("#verify_code_content").fadeIn(500);
             $(".blockui").hide();
           })
           .fail(function(data) {
-            $.notify(data.data.status_text, { type: "danger", delay: 5000 });
+            $.notify(data.responseJSON, { type: "danger", delay: 5000 });
             $(".blockui").hide();
           })
           .always(function(data) {
@@ -51,7 +51,7 @@ $(document).ready(function() {
           window.location.href = settings.login_return_url;
         })
         .fail(function(data) {
-          $.notify(data.responseJSON.status_text, {
+          $.notify(data.responseJSON.non_field_errors, {
             type: "danger",
             delay: 5000
           });
@@ -59,7 +59,7 @@ $(document).ready(function() {
           loginSuccess = false;
         })
         .always(function(data) {
-          $(".blockui").hide();
+          //$(".blockui").hide();
         });
     } else {
       $.notify(settings.error_no_verification_code, {

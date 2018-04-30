@@ -3,16 +3,21 @@ layout: default
 title: پروفایل
 custom_css:
 - basic.min
+- dropzone.min
 - notify
 custom_js:
 - base
+- dropzone.min
 - notify
 - profile
 ---
 
 <div class="content">
-    <div class="center-wrapper">
-        <form class="frmProfile form" method="POST" action="http://visitiran.ir/fa/api/profile/" enctype="multipart/form-data">
+    <div class="center-wrapper profile">
+        <div class="blockui local">
+            <div id="loader"></div>
+        </div>
+        <form class="frmProfile form" id="frmProfile" enctype="multipart/form-data">        
             <div class="row title">
                 <h1>
                     پروفایل شما
@@ -21,23 +26,39 @@ custom_js:
             </div>
             <div class="row email">
                 <label for="email">ایمیل</label>
-                <input class="input" type="email" readonly name="email" id="email" size="130" placeholder="ایمیل" value="shahinm@gmail.com">
+                <input class="input disabled" type="email" readonly name="username" id="username" size="130" placeholder="ایمیل">
             </div>
             <div class="row first-name">
                 <label for="first-name">نام</label>
-                <input class="input" type="text" name="first-name" maxlength="300" size="300" id="first_name" placeholder="نام">
+                <input class="input" type="text" name="first_name" maxlength="300" size="300" id="first_name" placeholder="نام">
             </div>
             <div class="row last-name">
                 <label for="last-name">نام خانوادگی</label>
-                <input class="input" type="text" name="last-name" maxlength="300" size="300" id="last_name" placeholder="نام خانوادگی">
-            </div>
-            <div class="row mobile">
-                <label for="mobile">نام خانوادگی</label>
-                <input class="input" type="text" name="mobile" maxlength="300" size="300" id="mobile" placeholder="شماره موبایل">
-            </div>
+                <input class="input" type="text" name="last_name" maxlength="300" size="300" id="last_name" placeholder="نام خانوادگی">
+            </div>  
             <div class="row">
-                <button id="submit-all" class="btn">ذخیره</button>    
+                <button id="submit-all" class="btn full-width">ذخیره</button>    
             </div>
-        </form>                
+        </form>         
+        <form class="frmProfile form dropzone" id="dropzoneForm" enctype="multipart/form-data">    
+            <div class="row avatar-image">
+                <!-- <input type="hidden" name="first_name" value="test">
+                <input type="hidden" name="last_name"> -->
+                <div class="avatar dropzone-previews preview-container">                        
+                    <img src="{{site.baseurl}}/assets/images/avatar-placholder.png" class="profile-image" id="profile-image" alt="">     
+                </div>    
+                <div class="image-uploader">
+                    <div class="dz-default dz-message">
+                        <span>برای تغییر عکس، اینجا را کلیک نمایید</span>
+                    </div>       
+                </div>                
+            </div>                     
+        </form>
+
+        <form id="uploadimage" action="" method="post" enctype="multipart/form-data">
+            <input type="file" name="avatar_image" id="avatar_image">
+            <input type="submit" value="Upload" class="submit" />
+        </form>
+        
     </div>    
 </div>

@@ -121,7 +121,7 @@
 
 .slick-dots
 {
-    bottom: 35px;
+    bottom: 50px;
     display: inline-block;
     line-height: 1;
     list-style: none;
@@ -130,7 +130,7 @@
     position: absolute;
     text-align: center;
     width: 100%;
-    z-index: 20;    
+    z-index: 2;    
 }
 
 .slick-dots.outside-dots {

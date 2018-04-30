@@ -77,14 +77,14 @@ $(document).ready(function() {
         $("#blockLogin").show();
         var jqxhr = $.post(settings.register_url, form.serialize())
           .done(function(data) {
-            $("#entered_email").val(data.data.email);
-            $("#lblEmail").text(data.data.email);
+            $("#entered_email").val(data.email);
+            $("#lblEmail").text(data.email);
             $("#email_content").hide(0);
             $("#verify_code_content").fadeIn(500);
             $("#blockLogin").hide();
           })
           .fail(function(data) {
-            $.notify(data.data.status_text, { type: "danger", delay: 5000 });
+            $.notify(data.responseJSON, { type: "danger", delay: 5000 });
             $("#blockLogin").hide();
           })
           .always(function(data) {
@@ -104,7 +104,7 @@ $(document).ready(function() {
     if (code.val().length > 0) {
       $(".error.code").empty();
       var form = $("#frmCode");      
-      $("#blockLogin").show();      
+      $("#blockLogin").show();
       var jqxhr = $.post(settings.login_url_token, form.serialize())
         .done(function(data) {
           var token = data.token;
@@ -115,7 +115,7 @@ $(document).ready(function() {
           postComment();
         })
         .fail(function(data) {         
-          $.notify(data.responseJSON.status_text, {
+          $.notify(data.responseJSON.non_field_errors, {
             type: "danger",
             delay: 5000
           });

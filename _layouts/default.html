@@ -13,9 +13,9 @@
   <script>
     var settings = {
       lang: 'fa',
-      register_url: 'http://visitiran.ir/fa/api/register/',
-      login_url: 'http://visitiran.ir/fa/api/login/',
-      login_url_token: 'http://visitiran.ir/fa/api/obtain-auth-token/',
+      register_url: 'http://visitiran.ir/fa/api/users/',
+      login_url: 'http://visitiran.ir/fa/api/users/login/',
+      login_url_token: 'http://visitiran.ir/fa/api/users/login/',
       error_server_connection: 'خطا در ایجاد برقراری ارتباط با سرور',
       error_no_email: 'ایمیل خود را وارد نمایید',
       error_no_verification_code: 'لطفآ کد ارسال شده را وارد نمایید',
@@ -29,6 +29,16 @@
       is_logged_in: false,
       success: 'کامنت شما با موفقیت ثبت شد',
       error: 'مشکلی برای ثبت کمانت شما به ایجاد شد'
+
+    }
+
+    var settings_profile = {      
+      get_me_url: 'http://visitiran.ir/fa/api/users/get_me/',     
+      edit_url: 'http://visitiran.ir/fa/api/users/701/',
+      // edit_url: 'http://visitiran.ir/fa/api/users/update_me/',
+      server_error: 'مشکل در برقراری ارتباط با سرور',      
+      success: 'شما با موفقیت ثبت شد',
+      error: 'مشکلی برای ثبت  شما به ایجاد شد'
 
     }
     
