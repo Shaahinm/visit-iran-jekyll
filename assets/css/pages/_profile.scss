@@ -5,7 +5,7 @@
 .frmProfile {
   box-sizing: border-box;
   &.dropzone .dz-preview .dz-image {
-    overflow: auto;
+    overflow: initial;
     width: 150px;
     height: 150px;
   }

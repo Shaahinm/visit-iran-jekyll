@@ -1,4 +1,3 @@
-
 var isLoading = $(".blockui");
 var modal = document.getElementById("loginModal");
 modal.style.display = "none";
@@ -7,7 +6,7 @@ $(document).ready(function() {
   getComments(url, true);
   $(".btn.next").on("click", function(e) {
     e.preventDefault();
-    getComments($(this).attr("href"), false);    
+    getComments($(this).attr("href"), false);
   });
 
   $("#commentToggle").on("click", function(e) {
@@ -35,10 +34,10 @@ $(document).ready(function() {
         delay: 5000
       });
     } else {
-      if (!isExpired()) {        
+      if (!isExpired()) {
         postComment();
       } else {
-        var modal = document.getElementById("loginModal");        
+        var modal = document.getElementById("loginModal");
         var btn = document.getElementById("myBtn");
         var span = document.getElementsByClassName("close")[0];
         modal.style.display = "block";
@@ -58,7 +57,8 @@ $(document).ready(function() {
   $("#rater").barrating({
     theme: "fontawesome-stars-o",
     allowEmpty: false,
-    initialRating: 1,
+    initialRating: -1,
+    reverse: true,
     onSelect: function(value, text, event) {
       $("#rate").val(value);
     }
@@ -90,7 +90,7 @@ $(document).ready(function() {
           .always(function(data) {
             $("#blockLogin").hide();
           });
-      } else {        
+      } else {
         $.notify(settings.error_no_email, { type: "info", delay: 5000 });
       }
     } else {
@@ -103,18 +103,18 @@ $(document).ready(function() {
     var code = $("#password");
     if (code.val().length > 0) {
       $(".error.code").empty();
-      var form = $("#frmCode");      
+      var form = $("#frmCode");
       $("#blockLogin").show();
       var jqxhr = $.post(settings.login_url_token, form.serialize())
         .done(function(data) {
           var token = data.token;
-          localStorage.setItem('token', token);
+          localStorage.setItem("token", token);
           var modal = document.getElementById("loginModal");
           modal.style.display = "none";
           $("#blockLogin").hide();
           postComment();
         })
-        .fail(function(data) {         
+        .fail(function(data) {
           $.notify(data.responseJSON.non_field_errors, {
             type: "danger",
             delay: 5000
@@ -124,7 +124,7 @@ $(document).ready(function() {
         .always(function(data) {
           $("#blockLogin").hide();
         });
-    } else {      
+    } else {
       $.notify(settings.error_no_verification_code, {
         type: "danger",
         delay: 5000
@@ -148,6 +148,7 @@ function getComments(url, reset) {
   }
   var jqxhr = $.get(url, function(data) {
     $("#commentCount").text(data.count);
+    // console.log(data);
     if (data.count > 0) {
       for (i = 0; i < data.results.length; i++) {
         createComment(data.results[i]);
@@ -183,10 +184,13 @@ function getComments(url, reset) {
 
 function createComment(data) {
   var stars = createStars(data.rate, 5);
-
+  var  image = "http://visitiran.ir/static/tourismiran/assets/images/avatar-placholder.png";
+  if (data.reviewer.avatar_image !== null) {
+    image = data.reviewer.avatar_image;
+  }
   var commentTemplate = `<div class="comment">
                             <div class="avatar">
-                                <img src="http://visitiran.ir/static/tourismiran/assets/images/avatar-placholder.png" alt="">
+                                <img src="${image}" alt="">
                                 <div class="sub-avatar">
                                     <div class="username">
                                     ${
@@ -244,11 +248,11 @@ function recaptchaExpired() {
 }
 function postComment() {
   var isLoading = $("#blockuiPostReview");
-  $(isLoading).show();  
+  $(isLoading).show();
   $.ajax({
     url: settings_comments_province.url,
-    type  : 'POST',
-    headers: {"Authorization": `JWT ${getToken()}`},
+    type: "POST",
+    headers: { Authorization: `JWT ${getToken()}` },
     data: $("#reviewForm").serialize(),
     success: function(data) {
       $.notify(settings_comments_province.success, {

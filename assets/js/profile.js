@@ -6,7 +6,7 @@ Dropzone.options.dropzoneForm = {
   url: "#",
   method: "PUT",
   MaxFiles: 1,
-  maxFileSize: 4,
+  maxFileSize: 1,
   uploadMultiple: false,
   parallelUploads: 1,
   createImageThumbnails: true,
@@ -15,33 +15,17 @@ Dropzone.options.dropzoneForm = {
   thumbnailHeight: "250",
   thumbnailMethod: "crop",
   acceptedFiles: "image/*",
-  addRemoveLinks: true,
+  // addRemoveLinks: true,
+  // dictCancelUpload: 'کانکئل ',
   previewsContainer: ".preview-container",
-  dictRemoveFile: "حذف",
+  // dictRemoveFile: "حذف",
   headers: {
     "Cache-Control": null,
     "X-Requested-With": null,
     Authorization: `JWT ${getToken()}`
   },
-  init: function() {
-    // var submitButton = document.querySelector("#submit-all");
-    var myDropzone = this;
-    // submitButton.addEventListener("click", function() {
-    //   $(isLoading).show();
-    //   var firstname = $("#first_name")
-    //     .val()
-    //     .trim();
-    //   var lastname = $("#last_name")
-    //     .val()
-    //     .trim();
-
-    //     if (myDropzone.getQueuedFiles().length > 0) {
-    //       myDropzone.processQueue();
-    //     } else {
-    //       myDropzone.uploadFiles([]); //send empty
-    //     }
-
-    // });
+  init: function() {    
+    var myDropzone = this;   
     myDropzone.options.url = `${settings_profile.edit_url}`;
     this.on("addedfile", function(file) {
       if (this.files[1] != null) {
@@ -51,28 +35,32 @@ Dropzone.options.dropzoneForm = {
           delay: 5000
         });
       }
+      if (file.size > 1 * 1024 * 1024) {
+        $.notify(settings_profile.too_large, {
+          type: "warning",
+          delay: 5000
+        });
+        this.removeFile(file);
+        return false;
+      }
       $("#profile-image").hide(500);
     });
     this.on("removedfile", function(file) {
       $("#profile-image").fadeIn(500);
     });
     this.on("success", function(file, serverResponse) {
-      $(isLoading).hide();
-      $.notify(settingsCreatePlaces.success, { type: "success", delay: 5000 });
-      $(".create-form").hide();
-      $(".success-form").fadeIn(500);
-      console.log(serverResponse);
+      $(isLoading).hide(500);
+      myDropzone.options.addRemoveLinks = false;
+      $.notify(settings_profile.success, { type: "success", delay: 5000 });            
     });
     this.on("error", function(file, serverResponse) {
       $(isLoading).hide();
       $(file.previewElement)
         .find(".dz-error-message")
-        .text(settingsCreatePlaces.error_server_connection);
-      $.notify(serverResponse.status_text, { type: "danger", delay: 5000 });
-      console.log(serverResponse);
+        .text(settings_profile.error);
+      $.notify(serverResponse.status_text, { type: "danger", delay: 5000 });      
     });
-    this.on("maxfilesexceeded", function(file) {
-      alert("call");
+    this.on("maxfilesexceeded", function(file) {      
       this.removeFile(file);
     });
   }

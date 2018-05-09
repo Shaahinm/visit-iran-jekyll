@@ -1,0 +1,88 @@
+.trip-planner {
+    &.form {
+        
+        @media (min-width: 769px) {
+            .datepicker-plot-area.datepicker-plot-area-inline-view.datepicker-state-no-meridian.datepicker-persian {
+                width: 300px;
+            }
+        }
+        display: flex;
+        flex-direction: column;
+        width: 100%;
+        padding: 20px;
+        @media (min-width: 769px) {
+            width: 600px;
+        }
+        h1 {
+            font-size: 24px;
+            margin-bottom: 10px;
+            font-weight: bold;
+        }
+        .hr {
+            width: 100%;
+            height: 1px;
+            background: $main;
+            margin-bottom: 10px;
+        }
+        .destinations {
+            display: flex;
+            flex-direction: column;
+            h2 {
+                font-size: 18px;
+                font-weight: bold;
+            }
+            .row {
+                padding: 10px 0;
+                .results {
+                    right: auto;
+                    width: 100%;
+                    .result {
+                        .content {
+                            .title {
+                                font-family: IRANSans;
+                                font-size: 12px;
+                            }
+                        }
+                    }
+                }
+            }
+        }
+        .new-destination {
+            margin-bottom: 40px;
+            .create-new-destination {
+                cursor: pointer;
+                color: $main;
+            }
+        }
+        .trip-dates {
+            h2 {
+                font-size: 18px;
+                font-weight: 700;
+                margin-bottom: 30px;
+            }
+            .display {
+                padding-bottom: 10px;
+                .bold {
+                    font-weight: 700;
+                }
+                #display-date-from {
+                    font-size: 14px;
+                }
+                #display-date-to {
+                    font-size: 14px;
+                }
+            }
+            .calendar-container {
+                display: flex;
+                flex-direction: column;
+                @media (min-width: 769px) {                     
+                    flex-direction: row;
+                }                
+            }
+        }
+        .button {
+            width: 100%;
+            margin: 20px 0;
+        }
+    }
+}
