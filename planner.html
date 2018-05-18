@@ -12,50 +12,107 @@ custom_js:
 - notify
 - planner
 ---
-
-<div class="content">     
-    <div class="blockui local">
+<div class="content">
+    <div class="blockui">
         <div id="loader"></div>
-    </div> 
-    <section class="center-wrapper">
-            <div class="trip-planner form">
-                <h1>برنامه ریزی سفر</h1>
-                <div class="hr"></div>
-                <div class="destinations">
-                    <h2>انتخاب مقاصد</h2>
-                    <div class="row">
-                        <div class="ui search">
-                            <input class="input prompt" type="text" placeholder="مقصد را انتخاب نمایید">
-                            <div class="results"></div>
-                        </div>
-                    </div>
+    </div>
+    <section class="center-wrapper column">
+        <a href="#new-trip">
+            <i class="fa fa-plus-square-o"></i>
+            ساخت سفر جدید
+        </a>
+        <div class="trips">
+        </div>
+        <div class="trip-timeline" style="display: none;">
+            <div class="row map">
+                <div id="map">
+                    <div id="mapcontainer"></div>
+                </div>                
+            </div>
+            <div class="origin">
+                <div id="local_start_date">
+
                 </div>
-                <div class="new-destination">
-                    <span class="create-new-destination">
-                        + اضافه کردن مقصد جدید
+            </div>
+            <span id="orign_name">
+            </span>
+            <div class="tm">
+            </div>
+            <div class="trip-summary">
+                <!-- <div class="transit-mode">
+                        <i class="fa fa-car"></i>                        
+                    </div> -->
+                <div id="distance-to-reach" class="distance-to-reach">
+                </div>
+                <div id="duration-to-reach" class="duration-to-reach">
+                </div>
+                <!-- <div class="local-arrival">
+                        sobh
+                        <i class="fa fa-bell"></i>
+                    </div>                   -->
+                <div class="home">
+                    <span id="local_end_date">
                     </span>
                 </div>
-                <div class="trip-dates">
-                    <h2>انتخاب تاریخ</h2>
-                    <div class="display">                        
-                        <span id="display-date-from">تاریخ شروع</span>
-                        <span class="bold">تا</span>
-                        <span id="display-date-to">تاریخ پایان</span>
+                <div id="home_name">
+                </div>
+            </div>
+
+            <button class="btn" id="reset">ایجاد تغییرات در سفر</button>
+        </div>
+    </section>
+</div>
+
+
+<div id="new-trip">
+    <button type="button" class="close">×</button>
+    <form>
+        <div class="trip-planner form">
+            <h1>برنامه ریزی سفر</h1>
+            <div class="hr"></div>
+            <div class="destinations origin">
+                <div class="row" data-count="-1">
+                    <div class="ui search origin">
+                        <input class="input prompt" type="text" placeholder="مبدا را انتخاب نمایید">
+                        <div class="results"></div>
                     </div>
-                    <div class="calendar-container">
-                        <input type="hidden" id="date-from">
-                        <div class="trip-date-from"></div>                    
-                        <div class="trip-date-to"></div>
-                        <input type="hidden" id="date-to">
+                </div>
+            </div>
+            <div class="destinations holder">
+                <h2>انتخاب مقاصد</h2>
+                <div class="row" data-count="0">
+                    <div class="ui search destination">
+                        <input class="input prompt" type="text" placeholder="مقصد را انتخاب نمایید">
+                        <div class="results"></div>
                     </div>
-                    
-                </div>                
-                <div class="button">
-                    <button class="btn" id="btnSubmit">برنامه ریزی</button>
+                </div>
+            </div>
+            <div class="new-destination">
+                <span class="create-new-destination">
+                    + اضافه کردن مقصد جدید
+                </span>
+            </div>
+            <div class="trip-dates">
+                <h2>انتخاب تاریخ</h2>
+                <div class="display">
+                    <span id="display-date-from">تاریخ شروع</span>
+                    <span class="bold">تا</span>
+                    <span id="display-date-to">تاریخ پایان</span>
+                </div>
+                <div class="calendar-container">
+                    <input type="hidden" id="date-from">
+                    <div class="trip-date-from"></div>
+                    <div class="trip-date-to"></div>
+                    <input type="hidden" id="date-to">
                 </div>
 
             </div>
-            
-            
-    </section>
+            <div class="button">
+                <button class="btn" id="btnSubmit">برنامه ریزی</button>
+            </div>
+
+        </div>
+    </form>
 </div>
+
+<!-- <input type="button" value="get map" id="show-map" /> -->

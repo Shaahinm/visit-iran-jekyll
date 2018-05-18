@@ -1,15 +1,15 @@
 .trip-planner {
     &.form {
-        
         @media (min-width: 769px) {
             .datepicker-plot-area.datepicker-plot-area-inline-view.datepicker-state-no-meridian.datepicker-persian {
-                width: 300px;
+                width: 280px;
             }
         }
         display: flex;
         flex-direction: column;
         width: 100%;
         padding: 20px;
+        box-sizing: border-box;
         @media (min-width: 769px) {
             width: 600px;
         }
@@ -33,6 +33,20 @@
             }
             .row {
                 padding: 10px 0;
+                display: flex;
+                flex-direction: row;
+                .ui.search {
+                    width: 100%;
+                }
+                .remover {
+                    cursor: pointer;
+                    i {
+                        position: relative;
+                        top: 8px;
+                        right: 2px;
+                        font-size: 24px;
+                    }
+                }
                 .results {
                     right: auto;
                     width: 100%;
@@ -42,6 +56,11 @@
                                 font-family: IRANSans;
                                 font-size: 12px;
                             }
+                        }
+                    }
+                    .message.empty {
+                        .header {
+                            font-family: IRANSans
                         }
                     }
                 }
@@ -75,9 +94,9 @@
             .calendar-container {
                 display: flex;
                 flex-direction: column;
-                @media (min-width: 769px) {                     
+                @media (min-width: 769px) {
                     flex-direction: row;
-                }                
+                }
             }
         }
         .button {
@@ -86,3 +105,251 @@
         }
     }
 }
+
+.trip-timeline {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    padding: 20px;
+    box-sizing: border-box;
+    @media (min-width: 769px) {
+        width: 560px;
+    }
+    .row.map {
+        margin: 10px 0;
+        #mapcontainer {
+            width: 300px;
+            height: 400px;
+            @media (max-width: 768px) {
+                width: 748px;
+                height: 500px;
+            }
+            @media (max-width: 500px) {
+                width: 480px;
+                height: 500px;
+            }            
+            @media (max-width: 400px) {
+                width: 380px;
+                height: 400px;
+            }
+            
+            @media (min-width: 769px) {
+                width: 560px;
+                height: 500px;
+            }
+        }
+        #map {
+            padding-top: 10px;
+            display: flex;
+            justify-content: center;
+            box-sizing: border-box;
+            direction: initial;
+        }
+    }
+    .origin {
+        text-align: center;
+        padding: 20px;
+        background: $main;
+        color: $white;
+        margin-bottom: 10px;
+    }
+    #orign_name {
+        text-align: center;
+        font-weight: 700;
+    }
+    .tm {
+        box-sizing: border-box;
+        position: relative;
+        max-width: 1200px;
+        margin: 20px auto;
+        &:before {
+            content: '';
+            display: inline-block;
+            width: 15px;
+            height: 15px;
+            -moz-border-radius: 7.5px;
+            -webkit-border-radius: 7.5px;
+            border-radius: 7.5px;
+            background-color: $main;
+            margin-top: -50px;
+            top: -35px;
+            @media (min-width: 900px) {
+                top: 240px;
+            }
+            left: 50%;
+            position: absolute;
+            margin-left: -10px;
+        }
+        .container {
+            position: relative;
+            background-color: inherit;
+            width: 100%;
+            margin-top: 75px;
+            box-sizing: border-box;
+            .content {
+                // box-shadow: 0 0px 8px 1px $accent;
+                margin-top: 0;
+                .data {
+                    &.bottom {
+                        padding: 0 0 10px 0;
+                    }
+                    padding: 5px 0;
+                    div {
+                        position: absolute;
+                        box-sizing: border-box;
+                        width: 50%;
+                        font-size: 12px;
+                        font-weight: 500;
+                        padding: 0 10px;
+                        i {
+                            font-size: 12px;
+                            color: $main;
+                        }
+                    }
+                    .transit-mode {
+                        top: -44px;
+                        text-align: left;
+                    }
+                    .distance-to-reach {
+                        top: -44px;
+                        text-align: left; // direction: initial;
+                    }
+                    .duration-to-reach {
+                        left: 0;
+                        top: -44px; // direction: initial;
+                        text-align: right;
+                    }
+                    .local-arrival {
+                        top: 5px;
+                        width: 50%;
+                        color: $white;
+                        background: $main;
+                        text-align: center;
+                        position: relative;
+                        height: 50px;
+                        line-height: 50px;
+                        margin: 0 auto;
+                        i {
+                            color: $white;
+                        }
+                    }
+                    .local-departure {
+                        top: -5px;
+                        width: 50%;
+                        color: $white;
+                        background: $main;
+                        text-align: center;
+                        position: relative;
+                        height: 50px;
+                        line-height: 50px;
+                        margin: 0 auto;
+                        i {
+                            color: $white;
+                        }
+                    }
+                }
+                .image {
+                    position: relative;
+                    .name {
+                        position: absolute;
+                        text-align: center;
+                        min-width: 150px;
+                        max-width: 250px;
+                        color: white;
+                        background: rgba(0, 0, 0, 0.5);
+                        top: 50%;
+                        left: 50%;
+                        transform: translate(-50%, -50%);
+                        padding: 20px;
+                    }
+                    img {
+                        width: 100%;
+                        object-fit: cover;
+                        height: 200px;
+                    }
+                }
+            }
+            &:before {
+                content: '';
+                position: absolute;
+                width: 2px;
+                background-color: $main;
+                top: -75px;
+                bottom: 100%;
+                left: 50%;
+                margin-left: -3px;
+            }
+        }
+    }
+}
+
+.trip-summary {
+    position: relative;
+    .home {
+        text-align: center;
+        padding: 20px;
+        background: $main;
+        color: $white;
+        margin-bottom: 10px;
+        margin-top: 80px;
+        &:before {
+            content: '';
+            position: absolute;
+            width: 2px;
+            background-color: $main;
+            top: -25px;
+            bottom: 75%;
+            left: 50%;
+            margin-left: -3px;
+        }
+        &:after {
+            content: '';
+            display: inline-block;
+            width: 15px;
+            height: 15px;
+            -moz-border-radius: 7.5px;
+            -webkit-border-radius: 7.5px;
+            border-radius: 7.5px;
+            background-color: #00a594;
+            top: 38px;
+            left: 50%;
+            position: absolute;
+            margin-left: -9px;
+        }
+    }
+    .transit-mode,
+    .distance-to-reach,
+    .duration-to-reach,
+    .local-arrival {
+        position: absolute;
+        box-sizing: border-box;
+        width: 50%;
+        font-size: 12px;
+        font-weight: 500;
+        padding: 0 10px;
+        i {
+            font-size: 12px;
+            color: $main;
+        }
+    }
+    .transit-mode {
+        // top: -14px;
+        text-align: left;
+    }
+    .distance-to-reach {
+        // top: 14px;
+        text-align: left; // direction: initial;
+    }
+    .duration-to-reach {
+        left: 0; // top: -14px; // direction: initial;
+        text-align: right;
+    }
+    #home_name {
+        position: relative;
+        top: -90px;
+        text-align: center;
+        font-weight: 700;
+    }
+}
+
+// }

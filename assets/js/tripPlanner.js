@@ -1,111 +1,17 @@
+//////////////////// GLOBALS ////////////////////
 var isLoading = $(".blockui");
-// GLOBALS
-
 var destinationCount = 1;
 var destinationIDs = [];
 var origin = 0
+//////////////////// GLOBALS ////////////////////
 $(isLoading).show();
-$(document).ready(function () {
 
-    // modal
-
-    $('a[href="#new-trip"]').on("click", function (event) {
-        event.preventDefault();
-        $("#new-trip").addClass("open");
-        $('#new-trip > form > input[type="search"]').focus();
-    });
-
-    $("#new-trip, #new-trip button.close").on("click keyup", function (event) {
-        if (
-            // event.target == this ||
-            event.target.className == "close" ||
-            event.keyCode == 27
-        ) {
-            $(this).removeClass("open");
-        }
-    });
-
-    $('#reset')
-        .on('click', function (e) {
-            e.preventDefault;
-            resetPage();
-            // preparePlannedTrip();
-        });
-
-    // submit form
-    $('#btnSubmit').click(function (e) {
-        e.preventDefault()
-        $(isLoading).show();
-        if ($("#date-from").val() === "" || $("#date-to").val() === "" || origin === 0 || destinationIDs.length === 0) {
-            $.notify(settings_planner.empty_form, {
-                type: "warning",
-                delay: 5000
-            });
-            $(isLoading).fadeOut(500);
-            return;
-        }
-        var sd = new
-        Date(Number($("#date-from").val()))
-        var ed = new
-        Date(Number($("#date-to").val()))
-        var stops = [];
-        $.each(destinationIDs, function (key, value) {
-            stops.push({
-                "destination_id": value,
-                "order_index": key
-            })
-        });
-        console.log(sd, ed, stops, origin);
-        var payload = {
-            "start_date": sd.getFullYear() + '-' + (sd.getMonth() + 1) + '-' + sd.getDate(),
-            "end_date": ed.getFullYear() + '-' + (ed.getMonth() + 1) + '-' + ed.getDate(),
-            origin: {
-                "destination_id": origin
-            },
-            stops: stops
-        }
-        $.ajax({
-            url: settings_planner.destinations_create_url,
-            type: "POST",
-            // headers: {
-            //     Authorization: `JWT ${getToken()}`
-            // },
-            data: JSON.stringify(payload),
-            dataType: 'json',
-            contentType: 'application/json',
-            success: function (data) {
-                $.notify(settings_planner.success_post, {
-                    type: "success",
-                    delay: 5000
-                });
-                resetForm(to, from)
-                $(isLoading).fadeOut(500);
-                localStorage.setItem('test', JSON.stringify(data));
-                preparePlannedTrip(data)
-                prepareMap(data)
-            },
-            error: function (data) {
-                $.notify(data.responseJSON.status_text, {
-                    type: "danger",
-                    delay: 5000
-                });
-                $(isLoading).hide();
-            },
-            always: function () {
-                $(isLoading).hide();
-            }
-        });
-        console.log(payload)
-    })
-
-    // create new destination
-    $('.create-new-destination').on('click', function (e) {
-        createNewDestination();
-    });
-
+$(function () {    
+    initiateNewTripHandlers();
+    createNewDestinationHandlers();
+    checkLocalStorageForTrips();
     getDestinations();
-
-    // dropdowns
+    removeSavedTripsHandlers()
     $.fn.search.settings.templates.message = function (type, message) {
         html = `
         <div class="message empty">
@@ -119,10 +25,10 @@ $(document).ready(function () {
         `;
         return html;
     };
-    initOrigin();
-    initSearchBox();
-
-    // dates
+    initOriginCity();
+    initDestinationsSearchBox();
+    initReturnToTripListHandler()
+    // custom search box message persian date picker initialization
     var to,
         from;
     to = $(".trip-date-to").persianDatepicker({
@@ -228,7 +134,91 @@ $(document).ready(function () {
         }
     });
 
-    // remove destination row handler
+    // create new trip button
+    $('#btnSubmit').click(function (e) {
+        e.preventDefault()
+        $(isLoading).show();
+        if ($("#date-from").val() === "" || $("#date-to").val() === "" || origin === 0 || destinationIDs.length === 0) {
+            $.notify(settings_planner.empty_form, {
+                type: "warning",
+                delay: 5000
+            });
+            $(isLoading).fadeOut(500);
+            return;
+        }
+        var sd = new
+        Date(Number($("#date-from").val()))
+        var ed = new
+        Date(Number($("#date-to").val()))
+        var stops = [];
+        $.each(destinationIDs, function (key, value) {
+            stops.push({"destination_id": value, "order_index": key})
+        });        
+        var payload = {
+            "start_date": sd.getFullYear() + '-' + (sd.getMonth() + 1) + '-' + sd.getDate(),
+            "end_date": ed.getFullYear() + '-' + (ed.getMonth() + 1) + '-' + ed.getDate(),
+            origin: {
+                "destination_id": origin
+            },
+            stops: stops
+        }
+        $.ajax({
+            url: settings_planner.destinations_create_url, type: "POST",
+            // headers: {     Authorization: `JWT ${getToken()}` },
+            data: JSON.stringify(payload),
+            dataType: 'json',
+            contentType: 'application/json',
+            success: function (data) {
+                $.notify(settings_planner.success_post, {
+                    type: "success",
+                    delay: 5000
+                });
+                resetNewTripForm(to, from)
+                saveTripInLocalStorage(data)
+                // addTripToTripList(data)
+                checkLocalStorageForTrips()
+                prepareTimelineView(data)                
+                prepareMap(data)
+                $(isLoading).fadeOut(500)
+
+                // localStorage.setItem('test', JSON.stringify(data)); 
+                
+                
+            },
+            error: function (data) {
+                $.notify(data.responseJSON.status_text, {
+                    type: "danger",
+                    delay: 5000
+                });
+                $(isLoading).hide();
+            },
+            always: function () {
+                $(isLoading).fadeOut(500);
+            }
+        });
+        console.log(payload)
+    })
+
+    initTripHeadersHandlers()
+});
+
+function createNewDestinationHandlers() {      
+
+    $('.create-new-destination').on('click', function (e) {
+        var template = `
+        <div class="row" data-count="${destinationCount}">
+            <div class="ui search destination">
+                <input class="input prompt" type="text" placeholder="مقصد بعدی را انتخاب نمایید">
+                <div class="results"></div>
+            </div>
+            <span class="remover">
+                <i class="fa fa-trash" style="color: gray"></i>
+            </span>
+        </div>`;
+        $('.destinations.holder').append(template);
+        destinationCount++;
+        initDestinationsSearchBox();
+    });
     $('.destinations').on('click', '.remover', function (e) {
         var order = $(this)
             .closest('.row')
@@ -246,64 +236,9 @@ $(document).ready(function () {
                 $(this).remove()
             })
     });
-
-});
-
-function getDestinations() {
-    var url = settings_planner.destinations_url;
-    $.ajax({
-        url: url,
-        type: "GET",
-        // headers: { Authorization: `JWT ${getToken()}` },
-        success: function (data) {
-            localStorage.setItem("destination", JSON.stringify(data));
-            initSearchBox();
-            $(isLoading).fadeOut(500);
-        },
-        error: function (data) {
-            $.notify(settings_planner.server_error, {
-                type: "danger",
-                delay: 5000
-            });
-            $(isLoading).hide();
-        },
-        always: function () {
-            $(isLoading).hide();
-        }
-    });
 }
 
-function prepareDestinations() {
-    var destinations = JSON.parse(localStorage.getItem('destination'));
-    var results = [];
-    $.each(destinations, function (index, dest) {
-        results.push({
-            title: dest.local_name,
-            id: dest.id
-        })
-    });
-    return results;
-}
-
-function createNewDestination() {
-    console.log(destinationIDs, destinationCount);
-    var template = `
-    <div class="row" data-count="${destinationCount}">
-        <div class="ui search destination">
-            <input class="input prompt" type="text" placeholder="مقصد بعدی را انتخاب نمایید">
-            <div class="results"></div>
-        </div>
-        <span class="remover">
-            <i class="fa fa-trash" style="color: gray"></i>
-        </span>
-    </div>`;
-
-    $('.destinations.holder').append(template);
-    destinationCount++;
-    initSearchBox();
-}
-
-function initSearchBox() {
+function initDestinationsSearchBox() {
     var results = prepareDestinations();
     $('.ui.search.destination').search({
         source: results,
@@ -325,20 +260,117 @@ function initSearchBox() {
     });
 }
 
-function initOrigin() {
+function initOriginCity() {
     var results = prepareDestinations();
     $('.ui.search.origin').search({
         source: results,
         minCharacters: 1,
         onSelect: function (result, response) {
             origin = result.id
-            console.log(origin)
             return true;
         }
     });
 }
 
-function resetForm(to, from) {
+function getDestinations() {
+    var url = settings_planner.destinations_url;
+    $.ajax({
+        url: url, type: "GET",
+        // headers: { Authorization: `JWT ${getToken()}` },
+        success: function (data) {
+            localStorage.setItem("cities", JSON.stringify(data));
+            initDestinationsSearchBox();
+            $(isLoading).fadeOut(500);
+        },
+        error: function (data) {
+            $.notify(settings_planner.server_error, {
+                type: "danger",
+                delay: 5000
+            });
+            $(isLoading).hide();
+        },
+        always: function () {
+            $(isLoading).hide();
+        }
+    });
+}
+
+function prepareDestinations() {
+    var destinations = JSON.parse(localStorage.getItem('cities'));
+    var results = [];
+    $.each(destinations, function (index, dest) {
+        results.push({title: dest.local_name, id: dest.id})
+    });
+    return results;
+}
+
+function initiateNewTripHandlers() {
+    $('a[href="#new-trip"]')
+        .on("click", function (event) {
+            event.preventDefault();
+            $("#new-trip").addClass("open");
+            $('#new-trip > form > .origin').focus();
+        });
+
+    $("#new-trip, #new-trip button.close").on("click keyup", function (event) {
+        if (
+        // event.target == this ||
+        event.target.className == "close" || event.keyCode == 27) {
+            $(this).removeClass("open");
+        }
+    });
+}
+
+function checkLocalStorageForTrips() {
+    var ls = localStorage.getItem("triphistory")
+    if (ls === null) {
+        ///////////// no trips had been stored
+        var message = $('.message-title');
+        $(message).html(settings_planner.no_trips_yet);
+        $(message).show();
+
+    } else {
+        ///////////// trips object exist
+        var trips = JSON.parse(ls);
+        var message = $('.message-title');
+        $(message).empty()
+        var tripCount = trips.trips.length;   
+        if(tripCount === 0) {
+            $(message).html(settings_planner.no_trips_yet);           
+        }
+        updateTitlesCount(tripCount)
+        var template = generateTripHeaders(trips.trips)
+
+        $(message).append(template)
+        $(message).fadeIn(500)
+    }
+
+    $(isLoading).fadeOut(500);
+}
+
+function saveTripInLocalStorage(data) {
+    var ls = localStorage.getItem("triphistory")
+    if (ls === null) {
+        var triphistory = {
+            count: 1,
+            trips: []
+        }
+        triphistory
+            .trips
+            .push(data);
+        localStorage.setItem('triphistory', JSON.stringify(triphistory))
+    } else {
+        ///////////// trips object exist
+        var triphistory = JSON.parse(ls);
+        triphistory.count = triphistory.count + 1
+        triphistory
+            .trips
+            .push(data)
+        localStorage.setItem('triphistory', JSON.stringify(triphistory))
+    }
+}
+
+function resetNewTripForm(to, from) {
     $('.input.prompt').val("")
     destinationCount = 1;
     destinationIDs = [];
@@ -357,9 +389,107 @@ function resetForm(to, from) {
 
     $('#display-date-from').html(`${settings_planner.start_date_text}`);
     $('#display-date-to').html(`${settings_planner.end_date_text}`);
+    $("#new-trip").removeClass("open")
 }
 
-function preparePlannedTrip(data) {
+function generateTripHeaders(trips) {
+    var template = '';
+    $.each(trips, function (key, value) {
+        template += `
+            <div class="trip-heading" data-index="${value.identifier}">
+                <div class="trip-heading-title">
+                    <a href="#">${value.title}</a>
+                </div>
+                <div class="remove-saved-trip">
+                    <a href="#">
+                        <i class="fa fa-trash"></i>
+                    </a>
+                </div>
+            </div>
+        `;
+    });
+
+    return template;
+}
+
+function initTripHeadersHandlers() {
+    $('.trips').on('click', '.trip-heading-title', function(e) {
+        e.preventDefault()
+        var uuid = $(this).parent().data('index')
+        var ls = getParsedTripHistory()      
+        var index
+        var trips = $.each(ls.trips, function(key, value) {
+            if(value.identifier === uuid) {
+                index = key
+            }        
+        })
+        prepareMap(trips[index])
+        prepareTimelineView(trips[index])
+        
+        
+    }) 
+}
+
+function getParsedTripHistory() {
+
+    return JSON.parse(localStorage.getItem('triphistory'))
+}
+
+function addTripToTripList(data) {
+    var trips = [data]
+    var template = generateTripHeaders(trips)
+    var message = $('.message-title')
+    var ls = localStorage.getItem("triphistory")
+    var t = JSON.parse(ls)
+    var tripCount = t.trips.length;
+    updateTitlesCount(tripCount)
+    message.append(template)
+
+}
+
+function removeSavedTripsHandlers() {
+    $('.trips')
+        .on('click', '.remove-saved-trip', function (e) {
+            e.preventDefault();
+            var el = $(this).parent()
+            var indexToRemove = $(el).data('index')
+            $(el).hide(500, function () {
+                $(this).remove()
+            })
+            removeTripFromLocalStorage(indexToRemove, hideLoading)
+        });
+}
+
+function showLoading(time) {
+    $(isLoading).fadeIn(time);
+}
+
+function hideLoading(time) {
+    $(isLoading).fadeOut(time);
+}
+
+function removeTripFromLocalStorage(index, toggleLoading) {
+    var ls = JSON.parse(localStorage.getItem('triphistory'))
+    var localIndex
+    var a = $.each(ls.trips, function(key, value) {
+        if(value.identifier === index) {
+            localIndex = key
+        }        
+    })    
+    ls
+        .trips
+        .splice(localIndex, 1)
+    ls.count -= 1 
+    localStorage.setItem('triphistory', JSON.stringify(ls))
+    updateTitlesCount(ls.count)
+    toggleLoading(500)
+}
+
+function updateTitlesCount(newCount) {
+    $("#tripCount").html(`${settings_planner.welcome_message} (${newCount}) `);
+}
+
+function prepareTimelineView(data) {
     $(isLoading).show();
     // data = JSON.parse(localStorage.getItem('test'));
     var template = "";
@@ -370,15 +500,17 @@ function preparePlannedTrip(data) {
     $("#local_start_date").html(data.local_start_date);
     $("#orign_name").html(data.origin.destination.name)
     var container = $(".tm");
+    $(container).empty()
     container.append(template);
-    $('.trip-planner').fadeOut(500, function (e) {
-        $('.trip-timeline').fadeIn(500);
+    $('.center-wrapper.top').fadeOut(500, function (e) {
+        $('.center-wrapper.tabs').fadeIn(500);
     });
 
-    $("#distance-to-reach").html(`${data.origin.distance_to_reach}<i class="fa fa-car"></i>`);
-    $("#duration-to-reach").html(`${data.origin.duration_to_reach}`);
+    $("#distance-to-reach").html(`${data.end.distance_to_reach}<i class="fa fa-car"></i>`);
+    $("#duration-to-reach").html(`${data.end.duration_to_reach}`);
     $("#home_name").html(`${data.origin.destination.name}`);
     $("#local_end_date").html(`${data.local_end_date}`);
+    $(isLoading).hide();
 
 }
 
@@ -400,54 +532,45 @@ function tripTemplate(stop) {
         default:
             break;
     }
-    var image = (stop.destination.images.length > 0) ? stop.destination.images[0] : "/static/tourismiran/assets/images/avatar-placholder.png";
+    // var image = (stop.destination.images.length > 0) ? stop.destination.images[0] : "/static/tourismiran/assets/images/avatar-placholder.png";
+    // var template = `
+    // <div class="container">
+    //     <div class="content">
+    //         <div class="data">
+    //             <div class="distance-to-reach">
+    //                 ${stop.distance_to_reach}
+    //                 ${transit_mode}
+    //             </div>
+    //             <div class="duration-to-reach">
+    //                 ${stop.duration_to_reach}
+    //             </div>
+    //             <div class="local-arrival">
+    //                 ${stop.local_arrival}
+    //                 <i class="fa fa-bell"></i>
+    //             </div>
+    //         </div>
+    //         <div class="image">
+    //             <div class="name">
+    //                 ${stop.destination.name}
+    //             </div>
+               
+    //         </div>
+    //         <div class="data bottom">
+    //             <div class="local-departure">
+    //             <i class="fa fa-hourglass"></i>
+    //                 ${stop.local_departure}
+    //             </div>
+    //         </div>
+    //     </div>
+    // </div>
+    // `;
+
+
     var template = `
-    <div class="container">
-        <div class="content">
-            <div class="data">
-                <div class="distance-to-reach">
-                    ${stop.distance_to_reach}
-                    ${transit_mode}
-                </div>
-                <div class="duration-to-reach">
-                    ${stop.duration_to_reach}
-                </div>
-                <div class="local-arrival">
-                    ${stop.local_arrival}
-                    <i class="fa fa-bell"></i>
-                </div>
-            </div>
-            <div class="image">
-                <div class="name">
-                    ${stop.destination.name}
-                </div>
-                <img src="http://visitiran.ir${image}" alt="">
-            </div>
-            <div class="data bottom">
-                <div class="local-departure">
-                <i class="fa fa-hourglass"></i>
-                    ${stop.local_departure}
-                </div>
-            </div>
-        </div>
-    </div>
-    `;
+        
+    `
 
     return template;
-}
-
-function resetPage() {
-    var container = $(".tm");
-    container.empty();
-    $("#local_start_date").html("");
-    $("#orign_name").html("")
-    $('.trip-timeline').fadeOut(500, function (e) {
-        $('.trip-planner').fadeIn(500);
-    });
-    $('.input.prompt').val("")
-    destinationCount = 1;
-    destinationIDs = [];
-    origin = 0
 }
 
 function prepareMap(data) {
@@ -528,7 +651,7 @@ function prepareMap(data) {
             var directionsDisplay;
             var directionsService = new google.maps.DirectionsService();
             var map;
-            data = JSON.parse(localStorage.getItem('test'));
+            // data = JSON.parse(localStorage.getItem('test'));
 
             function initialize() {
                 directionsDisplay = new google.maps.DirectionsRenderer({
@@ -601,5 +724,25 @@ function prepareMap(data) {
     }
 }
 
+function initReturnToTripListHandler() {
+    $('#reset')
+    .on('click', function (e) {
+        e.preventDefault;
+        resetPage();
+        // preparePlannedTrip();
+    });
+}
 
-// maps
+function resetPage() {
+    var container = $(".tm");
+    container.empty();
+    $("#local_start_date").html("");
+    $("#orign_name").html("")    
+    $('#tab-section').fadeOut(500, function (e) {
+        $('#planning-section').fadeIn(500);
+    });
+    $('.input.prompt').val("")
+    destinationCount = 1;
+    destinationIDs = [];
+    origin = 0
+}

@@ -1,0 +1,160 @@
+#new-trip {
+    position: absolute;
+    top: 0px;
+    left: 0px;
+    width: 100%;
+    height: auto;
+    min-height: 100%;
+    background-color: $white;
+    z-index: 100;
+    -webkit-transition: all 0.5s ease-in-out;
+    -moz-transition: all 0.5s ease-in-out;
+    -o-transition: all 0.5s ease-in-out;
+    -ms-transition: all 0.5s ease-in-out;
+    transition: all 0.5s ease-in-out;
+    -webkit-transform: translate(0px, -100%) scale(0, 0);
+    -moz-transform: translate(0px, -100%) scale(0, 0);
+    -o-transform: translate(0px, -100%) scale(0, 0);
+    -ms-transform: translate(0px, -100%) scale(0, 0);
+    transform: translate(0px, -100%) scale(0, 0);
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    opacity: 0;    
+    &.open {
+        -webkit-transform: translate(0px, 0px) scale(1, 1);
+        -moz-transform: translate(0px, 0px) scale(1, 1);
+        -o-transform: translate(0px, 0px) scale(1, 1);
+        -ms-transform: translate(0px, 0px) scale(1, 1);
+        transform: translate(0px, 0px) scale(1, 1);
+        opacity: 1;
+    }
+    .close {
+        position: fixed;
+        top: 15px;
+        right: 15px;
+        color: #fff;
+        background-color: $main;
+        border: none;
+        opacity: 1;
+        padding: 5px 17px;
+        font-size: 20px;
+    }
+    .trip-planner {
+        &.form {
+            margin-top: 70px;
+            @media (min-width: 769px) {
+                .datepicker-plot-area.datepicker-plot-area-inline-view.datepicker-state-no-meridian.datepicker-persian {
+                    width: 280px;
+                }
+            }
+            display: flex;
+            flex-direction: column;
+            width: 100%;
+            padding: 20px;
+            box-sizing: border-box;
+            @media (min-width: 500px) {
+                width: 80%;
+            }
+            @media (min-width: 769px) {
+                width: 600px;
+            }
+            h1 {
+                font-size: 24px;
+                margin-bottom: 10px;
+                font-weight: bold;
+            }
+            .hr {
+                width: 100%;
+                height: 1px;
+                background: $main;
+                margin-bottom: 10px;
+            }
+            .destinations {
+                display: flex;
+                flex-direction: column;
+                h2 {
+                    font-size: 18px;
+                    font-weight: bold;
+                }
+                .row {
+                    padding: 10px 0;
+                    display: flex;
+                    flex-direction: row;
+                    .ui.search {
+                        width: 100%;
+                        box-sizing: border-box;
+                        .prompt {
+                            border-radius: 0;
+                            width: 100%;
+                            box-sizing: border-box;
+                        }
+                    }
+                    .remover {
+                        cursor: pointer;
+                        i {
+                            position: relative;
+                            top: 8px;
+                            right: 2px;
+                            font-size: 24px;
+                        }
+                    }
+                    .results {
+                        right: auto;
+                        width: 100%;
+                        .result {
+                            .content {
+                                .title {
+                                    font-family: IRANSans;
+                                    font-size: 12px;
+                                }
+                            }
+                        }
+                        .message.empty {
+                            .header {
+                                font-family: IRANSans
+                            }
+                        }
+                    }
+                }
+            }
+            .new-destination {
+                margin-bottom: 40px;
+                .create-new-destination {
+                    cursor: pointer;
+                    color: $main;
+                }
+            }
+            .trip-dates {
+                h2 {
+                    font-size: 18px;
+                    font-weight: 700;
+                    margin-bottom: 30px;
+                }
+                .display {
+                    padding-bottom: 10px;
+                    .bold {
+                        font-weight: 700;
+                    }
+                    #display-date-from {
+                        font-size: 14px;
+                    }
+                    #display-date-to {
+                        font-size: 14px;
+                    }
+                }
+                .calendar-container {
+                    display: flex;
+                    flex-direction: column;
+                    @media (min-width: 769px) {
+                        flex-direction: row;
+                    }
+                }
+            }
+            .button {
+                width: 100%;
+                margin: 20px 0;
+            }
+        }
+    }
+}
