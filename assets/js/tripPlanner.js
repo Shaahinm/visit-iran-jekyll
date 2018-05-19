@@ -6,7 +6,7 @@ var origin = 0
 //////////////////// GLOBALS ////////////////////
 $(isLoading).show();
 
-$(function () {    
+$(function () {
     initiateNewTripHandlers();
     createNewDestinationHandlers();
     checkLocalStorageForTrips();
@@ -121,11 +121,17 @@ $(function () {
                     .selected
                     .unixDate;
                 to.options = {
-                    minDate: unix
+                    minDate: unix +  86400000
                 };
-                to.setDate(unix);
+                to.setDate(unix + 86400000);
                 if (to.touched) {
-                    to.setDate(cachedValue);
+                    if (unix > cachedValue) {
+                        $('#display-date-to').html(`${settings_planner.end_date_text}`);
+                        $('#date_to').val(unix)
+                        to.setDate(unix + 86400000);
+                    } else {
+                        to.setDate(cachedValue);
+                    }
                 }
             }
 
@@ -146,14 +152,33 @@ $(function () {
             $(isLoading).fadeOut(500);
             return;
         }
+
+        if ($("#display-date-from").text() ===  $("#display-date-to").text()) {
+            $.notify(settings_planner.same_date, {
+                type: "warning",
+                delay: 5000
+            });
+            $(isLoading).fadeOut(500);
+            return;
+        }
+
+        if ($("#date-from").val() ===  $("#date-to").val()) {
+            $.notify(settings_planner.same_date, {
+                type: "warning",
+                delay: 5000
+            });
+            $(isLoading).fadeOut(500);
+            return;
+        }
         var sd = new
         Date(Number($("#date-from").val()))
         var ed = new
         Date(Number($("#date-to").val()))
         var stops = [];
         $.each(destinationIDs, function (key, value) {
-            stops.push({"destination_id": value, "order_index": key})
-        });        
+            // stops.push({"destination_id": value, "order_index": key}) // with order
+            stops.push({"destination_id": value})
+        });
         var payload = {
             "start_date": sd.getFullYear() + '-' + (sd.getMonth() + 1) + '-' + sd.getDate(),
             "end_date": ed.getFullYear() + '-' + (ed.getMonth() + 1) + '-' + ed.getDate(),
@@ -177,13 +202,12 @@ $(function () {
                 saveTripInLocalStorage(data)
                 // addTripToTripList(data)
                 checkLocalStorageForTrips()
-                prepareTimelineView(data)                
+                prepareTimelineView(data)
                 prepareMap(data)
                 $(isLoading).fadeOut(500)
 
-                // localStorage.setItem('test', JSON.stringify(data)); 
-                
-                
+                // localStorage.setItem('test', JSON.stringify(data));
+
             },
             error: function (data) {
                 $.notify(data.responseJSON.status_text, {
@@ -202,10 +226,11 @@ $(function () {
     initTripHeadersHandlers()
 });
 
-function createNewDestinationHandlers() {      
+function createNewDestinationHandlers() {
 
-    $('.create-new-destination').on('click', function (e) {
-        var template = `
+    $('.create-new-destination')
+        .on('click', function (e) {
+            var template = `
         <div class="row" data-count="${destinationCount}">
             <div class="ui search destination">
                 <input class="input prompt" type="text" placeholder="مقصد بعدی را انتخاب نمایید">
@@ -215,10 +240,10 @@ function createNewDestinationHandlers() {
                 <i class="fa fa-trash" style="color: gray"></i>
             </span>
         </div>`;
-        $('.destinations.holder').append(template);
-        destinationCount++;
-        initDestinationsSearchBox();
-    });
+            $('.destinations.holder').append(template);
+            destinationCount++;
+            initDestinationsSearchBox();
+        });
     $('.destinations').on('click', '.remover', function (e) {
         var order = $(this)
             .closest('.row')
@@ -334,9 +359,9 @@ function checkLocalStorageForTrips() {
         var trips = JSON.parse(ls);
         var message = $('.message-title');
         $(message).empty()
-        var tripCount = trips.trips.length;   
-        if(tripCount === 0) {
-            $(message).html(settings_planner.no_trips_yet);           
+        var tripCount = trips.trips.length;
+        if (tripCount === 0) {
+            $(message).html(settings_planner.no_trips_yet);
         }
         updateTitlesCount(tripCount)
         var template = generateTripHeaders(trips.trips)
@@ -413,21 +438,23 @@ function generateTripHeaders(trips) {
 }
 
 function initTripHeadersHandlers() {
-    $('.trips').on('click', '.trip-heading-title', function(e) {
-        e.preventDefault()
-        var uuid = $(this).parent().data('index')
-        var ls = getParsedTripHistory()      
-        var index
-        var trips = $.each(ls.trips, function(key, value) {
-            if(value.identifier === uuid) {
-                index = key
-            }        
+    $('.trips')
+        .on('click', '.trip-heading-title', function (e) {
+            e.preventDefault()
+            var uuid = $(this)
+                .parent()
+                .data('index')
+            var ls = getParsedTripHistory()
+            var index
+            var trips = $.each(ls.trips, function (key, value) {
+                if (value.identifier === uuid) {
+                    index = key
+                }
+            })
+            prepareMap(trips[index])
+            prepareTimelineView(trips[index])            
+
         })
-        prepareMap(trips[index])
-        prepareTimelineView(trips[index])
-        
-        
-    }) 
 }
 
 function getParsedTripHistory() {
@@ -471,52 +498,94 @@ function hideLoading(time) {
 function removeTripFromLocalStorage(index, toggleLoading) {
     var ls = JSON.parse(localStorage.getItem('triphistory'))
     var localIndex
-    var a = $.each(ls.trips, function(key, value) {
-        if(value.identifier === index) {
+    var a = $.each(ls.trips, function (key, value) {
+        if (value.identifier === index) {
             localIndex = key
-        }        
-    })    
+        }
+    })
     ls
         .trips
         .splice(localIndex, 1)
-    ls.count -= 1 
+    ls.count -= 1
     localStorage.setItem('triphistory', JSON.stringify(ls))
     updateTitlesCount(ls.count)
     toggleLoading(500)
 }
 
 function updateTitlesCount(newCount) {
-    $("#tripCount").html(`${settings_planner.welcome_message} (${newCount}) `);
+    // $("#tripCount").html(`${settings_planner.trip_count} (${newCount}) `);
+    $("#title-tripcount").html(`${settings_planner.trip_count} (${newCount}) `);
 }
 
 function prepareTimelineView(data) {
     $(isLoading).show();
     // data = JSON.parse(localStorage.getItem('test'));
+
+    var transit_mode = findTransitMode(data.end.transit_mode)
+
+    // sumamry
+    $(".trip-name").html(data.title)
+    $(".trip-duration").html(`${data.local_start_date} - ${data.local_end_date}`)
+
+    //orogin
+    $("#origin_local_departure").html(`${settings_planner.start_time}: ${data.origin.local_departure}`);
+    $("#origin_name").html(data.origin.destination.name)
+
+    //end
+    $("#end_transit_mode").html(`${transit_mode}`);
+    $("#end_distance_to_reach").html(`${data.end.distance_to_reach}`);
+    $("#end_duration_to_reach").html(`${data.end.duration_to_reach}`);
+    $("#destination_local_arrival").html(`${data.end.local_arrival}`);
+    $("#destination_name").html(`${data.end.destination.name}`);
     var template = "";
     $.each(data.stops, function (key, value) {
         template += (tripTemplate(value));
     });
 
-    $("#local_start_date").html(data.local_start_date);
-    $("#orign_name").html(data.origin.destination.name)
-    var container = $(".tm");
+    var container = $(".row.stops");
     $(container).empty()
     container.append(template);
+
     $('.center-wrapper.top').fadeOut(500, function (e) {
         $('.center-wrapper.tabs').fadeIn(500);
     });
 
-    $("#distance-to-reach").html(`${data.end.distance_to_reach}<i class="fa fa-car"></i>`);
-    $("#duration-to-reach").html(`${data.end.duration_to_reach}`);
-    $("#home_name").html(`${data.origin.destination.name}`);
-    $("#local_end_date").html(`${data.local_end_date}`);
+    document
+                .getElementById("defaultOpen")
+                .click();
+
     $(isLoading).hide();
 
 }
 
 function tripTemplate(stop) {
+    var transit_mode = findTransitMode(stop.transit_mode)
+
+    var template = `
+        <div class="data">
+            <div class="logo">
+                ${transit_mode}
+            </div>
+            <div class="detail">
+                <span class="text">${stop.distance_to_reach}</span>
+                <span class="text">${stop.duration_to_reach}</span>
+            </div>
+        </div>
+        <div class="raised">
+            <div class="title">
+                <span>${stop.destination.name}</span>
+                <span>${stop.duration}</span>
+            </div>
+            <div class="subtitle">${settings_planner.arrival_time}: ${stop.local_arrival}</div>
+            <div class="subtitle">${settings_planner.leaving_time}: ${stop.local_departure}</div>
+        </div>           
+     `;
+    return template;
+}
+
+function findTransitMode(mode) {
     var transit_mode = "";
-    switch (stop.transit_mode) {
+    switch (mode) {
         case 'drive':
             transit_mode = `<i class="fa fa-car"></i>`;
             break;
@@ -532,86 +601,65 @@ function tripTemplate(stop) {
         default:
             break;
     }
-    // var image = (stop.destination.images.length > 0) ? stop.destination.images[0] : "/static/tourismiran/assets/images/avatar-placholder.png";
-    // var template = `
-    // <div class="container">
-    //     <div class="content">
-    //         <div class="data">
-    //             <div class="distance-to-reach">
-    //                 ${stop.distance_to_reach}
-    //                 ${transit_mode}
-    //             </div>
-    //             <div class="duration-to-reach">
-    //                 ${stop.duration_to_reach}
-    //             </div>
-    //             <div class="local-arrival">
-    //                 ${stop.local_arrival}
-    //                 <i class="fa fa-bell"></i>
-    //             </div>
-    //         </div>
-    //         <div class="image">
-    //             <div class="name">
-    //                 ${stop.destination.name}
-    //             </div>
-               
-    //         </div>
-    //         <div class="data bottom">
-    //             <div class="local-departure">
-    //             <i class="fa fa-hourglass"></i>
-    //                 ${stop.local_departure}
-    //             </div>
-    //         </div>
-    //     </div>
-    // </div>
-    // `;
 
-
-    var template = `
-        
-    `
-
-    return template;
+    return transit_mode
 }
 
 function prepareMap(data) {
     if (typeof google === 'object' && typeof google.maps === 'object') {
         var directionsDisplay;
-        var directionsService = new google.maps.DirectionsService();
+        var directionsService = new google
+            .maps
+            .DirectionsService();
         var map;
         // data = JSON.parse(localStorage.getItem('test'));
 
         function initialize() {
-            directionsDisplay = new google.maps.DirectionsRenderer({
-                suppressMarkers: true
-            });
+            directionsDisplay = new google
+                .maps
+                .DirectionsRenderer({suppressMarkers: true});
             var mapOptions = {
-                center: new google.maps.LatLng(data.origin.destination.lat, data.origin.destination.lng),
-                zoom: 5,
+                center: new google
+                    .maps
+                    .LatLng(data.origin.destination.lat, data.origin.destination.lng),
+                zoom: 4,
                 mapTypeId: google.maps.MapTypeId.ROADMAP
             };
 
-            map = new google.maps.Map(document.getElementById('mapcontainer'), mapOptions);
+            map = new google
+                .maps
+                .Map(document.getElementById('mapcontainer'), mapOptions);
             directionsDisplay.setMap(map);
-            // google.maps.event.addDomListener(document.getElementById('routebtn'), 'click', calcRoute);
+            // google.maps.event.addDomListener(document.getElementById('routebtn'),
+            // 'click', calcRoute);
         }
 
         function addMarkers() {
-            var marker, i;
-            marker = new google.maps.Marker({
-                position: new google.maps.LatLng(data.origin.destination.lat, data.origin.destination.lng),
-                map: map,
-                label: "مبدا",
-            });
+            var marker,
+                i;
+            marker = new google
+                .maps
+                .Marker({
+                    position: new google
+                        .maps
+                        .LatLng(data.origin.destination.lat, data.origin.destination.lng),
+                    map: map,
+                    label: "مبدا"
+                });
 
             var waypts = [];
 
             $.each(data.stops, function (key, value) {
-                marker = new google.maps.Marker({
-                    position: new google.maps.LatLng(value.destination.lat, value.destination.lng),
-                    map: map,
-                    // icon: markerIcon,
-                    label: "" + (key + 1)
-                });
+                marker = new google
+                    .maps
+                    .Marker({
+                        position: new google
+                            .maps
+                            .LatLng(value.destination.lat, value.destination.lng),
+                        map: map,
+                        // icon: markerIcon,
+                        label: "" + (key + 1)
+                    });
 
                 waypts.push({
                     location: {
@@ -634,7 +682,7 @@ function prepareMap(data) {
                 },
                 waypoints: waypts,
                 // optimizeWaypoints: true,
-                travelMode: 'DRIVING',
+                travelMode: 'DRIVING'
             }, function (response, status) {
                 if (status === 'OK') {
                     directionsDisplay.setDirections(response);
@@ -647,45 +695,63 @@ function prepareMap(data) {
         addMarkers()
 
     } else {
-        $.getScript('https://maps.googleapis.com/maps/api/js?key=AIzaSyBFndaoH80NlVGRjJrwr_Jl-ko2CpWmtSU', () => {
+        $.getScript('https://maps.googleapis.com/maps/api/js?key=AIzaSyBFndaoH80NlVGRjJrwr_Jl-ko2CpWm' +
+                'tSU',
+        () => {
             var directionsDisplay;
-            var directionsService = new google.maps.DirectionsService();
+            var directionsService = new google
+                .maps
+                .DirectionsService();
             var map;
             // data = JSON.parse(localStorage.getItem('test'));
 
             function initialize() {
-                directionsDisplay = new google.maps.DirectionsRenderer({
-                    suppressMarkers: true
-                });
+                directionsDisplay = new google
+                    .maps
+                    .DirectionsRenderer({suppressMarkers: true});
                 var mapOptions = {
-                    center: new google.maps.LatLng(data.origin.destination.lat, data.origin.destination.lng),
+                    center: new google
+                        .maps
+                        .LatLng(data.origin.destination.lat, data.origin.destination.lng),
                     zoom: 5,
                     mapTypeId: google.maps.MapTypeId.ROADMAP
                 };
 
-                map = new google.maps.Map(document.getElementById('mapcontainer'), mapOptions);
+                map = new google
+                    .maps
+                    .Map(document.getElementById('mapcontainer'), mapOptions);
                 directionsDisplay.setMap(map);
-                // google.maps.event.addDomListener(document.getElementById('routebtn'), 'click', calcRoute);
+                // google.maps.event.addDomListener(document.getElementById('routebtn'),
+                // 'click', calcRoute);
             }
 
             function addMarkers() {
-                var marker, i;
-                marker = new google.maps.Marker({
-                    position: new google.maps.LatLng(data.origin.destination.lat, data.origin.destination.lng),
-                    map: map,
-                    label: "مبدا",
-                });
+                var marker,
+                    i;
+                marker = new google
+                    .maps
+                    .Marker({
+                        position: new google
+                            .maps
+                            .LatLng(data.origin.destination.lat, data.origin.destination.lng),
+                        map: map,
+                        label: "مبدا"
+                    });
 
                 var waypts = [];
 
                 $.each(data.stops, function (key, value) {
                     if (data.origin.destination.lat !== value.destination.lat && data.origin.destination.lng !== value.destination.lng) {
-                        marker = new google.maps.Marker({
-                            position: new google.maps.LatLng(value.destination.lat, value.destination.lng),
-                            map: map,
-                            // icon: markerIcon,
-                            label: "" + (key + 1)
-                        });
+                        marker = new google
+                            .maps
+                            .Marker({
+                                position: new google
+                                    .maps
+                                    .LatLng(value.destination.lat, value.destination.lng),
+                                map: map,
+                                // icon: markerIcon,
+                                label: "" + (key + 1)
+                            });
 
                     }
                     waypts.push({
@@ -709,7 +775,7 @@ function prepareMap(data) {
                     },
                     waypoints: waypts,
                     // optimizeWaypoints: true,
-                    travelMode: 'DRIVING',
+                    travelMode: 'DRIVING'
                 }, function (response, status) {
                     if (status === 'OK') {
                         directionsDisplay.setDirections(response);
@@ -726,10 +792,15 @@ function prepareMap(data) {
 
 function initReturnToTripListHandler() {
     $('#reset')
-    .on('click', function (e) {
+        .on('click', function (e) {
+            e.preventDefault;
+            resetPage();
+            // preparePlannedTrip();
+        });
+
+    $("#title-tripcount").on('click', function (e) {
         e.preventDefault;
-        resetPage();
-        // preparePlannedTrip();
+        resetPage();        
     });
 }
 
@@ -737,7 +808,7 @@ function resetPage() {
     var container = $(".tm");
     container.empty();
     $("#local_start_date").html("");
-    $("#orign_name").html("")    
+    $("#origin_name").html("")
     $('#tab-section').fadeOut(500, function (e) {
         $('#planning-section').fadeIn(500);
     });

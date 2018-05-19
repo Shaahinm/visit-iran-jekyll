@@ -1,5 +1,5 @@
 ---
-layout: default
+layout: base_trip
 title: استان 
 custom_css: 
 - persian-datepicker.min
@@ -20,6 +20,7 @@ custom_js:
     <section class="center-wrapper column top" id="planning-section">
         <div class="trips">
             <h1 id="tripCount">
+                سفر های من
             </h1>
             <div class="hr"></div>
             <div class="message-title" style="display: none;">
@@ -30,20 +31,54 @@ custom_js:
             </a>
         </div>
     </section>
-    <section class="center-wrapper column top tabs" id="tab-section" style="display: none;">
+    <section class="center-wrapper column top tabs" id="tab-section" style="display: none;">        
+        <div class="image">
+            <img src="http://via.placeholder.com/1350x650" alt="">
+            <div class="text">
+                <div class="top trip-name"></div>
+                <div class="bottom trip-duration"></div>                
+            </div>
+        </div>                        
         <div class="tab">
             <button class="tablinks" onclick="openTab(event, 'calendar')">تقویم</button>
             <button class="tablinks" onclick="openTab(event, 'daybyday')">روزانه</button>
-            <button class="tablinks" onclick="openTab(event, 'timeline')">تایملاین</button>
+            <button class="tablinks" id="defaultOpen" onclick="openTab(event, 'timeline')">تایملاین</button>
         </div>
 
-        <div id="timeline" class="tabcontent trip-timeline">
-            <div class="row map">
-                <div id="map">
-                    <div id="mapcontainer"></div>
+        <div id="timeline" class="tabcontent trip-timeline">            
+            <div class="timeline-container">
+                <div class="row direction">
+                    <div class="row start">
+                        <div class="raised">
+                            <div id="origin_name" class="title"></div>
+                            <div id="origin_local_departure" class="subtitle"></div>
+                        </div>
+                    </div>
+                    <div class="row stops">
+                                     
+                    </div>
+                    <div class="row end">
+                        <div class="data">
+                            <div class="logo" id="end_transit_mode">
+                                <i class="fa fa-cab"></i>
+                            </div>
+                            <div class="detail">
+                                <span class="text" id="end_distance_to_reach"></span>
+                                <span class="text" id="end_duration_to_reach"></span>
+                            </div>
+                        </div>
+                        <div class="raised">
+                            <div id="destination_name" class="title"></div>
+                            <div id="destination_local_arrival" class="subtitle"></div>
+                        </div>
+                    </div>
+                </div>                
+                <div class="row map">
+                    <div id="map">
+                        <div id="mapcontainer"></div>
+                    </div>
                 </div>
-            </div>
-            <div class="">
+            <!-- <div class="">
                 <div class="origin">
                     <div id="local_start_date">
 
@@ -52,30 +87,23 @@ custom_js:
                 <div id="orign_name">
                 </div>
                 <div class="tm"></div>
-                <div class="trip-summary">
-                    <!-- <div class="transit-mode">
-                                        <i class="fa fa-car"></i>                        
-                                    </div> -->
+                <div class="trip-summary">                    
                     <div id="distance-to-reach" class="distance-to-reach">
                     </div>
                     <div id="duration-to-reach" class="duration-to-reach">
-                    </div>
-                    <!-- <div class="local-arrival">
-                                        sobh
-                                        <i class="fa fa-bell"></i>
-                                    </div>                   -->
+                    </div>                    
                     <div class="home">
                         <span id="local_end_date">
                         </span>
                     </div>
                     <div id="home_name">
                     </div>
-                </div>
-            <button class="btn" id="reset">بازگشت به لیست سفر ها</button>
+                </div>            
+                
+            </div> -->
                 
             </div>
-            <!-- <h3>London</h3>
-            <p>London is the capital city of England.</p> -->
+            <button class="btn" id="reset">بازگشت به لیست سفر ها</button>
         </div>
 
         <div id="daybyday" class="tabcontent">

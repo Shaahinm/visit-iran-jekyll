@@ -1,9 +1,9 @@
 .tab {
-    overflow: hidden;
-    border: 1px solid $main;
-    background-color: $dark-bg;
-    margin-top: 50px;
-
+    overflow: hidden;    
+    background-color: $dark-bg;    
+    display: flex;
+    flex-direction: row-reverse;
+    width: 100%;
     button {
         background-color: inherit;
         float: left;
@@ -14,6 +14,7 @@
         transition: 0.3s;
         font-size: 16px;        
         min-width: 80px;
+        width: 100%;
         &:hover {
             background-color: #ddd;
         }
@@ -29,10 +30,10 @@
     -webkit-animation: fadeEffect 1s;
     animation: fadeEffect 1s;
     width: 100%;    
-    box-sizing: border-box;
-    @media (min-width: 769px) {
-        width: 560px;
-    }
+    box-sizing: border-box;    
+    @media (min-width: 1281px) {
+        padding: 20px 124px;
+    }    
 }
 
 /* Fade in tabs */
